@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="AI Native">
+  <defs>
+    <linearGradient id="aiNativeGradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#10b981"/>
+      <stop offset="0.5" stop-color="#22c55e"/>
+      <stop offset="1" stop-color="#84cc16"/>
+    </linearGradient>
+    <mask id="aiNativeRingMask">
+      <rect width="64" height="64" fill="black"/>
+      <rect x="2" y="2" width="60" height="60" rx="18" ry="18" fill="white"/>
+      <circle cx="32" cy="32" r="18" fill="black"/>
+    </mask>
+  </defs>
+  <rect width="64" height="64" fill="url(#aiNativeGradient)" mask="url(#aiNativeRingMask)"/>
+  <circle cx="32" cy="32" r="9" fill="#ffffff"/>
+</svg>
