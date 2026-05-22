@@ -93,27 +93,12 @@
         /* ============ BRAND MARK ============ */
         .mark { display: inline-flex; align-items: center; justify-content: center; }
         .mark-icon {
-            position: relative;
-            width: 36px; height: 36px;
-            display: inline-flex; align-items: center; justify-content: center;
+            display: inline-block;
+            width: 32px; height: 32px;
+            filter: drop-shadow(0 4px 12px rgba(34, 197, 94, 0.35));
+            transition: transform 0.4s var(--ease-out-quint), filter 0.4s var(--ease-out-quint);
         }
-        .mark-icon::before, .mark-icon::after { content: ''; position: absolute; }
-        .mark-icon::before {
-            inset: 0;
-            background: conic-gradient(from 0deg, #16a34a, #84cc16, #22c55e, #10b981, #16a34a);
-            border-radius: 10px;
-            opacity: 0.95;
-            animation: markRotate 18s linear infinite;
-            mask: radial-gradient(circle at center, transparent 30%, black 31%);
-            -webkit-mask: radial-gradient(circle at center, transparent 30%, black 31%);
-        }
-        .mark-icon::after {
-            width: 12px; height: 12px;
-            background: var(--fg);
-            border-radius: 50%;
-            box-shadow: 0 0 16px rgba(255,255,255,0.4);
-        }
-        @keyframes markRotate { to { transform: rotate(360deg); } }
+        .logo:hover .mark-icon { transform: rotate(8deg) scale(1.05); filter: drop-shadow(0 6px 18px rgba(34, 197, 94, 0.55)); }
         .mark-text {
             font-weight: 700; font-size: 17px; letter-spacing: -0.02em;
             margin-left: 10px;
@@ -313,17 +298,20 @@
         .hero-stat-number .unit { color: var(--accent); }
         .hero-stat-label { font-size: 12px; color: var(--fg-dim); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
 
-        /* Floating chips */
+        /* Floating chips — anchored to container's right edge so they stay close to H1 */
         .hero-chips {
-            position: absolute; right: 6%;
-            top: 38%; transform: translateY(-50%);
-            display: flex; flex-direction: column; gap: 16px;
+            position: absolute;
+            right: 24px;
+            top: 220px;
+            display: flex; flex-direction: column;
+            gap: 14px;
+            align-items: flex-end;
             pointer-events: none;
             z-index: 1;
         }
         .hero-chip {
             display: inline-flex; align-items: center; gap: 10px;
-            padding: 10px 14px;
+            padding: 9px 14px;
             background: var(--bg-glass);
             border: 1px solid var(--border);
             border-radius: 100px;
@@ -333,10 +321,10 @@
             box-shadow: 0 8px 24px -8px rgba(0,0,0,0.6);
             animation: chipFloat 6s ease-in-out infinite;
         }
-        .hero-chip:nth-child(1) { animation-delay: 0s; transform: translateX(0); }
-        .hero-chip:nth-child(2) { animation-delay: 0.8s; margin-left: 32px; }
-        .hero-chip:nth-child(3) { animation-delay: 1.6s; margin-left: 8px; }
-        .hero-chip:nth-child(4) { animation-delay: 2.4s; margin-left: 48px; }
+        .hero-chip:nth-child(1) { animation-delay: 0s; }
+        .hero-chip:nth-child(2) { animation-delay: 0.8s; margin-right: 16px; }
+        .hero-chip:nth-child(3) { animation-delay: 1.6s; margin-right: 4px; }
+        .hero-chip:nth-child(4) { animation-delay: 2.4s; margin-right: 32px; }
         @keyframes chipFloat {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
@@ -392,80 +380,137 @@
         .problem { padding: 140px 0; border-top: 1px solid var(--border-subtle); background: linear-gradient(180deg, transparent 0%, var(--bg-elevated) 100%); }
         .problem-grid { display: grid; gap: 14px; max-width: 880px; margin: 0 auto; }
 
-        /* Pyramid visualization */
-        .pyramid {
-            max-width: 640px;
-            margin: 0 auto 72px;
-            display: flex; flex-direction: column; align-items: center; gap: 14px;
+        /* ============ PYRAMID ============ */
+        .pyramid-wrap {
             position: relative;
-            padding-top: 80px;
+            max-width: 720px;
+            margin: 0 auto 80px;
+            padding-top: 90px;
+        }
+        .pyramid {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 12px;
+            position: relative;
         }
         .pyramid-layer {
+            display: flex; align-items: center; justify-content: space-between;
             padding: 22px 32px;
             border-radius: 16px;
             font-weight: 800; font-size: 26px;
-            text-align: center;
             letter-spacing: -0.025em;
-            border: 2px solid;
+            border: 1px solid;
             position: relative;
-            box-shadow: 0 1px 0 0 rgba(255,255,255,0.25) inset, 0 16px 36px -10px rgba(0,0,0,0.45);
-            transition: transform 0.4s var(--ease-out-quint), box-shadow 0.4s var(--ease-out-quint);
+            transition: transform 0.5s var(--ease-out-quint), box-shadow 0.5s var(--ease-out-quint);
+            overflow: hidden;
         }
+        .pyramid-layer::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent 35%, transparent 60%, rgba(0,0,0,0.08));
+            pointer-events: none;
+        }
+        .pyramid-layer::after {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+            opacity: 0.12;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+        .pyramid-layer > * { position: relative; z-index: 1; }
         .pyramid-layer:hover { transform: translateY(-3px); }
+        .pyramid-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            opacity: 0.7;
+            white-space: nowrap;
+        }
         .pyramid-bottom {
             width: 100%;
             background: linear-gradient(180deg, #f5d4b0, #e9c5a0);
-            border-color: #c79c70;
+            border-color: rgba(199, 156, 112, 0.6);
             color: #3a2400;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.4) inset, 0 18px 40px -14px rgba(199, 156, 112, 0.35);
             order: 3;
         }
         .pyramid-mid {
-            width: 74%;
+            width: 78%;
             background: linear-gradient(180deg, #ffd84a, #f5c842);
-            border-color: #d4a527;
+            border-color: rgba(212, 165, 39, 0.7);
             color: #3a2600;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.45) inset, 0 18px 40px -14px rgba(212, 165, 39, 0.4);
             order: 2;
         }
         .pyramid-top {
-            width: 46%;
+            width: 52%;
             background: linear-gradient(180deg, #34d76b, #22c55e);
-            border-color: #16a34a;
+            border-color: rgba(22, 163, 74, 0.8);
             color: #02160a;
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.5) inset,
+                0 18px 44px -10px rgba(34, 197, 94, 0.55),
+                0 0 80px -20px rgba(34, 197, 94, 0.4);
             order: 1;
-            box-shadow: 0 1px 0 0 rgba(255,255,255,0.3) inset, 0 16px 36px -10px rgba(34, 197, 94, 0.5), 0 0 60px -10px rgba(34, 197, 94, 0.35);
+            animation: pyramidTopPulse 4s ease-in-out infinite;
         }
+        @keyframes pyramidTopPulse {
+            0%, 100% { box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 18px 44px -10px rgba(34, 197, 94, 0.55), 0 0 80px -20px rgba(34, 197, 94, 0.4); }
+            50% { box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 18px 44px -10px rgba(34, 197, 94, 0.75), 0 0 110px -10px rgba(34, 197, 94, 0.55); }
+        }
+
+        /* Annotation */
         .pyramid-annotation {
             position: absolute;
-            top: -8px; right: -40px;
+            top: -12px; right: 12px;
             display: flex; flex-direction: column; align-items: flex-end;
             font-family: 'Caveat', cursive;
-            font-size: 30px; font-weight: 600;
+            font-size: 32px; font-weight: 600;
             color: var(--fg-muted);
-            transform: rotate(-6deg);
+            transform: rotate(-4deg);
             line-height: 1;
             pointer-events: none;
         }
-        .pyramid-annotation-text {
-            white-space: nowrap;
-            margin-bottom: -8px;
-        }
-        .pyramid-annotation svg {
-            width: 72px; height: 64px;
-            margin-right: 8px;
+        .pyramid-annotation-text { white-space: nowrap; margin-bottom: 4px; }
+        .pyramid-annotation svg { width: 90px; height: 70px; color: var(--fg-dim); transform: rotate(10deg) translateX(-8px); }
+
+        /* Side rail with population labels */
+        .pyramid-rail {
+            position: absolute;
+            left: -110px; top: 90px; bottom: 0;
+            display: flex; flex-direction: column;
+            justify-content: space-around;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
             color: var(--fg-dim);
-            transform: rotate(8deg);
+            pointer-events: none;
+        }
+        .pyramid-rail-item {
+            display: flex; align-items: center; gap: 10px;
+            white-space: nowrap;
+        }
+        .pyramid-rail-item::after {
+            content: ''; width: 30px; height: 1px;
+            background: var(--border);
+        }
+
+        @media (max-width: 900px) {
+            .pyramid-rail { display: none; }
         }
         @media (max-width: 768px) {
-            .pyramid { padding-top: 70px; }
+            .pyramid-wrap { padding-top: 78px; }
             .pyramid-layer { font-size: 18px; padding: 18px 22px; }
-            .pyramid-top { width: 56%; }
-            .pyramid-mid { width: 80%; }
-            .pyramid-annotation { right: 0; font-size: 24px; }
-            .pyramid-annotation svg { width: 56px; height: 48px; }
+            .pyramid-meta { display: none; }
+            .pyramid-top { width: 60%; }
+            .pyramid-mid { width: 82%; }
+            .pyramid-annotation { right: 4px; font-size: 26px; }
+            .pyramid-annotation svg { width: 64px; height: 52px; }
         }
+
+        /* ============ LEVEL CARDS — redesigned ============ */
         .level-card {
-            display: grid; grid-template-columns: 96px 1fr 100px; gap: 28px; align-items: center;
-            padding: 32px 36px;
+            display: grid; grid-template-columns: 76px 1fr auto; gap: 28px; align-items: center;
+            padding: 28px 32px;
             background: var(--bg-card);
             background-image: var(--gradient-card);
             border: 1px solid var(--border-subtle);
@@ -474,6 +519,17 @@
             transition: all 0.5s var(--ease-out-quint);
             position: relative; overflow: hidden;
         }
+        .level-card::before {
+            content: '';
+            position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+            background: var(--level-color, var(--fg-dim));
+            opacity: 0.4;
+            transition: opacity 0.4s ease, width 0.4s ease;
+        }
+        .level-card:hover::before { opacity: 1; width: 5px; }
+        .level-card:nth-child(1) { --level-color: #e9c5a0; }
+        .level-card:nth-child(2) { --level-color: #f5c842; }
+        .level-card:nth-child(3) { --level-color: var(--accent); }
         .level-card::after {
             content: ''; position: absolute; inset: 0;
             background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(34, 197, 94, 0.06), transparent 40%);
@@ -484,48 +540,53 @@
         .level-card.active {
             border-color: rgba(34, 197, 94, 0.4);
             background: linear-gradient(135deg, rgba(34, 197, 94, 0.10) 0%, var(--bg-card) 100%);
-            box-shadow: var(--shadow-elevated), 0 0 40px -10px rgba(34, 197, 94, 0.25);
+            box-shadow: var(--shadow-elevated), 0 0 50px -10px rgba(34, 197, 94, 0.25);
+        }
+        .level-card.active::before { opacity: 1; width: 5px; }
+
+        .level-number-wrap {
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
         }
         .level-number {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 56px; font-weight: 600;
-            color: var(--fg-dim); opacity: 0.25;
-            line-height: 1;
-            letter-spacing: -0.04em;
+            font-size: 44px; font-weight: 600;
+            color: var(--fg-dim); opacity: 0.35;
+            line-height: 1; letter-spacing: -0.04em;
         }
         .level-card.active .level-number {
             background: var(--gradient-primary);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             opacity: 1;
         }
-        .level-content h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.025em; }
-        .level-content p { color: var(--fg-muted); font-size: 16px; line-height: 1.55; }
-        .level-quote { color: var(--fg-dim); font-style: italic; margin-top: 8px; font-size: 14px; }
-        .level-meter {
-            display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
-        }
-        .level-meter-bar {
-            width: 80px; height: 4px;
-            background: var(--border);
-            border-radius: 100px;
-            overflow: hidden;
-            position: relative;
-        }
-        .level-meter-bar::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: var(--gradient-primary);
-            transform-origin: left;
-        }
-        .level-card:nth-child(1) .level-meter-bar::after { transform: scaleX(0.25); }
-        .level-card:nth-child(2) .level-meter-bar::after { transform: scaleX(0.55); }
-        .level-card.active .level-meter-bar::after { transform: scaleX(1); box-shadow: 0 0 12px var(--accent-glow); }
-        .level-meter-label {
+        .level-number-chip {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
-            color: var(--fg-dim); font-weight: 600;
+            font-size: 10px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            padding: 3px 8px;
+            border: 1px solid var(--level-color);
+            color: var(--level-color);
+            border-radius: 4px;
+            opacity: 0.75;
+            white-space: nowrap;
         }
-        .level-card.active .level-meter-label { color: var(--accent-light); }
+        .level-card.active .level-number-chip { opacity: 1; background: rgba(34,197,94,0.1); }
+
+        .level-content h3 {
+            font-size: 24px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.025em;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .level-content h3 .level-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--level-color);
+            display: inline-block;
+            box-shadow: 0 0 12px var(--level-color);
+        }
+        .level-content p { color: var(--fg-muted); font-size: 16px; line-height: 1.55; }
+        .level-quote {
+            color: var(--fg-dim); font-style: italic; margin-top: 10px; font-size: 14px;
+            padding-left: 14px; border-left: 2px solid var(--level-color);
+            opacity: 0.85;
+        }
         .level-badge {
             display: inline-flex; align-items: center; gap: 6px;
             margin-top: 16px;
@@ -537,6 +598,20 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
             text-transform: uppercase;
+        }
+        .level-arrow {
+            font-size: 22px; color: var(--fg-dim);
+            opacity: 0.4;
+            transition: all 0.4s var(--ease-out-quint);
+        }
+        .level-card.active .level-arrow {
+            color: var(--accent); opacity: 1;
+        }
+        .level-card:hover .level-arrow { transform: translateX(4px); }
+        @media (max-width: 768px) {
+            .level-card { grid-template-columns: 1fr; gap: 16px; padding: 24px; }
+            .level-number-wrap { flex-direction: row; align-items: baseline; }
+            .level-arrow { display: none; }
         }
         .problem-callout {
             margin-top: 56px;
@@ -1118,9 +1193,6 @@
             footer .container { flex-direction: column; align-items: flex-start; }
             .footer-right { align-items: flex-start; }
             .footer-links { flex-wrap: wrap; }
-            .level-card { grid-template-columns: 1fr; gap: 16px; padding: 24px; }
-            .level-number { font-size: 36px; }
-            .level-meter { display: none; }
             .program-card.featured::before { display: none; }
             .program-card { padding: 32px; }
         }
@@ -1130,7 +1202,7 @@
     <nav>
         <div class="container">
             <a href="#" class="logo">
-                <span class="mark-icon"></span>
+                <img class="mark-icon" src="logo.svg" alt="" width="32" height="32">
                 <span class="mark-text">AI Native<span class="mark-text-suffix">v1</span></span>
             </a>
             <ul class="nav-links">
@@ -1152,14 +1224,13 @@
         <div class="hero-side left">AI-Native · 2026 · Cohort 02 · v1.0</div>
         <div class="hero-side right">Run by Alexey Ivanov · Amsterdam · ICF-PCC</div>
 
-        <div class="hero-chips">
-            <div class="hero-chip"><span class="hero-chip-icon">🧠</span> Obsidian + Cloud Code</div>
-            <div class="hero-chip"><span class="hero-chip-icon">⚙️</span> Skills · Memory · Agents</div>
-            <div class="hero-chip"><span class="hero-chip-icon">📡</span> NotebookLM + Perplexity</div>
-            <div class="hero-chip"><span class="hero-chip-icon">✨</span> PersonalOS</div>
-        </div>
-
         <div class="container">
+            <div class="hero-chips">
+                <div class="hero-chip"><span class="hero-chip-icon">🧠</span> Obsidian + Cloud Code</div>
+                <div class="hero-chip"><span class="hero-chip-icon">⚙️</span> Skills · Memory · Agents</div>
+                <div class="hero-chip"><span class="hero-chip-icon">📡</span> NotebookLM + Perplexity</div>
+                <div class="hero-chip"><span class="hero-chip-icon">✨</span> PersonalOS</div>
+            </div>
             <div class="hero-label">
                 <span class="hero-label-chip"><span class="hero-label-dot"></span> LIVE</span>
                 Старт следующего потока — формируется
@@ -1232,56 +1303,72 @@
                 <h2>Большинство застревает на уровне AI Literate</h2>
             </div>
 
-            <div class="pyramid">
+            <div class="pyramid-wrap">
                 <div class="pyramid-annotation">
                     <span class="pyramid-annotation-text">идём сюда</span>
-                    <svg viewBox="0 0 72 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M62 6 C58 22, 44 42, 18 52" />
-                        <path d="M28 46 L18 52 L24 60" />
+                    <svg viewBox="0 0 90 70" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M78 8 C72 24, 56 48, 18 56" />
+                        <path d="M28 50 L18 56 L24 64" />
                     </svg>
                 </div>
-                <div class="pyramid-layer pyramid-top">AI Native</div>
-                <div class="pyramid-layer pyramid-mid">AI Literate</div>
-                <div class="pyramid-layer pyramid-bottom">AI Curious</div>
+                <div class="pyramid-rail">
+                    <div class="pyramid-rail-item">~20%</div>
+                    <div class="pyramid-rail-item">~55%</div>
+                    <div class="pyramid-rail-item">~25%</div>
+                </div>
+                <div class="pyramid">
+                    <div class="pyramid-layer pyramid-top">
+                        <span>AI Native</span>
+                        <span class="pyramid-meta">переизобретают процессы</span>
+                    </div>
+                    <div class="pyramid-layer pyramid-mid">
+                        <span>AI Literate</span>
+                        <span class="pyramid-meta">пишут промпты</span>
+                    </div>
+                    <div class="pyramid-layer pyramid-bottom">
+                        <span>AI Curious</span>
+                        <span class="pyramid-meta">пробуют бесплатно</span>
+                    </div>
+                </div>
             </div>
 
             <div class="problem-grid">
                 <div class="level-card">
-                    <div class="level-number">01</div>
+                    <div class="level-number-wrap">
+                        <div class="level-number">01</div>
+                        <div class="level-number-chip">~25%</div>
+                    </div>
                     <div class="level-content">
-                        <h3>AI Curious</h3>
+                        <h3><span class="level-dot"></span>AI Curious</h3>
                         <p>Пробуют бесплатные инструменты, обращаются к AI, когда застряли.</p>
                         <p class="level-quote">«О, ChatGPT может и так?»</p>
                     </div>
-                    <div class="level-meter">
-                        <div class="level-meter-bar"></div>
-                        <div class="level-meter-label">25%</div>
-                    </div>
+                    <div class="level-arrow">→</div>
                 </div>
                 <div class="level-card">
-                    <div class="level-number">02</div>
+                    <div class="level-number-wrap">
+                        <div class="level-number">02</div>
+                        <div class="level-number-chip">~55%</div>
+                    </div>
                     <div class="level-content">
-                        <h3>AI Literate</h3>
+                        <h3><span class="level-dot"></span>AI Literate</h3>
                         <p>Платят за AI, знают разные модели, умеют писать промпты. Но используют ИИ как «умный Google» — разрозненные чаты, generic-результаты.</p>
                         <p class="level-quote">«Напиши мне письмо в таком-то тоне»</p>
                     </div>
-                    <div class="level-meter">
-                        <div class="level-meter-bar"></div>
-                        <div class="level-meter-label">55%</div>
-                    </div>
+                    <div class="level-arrow">→</div>
                 </div>
                 <div class="level-card active">
-                    <div class="level-number">03</div>
+                    <div class="level-number-wrap">
+                        <div class="level-number">03</div>
+                        <div class="level-number-chip">цель</div>
+                    </div>
                     <div class="level-content">
-                        <h3>AI Native</h3>
+                        <h3><span class="level-dot"></span>AI Native</h3>
                         <p>Перестроили все рабочие процессы с AI как напарником. ИИ помнит контекст и выдаёт результат в вашем стиле.</p>
                         <p class="level-quote">«Как переизобрести весь этот процесс с AI?»</p>
                         <span class="level-badge">↑ Ваш следующий уровень</span>
                     </div>
-                    <div class="level-meter">
-                        <div class="level-meter-bar"></div>
-                        <div class="level-meter-label">100%</div>
-                    </div>
+                    <div class="level-arrow">✦</div>
                 </div>
             </div>
             <div class="problem-callout">
@@ -1866,7 +1953,7 @@
         <div class="container">
             <div class="footer-brand">
                 <a href="#" class="logo">
-                    <span class="mark-icon"></span>
+                    <img class="mark-icon" src="logo.svg" alt="" width="32" height="32">
                     <span class="mark-text">AI Native<span class="mark-text-suffix">v1</span></span>
                 </a>
                 <div class="footer-legal">
