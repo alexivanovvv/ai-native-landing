@@ -242,7 +242,7 @@
             font-weight: 800; letter-spacing: -0.035em;
             line-height: 1.02;
             margin-bottom: 24px;
-            max-width: 700px;
+            max-width: 820px;
             animation: fadeInUp 0.9s var(--ease-out-quint) 0.1s both;
         }
         h1 .h1-line { display: block; }
@@ -281,10 +281,10 @@
 
         .hero-stats {
             display: flex; flex-wrap: wrap;
-            gap: 14px 38px;
-            padding-top: 22px;
+            gap: 16px 48px;
+            padding-top: 24px;
             border-top: 1px solid var(--border-subtle);
-            max-width: 640px;
+            max-width: 760px;
             animation: fadeInUp 0.9s var(--ease-out-quint) 0.4s both;
         }
         .hero-stat-number {
@@ -419,14 +419,6 @@
             font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
             color: var(--accent-light); font-weight: 500;
         }
-        .section-label::before {
-            content: attr(data-no);
-            color: var(--fg-dim);
-            border: 1px solid var(--border);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
         h2 { font-size: clamp(30px, 4vw, 50px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; max-width: 820px; }
         .section-header h2 { margin: 0 auto; }
         .section-header > p { color: var(--fg-muted); font-size: 17px; margin-top: 16px; max-width: 680px; margin-left: auto; margin-right: auto; line-height: 1.6; }
@@ -459,25 +451,46 @@
         /* ============ PYRAMID ============ */
         .pyramid-wrap {
             position: relative;
-            max-width: 720px;
+            max-width: 700px;
             margin: 0 auto 80px;
-            padding-top: 90px;
+            padding-top: 80px;
         }
         .pyramid {
-            display: flex; flex-direction: column; align-items: center;
+            display: flex; flex-direction: column;
             gap: 12px;
             position: relative;
         }
+        .pyramid-row {
+            display: grid;
+            grid-template-columns: 90px 1fr 150px;
+            align-items: center;
+            gap: 22px;
+        }
+        .pyramid-pct {
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px; font-weight: 600;
+            color: var(--fg-dim); letter-spacing: 0.02em;
+        }
+        .pyramid-act {
+            text-align: left;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.07em;
+            color: var(--fg-dim); line-height: 1.4;
+        }
         .pyramid-layer {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 22px 32px;
+            justify-self: center;
+            width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            padding: 28px 28px;
             border-radius: 16px;
-            font-weight: 800; font-size: 26px;
+            font-weight: 800; font-size: 27px;
             letter-spacing: -0.025em;
             border: 1px solid;
-            position: relative;
+            position: relative; overflow: hidden;
             transition: transform 0.5s var(--ease-out-quint), box-shadow 0.5s var(--ease-out-quint);
-            overflow: hidden;
         }
         .pyramid-layer::before {
             content: '';
@@ -493,33 +506,24 @@
             mix-blend-mode: overlay;
             pointer-events: none;
         }
-        .pyramid-layer > * { position: relative; z-index: 1; }
+        .pyramid-layer span { position: relative; z-index: 1; }
         .pyramid-layer:hover { transform: translateY(-3px); }
-        .pyramid-meta {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.08em;
-            opacity: 0.7;
-            white-space: nowrap;
-        }
         .pyramid-bottom {
             width: 100%;
             background: linear-gradient(180deg, #f5d4b0, #e9c5a0);
             border-color: rgba(199, 156, 112, 0.6);
             color: #3a2400;
             box-shadow: 0 1px 0 rgba(255,255,255,0.4) inset, 0 18px 40px -14px rgba(199, 156, 112, 0.35);
-            order: 3;
         }
         .pyramid-mid {
-            width: 78%;
+            width: 70%;
             background: linear-gradient(180deg, #ffd84a, #f5c842);
             border-color: rgba(212, 165, 39, 0.7);
             color: #3a2600;
             box-shadow: 0 1px 0 rgba(255,255,255,0.45) inset, 0 18px 40px -14px rgba(212, 165, 39, 0.4);
-            order: 2;
         }
         .pyramid-top {
-            width: 52%;
+            width: 46%;
             background: linear-gradient(180deg, #34d76b, #22c55e);
             border-color: rgba(22, 163, 74, 0.8);
             color: #02160a;
@@ -527,7 +531,6 @@
                 0 1px 0 rgba(255,255,255,0.5) inset,
                 0 18px 44px -10px rgba(34, 197, 94, 0.55),
                 0 0 80px -20px rgba(34, 197, 94, 0.4);
-            order: 1;
             animation: pyramidTopPulse 4s ease-in-out infinite;
         }
         @keyframes pyramidTopPulse {
@@ -550,35 +553,14 @@
         .pyramid-annotation-text { white-space: nowrap; margin-bottom: 4px; }
         .pyramid-annotation svg { width: 90px; height: 70px; color: var(--fg-dim); transform: rotate(10deg) translateX(-8px); }
 
-        /* Side rail with population labels */
-        .pyramid-rail {
-            position: absolute;
-            left: -110px; top: 90px; bottom: 0;
-            display: flex; flex-direction: column;
-            justify-content: space-around;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
-            color: var(--fg-dim);
-            pointer-events: none;
-        }
-        .pyramid-rail-item {
-            display: flex; align-items: center; gap: 10px;
-            white-space: nowrap;
-        }
-        .pyramid-rail-item::after {
-            content: ''; width: 30px; height: 1px;
-            background: var(--border);
-        }
-
-        @media (max-width: 900px) {
-            .pyramid-rail { display: none; }
-        }
         @media (max-width: 768px) {
-            .pyramid-wrap { padding-top: 78px; }
-            .pyramid-layer { font-size: 18px; padding: 18px 22px; }
-            .pyramid-meta { display: none; }
-            .pyramid-top { width: 60%; }
+            .pyramid-wrap { padding-top: 70px; }
+            .pyramid-row { grid-template-columns: 50px 1fr; gap: 12px; }
+            .pyramid-act { display: none; }
+            .pyramid-layer { font-size: 18px; padding: 20px 18px; }
+            .pyramid-top { width: 62%; }
             .pyramid-mid { width: 82%; }
+            .pyramid-pct { font-size: 11px; }
             .pyramid-annotation { right: 4px; font-size: 26px; }
             .pyramid-annotation svg { width: 64px; height: 52px; }
         }
@@ -1482,23 +1464,21 @@
                         <path d="M28 50 L18 56 L24 64" />
                     </svg>
                 </div>
-                <div class="pyramid-rail">
-                    <div class="pyramid-rail-item">~5%</div>
-                    <div class="pyramid-rail-item">~30%</div>
-                    <div class="pyramid-rail-item">~65%</div>
-                </div>
                 <div class="pyramid">
-                    <div class="pyramid-layer pyramid-top">
-                        <span>AI Native</span>
-                        <span class="pyramid-meta">переизобретают процессы</span>
+                    <div class="pyramid-row">
+                        <div class="pyramid-pct">~5%</div>
+                        <div class="pyramid-layer pyramid-top"><span>AI Native</span></div>
+                        <div class="pyramid-act">переизобретают процессы</div>
                     </div>
-                    <div class="pyramid-layer pyramid-mid">
-                        <span>AI Literate</span>
-                        <span class="pyramid-meta">пишут промпты</span>
+                    <div class="pyramid-row">
+                        <div class="pyramid-pct">~30%</div>
+                        <div class="pyramid-layer pyramid-mid"><span>AI Literate</span></div>
+                        <div class="pyramid-act">пишут промпты</div>
                     </div>
-                    <div class="pyramid-layer pyramid-bottom">
-                        <span>AI Curious</span>
-                        <span class="pyramid-meta">пробуют бесплатно</span>
+                    <div class="pyramid-row">
+                        <div class="pyramid-pct">~65%</div>
+                        <div class="pyramid-layer pyramid-bottom"><span>AI Curious</span></div>
+                        <div class="pyramid-act">пробуют бесплатно</div>
                     </div>
                 </div>
             </div>
