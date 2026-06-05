@@ -60,32 +60,7 @@
             --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        html { scroll-behavior: smooth; scroll-snap-type: y proximity; scroll-padding-top: 72px; }
-        section { scroll-snap-align: start; scroll-snap-stop: normal; }
-
-        /* Right-side section dots */
-        .dots-nav {
-            position: fixed; right: 22px; top: 50%; transform: translateY(-50%);
-            z-index: 80; display: flex; flex-direction: column; gap: 14px;
-        }
-        .dots-nav a {
-            width: 11px; height: 11px; border-radius: 50%;
-            border: 1.5px solid var(--fg-dim); background: transparent;
-            transition: all 0.3s var(--ease-out-quint); position: relative;
-            display: block;
-        }
-        .dots-nav a:hover { border-color: var(--accent); transform: scale(1.25); }
-        .dots-nav a.active { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
-        .dots-nav a::after {
-            content: attr(data-label);
-            position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
-            white-space: nowrap; font-family: 'JetBrains Mono', monospace; font-size: 11px;
-            color: var(--fg); background: var(--bg-card); border: 1px solid var(--border);
-            padding: 4px 9px; border-radius: 6px; opacity: 0; pointer-events: none;
-            transition: opacity 0.2s ease; box-shadow: var(--shadow-card);
-        }
-        .dots-nav a:hover::after { opacity: 1; }
-        @media (max-width: 1100px) { .dots-nav { display: none; } }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -193,18 +168,22 @@
 
         /* ============ HERO ============ */
         .hero {
-            min-height: 100vh;
             display: flex; flex-direction: column; justify-content: center;
-            padding: 140px 0 100px;
+            padding: 150px 0 110px;
             position: relative;
             overflow: hidden;
+            isolation: isolate;
+            background:
+                radial-gradient(120% 90% at 50% -10%, rgba(16,185,129,0.16), rgba(5,5,7,0) 55%),
+                var(--bg);
         }
         .hero-aurora {
             position: absolute; inset: 0;
             pointer-events: none;
             background: var(--gradient-aurora-1), var(--gradient-aurora-2), var(--gradient-aurora-3);
             animation: auroraDrift 24s ease-in-out infinite alternate;
-            filter: blur(40px);
+            filter: blur(60px);
+            opacity: 0.7;
         }
         @keyframes auroraDrift {
             0% { transform: translate3d(-3%, -2%, 0) scale(1); }
@@ -217,8 +196,8 @@
                 linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
             background-size: 64px 64px;
-            mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent);
-            -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent);
+            mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
         }
         .hero-side {
             position: absolute; top: 140px; bottom: 100px;
@@ -2155,28 +2134,6 @@
             });
         });
 
-        // Section dots — highlight active section
-        (function () {
-            const dots = Array.from(document.querySelectorAll('.dots-nav a'));
-            const map = new Map();
-            dots.forEach(d => {
-                const sec = document.querySelector(d.getAttribute('href'));
-                if (sec) map.set(sec, d);
-            });
-            if (map.size) {
-                const dObs = new IntersectionObserver((entries) => {
-                    entries.forEach(en => {
-                        if (en.isIntersecting) {
-                            dots.forEach(d => d.classList.remove('active'));
-                            const active = map.get(en.target);
-                            if (active) active.classList.add('active');
-                        }
-                    });
-                }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-                map.forEach((_, sec) => dObs.observe(sec));
-            }
-        })();
-
         // Add star rating + verified badge to every testimonial card
         document.querySelectorAll('.testimonials .testimonial-card').forEach(card => {
             const rating = document.createElement('div');
@@ -2265,18 +2222,6 @@
             });
         });
     </script>
-
-    <!-- Section dots -->
-    <nav class="dots-nav" aria-label="Навигация по секциям">
-        <a href="#top" data-label="Главная"></a>
-        <a href="#levels" data-label="Уровни"></a>
-        <a href="#results" data-label="Что получите"></a>
-        <a href="#testimonials" data-label="Отзывы"></a>
-        <a href="#audience" data-label="Для кого"></a>
-        <a href="#curriculum" data-label="Программа"></a>
-        <a href="#program" data-label="Цены"></a>
-        <a href="#faq" data-label="FAQ"></a>
-    </nav>
 
     <div class="mobile-cta">
         <div class="mobile-price">
