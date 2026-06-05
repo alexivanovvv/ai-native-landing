@@ -60,7 +60,32 @@
             --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scroll-snap-type: y proximity; scroll-padding-top: 72px; }
+        section { scroll-snap-align: start; scroll-snap-stop: normal; }
+
+        /* Right-side section dots */
+        .dots-nav {
+            position: fixed; right: 22px; top: 50%; transform: translateY(-50%);
+            z-index: 80; display: flex; flex-direction: column; gap: 14px;
+        }
+        .dots-nav a {
+            width: 11px; height: 11px; border-radius: 50%;
+            border: 1.5px solid var(--fg-dim); background: transparent;
+            transition: all 0.3s var(--ease-out-quint); position: relative;
+            display: block;
+        }
+        .dots-nav a:hover { border-color: var(--accent); transform: scale(1.25); }
+        .dots-nav a.active { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+        .dots-nav a::after {
+            content: attr(data-label);
+            position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+            white-space: nowrap; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            color: var(--fg); background: var(--bg-card); border: 1px solid var(--border);
+            padding: 4px 9px; border-radius: 6px; opacity: 0; pointer-events: none;
+            transition: opacity 0.2s ease; box-shadow: var(--shadow-card);
+        }
+        .dots-nav a:hover::after { opacity: 1; }
+        @media (max-width: 1100px) { .dots-nav { display: none; } }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -841,7 +866,10 @@
 
         /* ============ CURRICULUM ============ */
         .curriculum { padding: 140px 0; border-top: 1px solid var(--border-subtle); background: var(--bg-elevated); }
-        .curriculum-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .curriculum-grid { display: flex; flex-direction: column; gap: 18px; max-width: 820px; margin: 0 auto; }
+        .curriculum-grid .week-card { display: grid; grid-template-columns: 56px 1fr; gap: 28px; align-items: start; }
+        .curriculum-grid .week-card .feature-icon { grid-row: span 4; margin-bottom: 0; }
+        @media (max-width: 560px) { .curriculum-grid .week-card { grid-template-columns: 1fr; gap: 14px; } }
         .week-card {
             background: var(--bg-card);
             background-image: var(--gradient-card);
@@ -1403,7 +1431,7 @@
     </nav>
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="top">
         <div class="hero-aurora"></div>
         <div class="hero-grid"></div>
         <div class="hero-side left">AI-Native · 2026 · Cohort 02 · v1.0</div>
@@ -1560,7 +1588,7 @@
     </section>
 
     <!-- SOLUTION -->
-    <section class="solution">
+    <section class="solution" id="results">
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Результат</div>
@@ -1917,16 +1945,22 @@
                 <h2>Инструменты, которые вы освоите</h2>
             </div>
             <div class="tools-strip">
-                <span class="tool-chip">🤖 Claude / ChatGPT</span>
+                <span class="tool-chip">🤖 Claude</span>
+                <span class="tool-chip">💬 ChatGPT</span>
+                <span class="tool-chip">✨ Gemini</span>
                 <span class="tool-chip">🔍 Perplexity</span>
-                <span class="tool-chip">🧠 Obsidian</span>
                 <span class="tool-chip">📓 NotebookLM</span>
-                <span class="tool-chip">🎙 Granola / Fathom</span>
+                <span class="tool-chip">🧠 Obsidian</span>
+                <span class="tool-chip">📝 Notion</span>
+                <span class="tool-chip">☁️ Google Drive / Docs</span>
+                <span class="tool-chip">🎙 Granola</span>
+                <span class="tool-chip">🎬 Fathom</span>
                 <span class="tool-chip">⌨️ Claude Code</span>
-                <span class="tool-chip">☁️ Google Workspace</span>
-                <span class="tool-chip">💬 Claude Cowork</span>
+                <span class="tool-chip">🧑‍💻 Cursor</span>
+                <span class="tool-chip">⚡ Zapier</span>
+                <span class="tool-chip">🤝 Claude Cowork</span>
             </div>
-            <p class="tools-note">💰 <strong>$20–50/мес</strong> — хватает одной LLM-подписки на весь стек &nbsp;·&nbsp; 🔒 без кода и серверов</p>
+            <p class="tools-note">💰 <strong>$20–50/мес</strong> — хватает одной LLM-подписки, чтобы начать &nbsp;·&nbsp; 🔒 без кода и серверов</p>
         </div>
     </section>
 
@@ -2122,6 +2156,28 @@
             });
         });
 
+        // Section dots — highlight active section
+        (function () {
+            const dots = Array.from(document.querySelectorAll('.dots-nav a'));
+            const map = new Map();
+            dots.forEach(d => {
+                const sec = document.querySelector(d.getAttribute('href'));
+                if (sec) map.set(sec, d);
+            });
+            if (map.size) {
+                const dObs = new IntersectionObserver((entries) => {
+                    entries.forEach(en => {
+                        if (en.isIntersecting) {
+                            dots.forEach(d => d.classList.remove('active'));
+                            const active = map.get(en.target);
+                            if (active) active.classList.add('active');
+                        }
+                    });
+                }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+                map.forEach((_, sec) => dObs.observe(sec));
+            }
+        })();
+
         // Add star rating + verified badge to every testimonial card
         document.querySelectorAll('.testimonials .testimonial-card').forEach(card => {
             const rating = document.createElement('div');
@@ -2210,6 +2266,18 @@
             });
         });
     </script>
+
+    <!-- Section dots -->
+    <nav class="dots-nav" aria-label="Навигация по секциям">
+        <a href="#top" data-label="Главная"></a>
+        <a href="#levels" data-label="Уровни"></a>
+        <a href="#results" data-label="Что получите"></a>
+        <a href="#testimonials" data-label="Отзывы"></a>
+        <a href="#audience" data-label="Для кого"></a>
+        <a href="#curriculum" data-label="Программа"></a>
+        <a href="#program" data-label="Цены"></a>
+        <a href="#faq" data-label="FAQ"></a>
+    </nav>
 
     <div class="mobile-cta">
         <div class="mobile-price">
