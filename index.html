@@ -124,11 +124,20 @@
         }
         nav .container { display: flex; justify-content: space-between; align-items: center; height: 72px; }
         .logo { display: flex; align-items: center; text-decoration: none; color: var(--fg); }
-        .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
-        .nav-links a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: -0.005em; transition: color 0.2s; position: relative; }
+        .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
+        .nav-links a {
+            color: var(--fg-muted); text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 0.07em;
+            transition: color 0.2s; position: relative;
+        }
         .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 100%; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform 0.3s var(--ease-out-quint); }
-        .nav-links a:hover { color: var(--fg); }
-        .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+        .nav-links a:not(.btn):hover { color: var(--fg); }
+        .nav-links a:not(.btn):hover::after { transform: scaleX(1); transform-origin: left; }
+        /* keep the CTA button text dark & readable, override the muted nav-link color */
+        .nav-links a.btn-primary { color: #02160a; letter-spacing: 0.04em; }
+        .nav-links a.btn-primary::after { display: none; }
 
         /* ============ BUTTONS ============ */
         .btn {
@@ -325,69 +334,17 @@
         .hero-chip-icon svg { width: 100%; height: 100%; }
         @media (max-width: 1100px) { .hero-chips { display: none; } }
 
-        /* Hero levels visual — branded mini-pyramid */
-        .hero-levels {
-            position: absolute;
-            right: 24px; top: 50%;
-            transform: translateY(-50%);
-            width: 320px;
-            display: flex; flex-direction: column; align-items: center;
-            gap: 12px;
-            z-index: 2;
-            pointer-events: none;
-            animation: fadeInUp 1s var(--ease-out-quint) 0.5s both;
+        /* Hero brand mark — the pyramid logo */
+        .hero-logo {
+            margin-bottom: 28px;
+            animation: fadeInUp 0.9s var(--ease-out-quint) both;
         }
-        .hero-levels-logo {
-            margin-bottom: 4px;
-            filter: drop-shadow(0 8px 24px rgba(34, 197, 94, 0.45));
+        .hero-logo img {
+            display: block;
+            filter: drop-shadow(0 10px 30px rgba(34, 197, 94, 0.35));
             animation: heroLogoFloat 6s ease-in-out infinite;
         }
-        .hero-levels-logo img { display: block; }
-        @keyframes heroLogoFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-        .hl-bar {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 16px 22px;
-            border-radius: 14px;
-            font-weight: 800; font-size: 18px;
-            letter-spacing: -0.02em;
-            border: 1px solid;
-            position: relative; overflow: hidden;
-        }
-        .hl-bar::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.22), transparent 40%, transparent 60%, rgba(0,0,0,0.08));
-            pointer-events: none;
-        }
-        .hl-mark { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.75; }
-        .hl-top {
-            width: 62%;
-            background: linear-gradient(180deg, #34d76b, #22c55e);
-            border-color: rgba(22, 163, 74, 0.8);
-            color: #02160a;
-            box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 14px 40px -10px rgba(34, 197, 94, 0.6), 0 0 70px -18px rgba(34, 197, 94, 0.5);
-            animation: pyramidTopPulse 4s ease-in-out infinite;
-        }
-        .hl-mid {
-            width: 82%;
-            background: linear-gradient(180deg, #ffd84a, #f5c842);
-            border-color: rgba(212, 165, 39, 0.7);
-            color: #3a2600;
-            box-shadow: 0 1px 0 rgba(255,255,255,0.45) inset, 0 14px 36px -14px rgba(212, 165, 39, 0.4);
-        }
-        .hl-bottom {
-            width: 100%;
-            background: linear-gradient(180deg, #f5d4b0, #e9c5a0);
-            border-color: rgba(199, 156, 112, 0.6);
-            color: #3a2400;
-            box-shadow: 0 1px 0 rgba(255,255,255,0.4) inset, 0 14px 36px -14px rgba(199, 156, 112, 0.35);
-        }
-        .hero-levels-caption {
-            margin-top: 6px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
-            color: var(--fg-dim);
-        }
-        @media (max-width: 1180px) { .hero-levels { display: none; } }
+        @keyframes heroLogoFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 
         /* ============ TRUST BAR ============ */
         .trustbar { border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); background: var(--bg-elevated); }
@@ -929,6 +886,28 @@
         @media (max-width: 1024px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 640px) { .results-grid { grid-template-columns: 1fr; } }
 
+        /* ============ QUOTE STRIP (teaser) ============ */
+        .quote-strip { padding: 64px 0 8px; }
+        .quote-strip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .qs-card {
+            padding: 26px 28px;
+            background: var(--bg-card); background-image: var(--gradient-card);
+            border: 1px solid var(--border-subtle); border-radius: var(--r-lg);
+            box-shadow: var(--shadow-card);
+            display: flex; flex-direction: column; gap: 14px;
+        }
+        .qs-quote { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.35; color: var(--fg); }
+        .qs-author { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--fg); margin-top: auto; }
+        .qs-avatar {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: linear-gradient(135deg, rgba(34,197,94,0.3), rgba(132,204,22,0.3));
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 700; flex-shrink: 0;
+        }
+        .qs-role { color: var(--fg-dim); font-weight: 500; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+        @media (max-width: 860px) { .quote-strip-grid { grid-template-columns: 1fr; } .quote-strip { padding: 48px 0 0; } }
+
         /* ============ TESTIMONIALS FEATURED ============ */
         .testimonials-featured {
             display: grid; grid-template-columns: repeat(3, 1fr);
@@ -1102,6 +1081,10 @@
             color: var(--fg-muted); font-size: 15px;
         }
         .mentoring-callout strong { color: var(--fg); font-family: 'JetBrains Mono', monospace; }
+
+        /* ============ PAY BLOCK (in pricing) ============ */
+        .pay-block { margin-top: 44px; padding-top: 40px; border-top: 1px solid var(--border-subtle); }
+        .pay-title { text-align: center; font-size: 18px; font-weight: 700; margin-bottom: 28px; letter-spacing: -0.02em; }
 
         /* ============ ENROLL ============ */
         .enroll { padding: 120px 0; border-top: 1px solid var(--border-subtle); }
@@ -1334,9 +1317,12 @@
         <div class="hero-side right">Run by Alexey Ivanov · Amsterdam · ICF-PCC</div>
 
         <div class="container">
+            <div class="hero-logo">
+                <img src="logo.svg" alt="AI Native" width="76" height="76">
+            </div>
             <div class="hero-label">
                 <span class="hero-label-chip"><span class="hero-label-dot"></span> LIVE</span>
-                Поток 2 · живая группа · набор открыт
+                Поток 2 · живая группа · идёт набор
             </div>
             <h1>
                 <span class="h1-line">Станьте <span class="h1-emph">AI Native</span></span>
@@ -1368,17 +1354,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Hero levels visual -->
-        <div class="hero-levels" aria-hidden="true">
-            <div class="hero-levels-logo">
-                <img src="logo.svg" alt="" width="44" height="44">
-            </div>
-            <div class="hl-bar hl-top"><span>AI Native</span><span class="hl-mark">✦ цель</span></div>
-            <div class="hl-bar hl-mid"><span>AI Literate</span></div>
-            <div class="hl-bar hl-bottom"><span>AI Curious</span></div>
-            <div class="hero-levels-caption">Три уровня работы с ИИ</div>
-        </div>
     </section>
 
     <!-- TRUST BAR -->
@@ -1402,6 +1377,26 @@
             <div class="trust-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                 <strong>600+</strong> на программах
+            </div>
+        </div>
+    </section>
+
+    <!-- QUOTE STRIP (teaser) -->
+    <section class="quote-strip">
+        <div class="container">
+            <div class="quote-strip-grid">
+                <div class="qs-card">
+                    <div class="qs-quote">«Полвечера на каждый текст — теперь в прошлом»</div>
+                    <div class="qs-author"><span class="qs-avatar">М</span> Марина <span class="qs-role">· контент-лид</span></div>
+                </div>
+                <div class="qs-card">
+                    <div class="qs-quote">«Сижу, четыре часа прошло — а мне интересно копаться дальше»</div>
+                    <div class="qs-author"><span class="qs-avatar">П</span> Пётр <span class="qs-role">· руководитель</span></div>
+                </div>
+                <div class="qs-card">
+                    <div class="qs-quote">«Звонок → summary → оффер — за один процесс»</div>
+                    <div class="qs-author"><span class="qs-avatar">Ю</span> Юрий <span class="qs-role">· юрист, партнёр</span></div>
+                </div>
             </div>
         </div>
     </section>
@@ -1439,7 +1434,7 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-label" data-no="S/01">Три уровня работы с ИИ</div>
-                <h2>Большинство застревает на уровне AI Literate</h2>
+                <h2>Лишь немногие доходят до уровня AI Native</h2>
             </div>
 
             <div class="pyramid-wrap">
@@ -1451,9 +1446,9 @@
                     </svg>
                 </div>
                 <div class="pyramid-rail">
-                    <div class="pyramid-rail-item">~20%</div>
-                    <div class="pyramid-rail-item">~55%</div>
-                    <div class="pyramid-rail-item">~25%</div>
+                    <div class="pyramid-rail-item">~5%</div>
+                    <div class="pyramid-rail-item">~30%</div>
+                    <div class="pyramid-rail-item">~65%</div>
                 </div>
                 <div class="pyramid">
                     <div class="pyramid-layer pyramid-top">
@@ -1475,7 +1470,7 @@
                 <div class="level-card">
                     <div class="level-number-wrap">
                         <div class="level-number">01</div>
-                        <div class="level-number-chip">~25%</div>
+                        <div class="level-number-chip">~65%</div>
                     </div>
                     <div class="level-content">
                         <h3><span class="level-dot"></span>AI Curious</h3>
@@ -1487,7 +1482,7 @@
                 <div class="level-card">
                     <div class="level-number-wrap">
                         <div class="level-number">02</div>
-                        <div class="level-number-chip">~55%</div>
+                        <div class="level-number-chip">~30%</div>
                     </div>
                     <div class="level-content">
                         <h3><span class="level-dot"></span>AI Literate</h3>
@@ -1499,7 +1494,7 @@
                 <div class="level-card active">
                     <div class="level-number-wrap">
                         <div class="level-number">03</div>
-                        <div class="level-number-chip">цель</div>
+                        <div class="level-number-chip">~5% · цель</div>
                     </div>
                     <div class="level-content">
                         <h3><span class="level-dot"></span>AI Native</h3>
@@ -1511,7 +1506,7 @@
                 </div>
             </div>
             <div class="problem-callout">
-                <p>Большинство профессионалов находятся на уровне 2. <strong>Этот интенсив — мост к уровню 3.</strong></p>
+                <p>До уровня AI Native доходят единицы — около 5%. <strong>Этот интенсив — ваш мост на третий уровень.</strong></p>
                 <a href="#program" class="btn btn-primary" style="margin-top: 24px;">Хочу на уровень 3 <span class="arrow">→</span></a>
             </div>
         </div>
@@ -1521,40 +1516,40 @@
     <section class="solution">
         <div class="container">
             <div class="section-header">
-                <div class="section-label" data-no="S/02">Что даёт интенсив</div>
-                <h2>Контекст важнее промпта</h2>
-                <p>Правило «0 → 80 → 100»: базовые настройки дают 80% за минуты, оставшиеся 20% делают AI настроенным именно под вас.</p>
+                <div class="section-label" data-no="S/02">Подход</div>
+                <h2>Принципы, на которых строится AI Native</h2>
+                <p>Это не набор трюков, а система мышления и работы с ИИ. Вот шесть принципов, которые вы освоите и встроите в свои процессы за 4 недели.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card featured">
+                <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Правило «0 → 80 → 100»</h3>
-                    <p>AI-native процесс позволяет перейти от 0% до 80% практически мгновенно — через базовые настройки, промпты и принципы. Затем мы фокусируемся на финальных 20%, которые делают работу с ИИ настроенной под вас.</p>
+                    <p>Базовые настройки дают 80% результата за минуты. Оставшиеся 20% доводим под вас — именно там рождается ваше преимущество.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🧭</div>
                     <h3>Новые процессы</h3>
-                    <p>Переход к AI Native — это проектирование новых процессов, а не «улучшение старых».</p>
+                    <p>AI Native — это не «улучшить старое», а спроектировать процессы заново, где ИИ участвует в каждом шаге, а не подключается изредка.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🧠</div>
-                    <h3>Три компетенции AI Native</h3>
-                    <p>Дизайн процессов (человек vs AI), качество решений, работа с контекстом.</p>
+                    <h3>Три компетенции</h3>
+                    <p>Дизайн процессов «человек ↔ ИИ», качество решений и работа с контекстом — три навыка, на которых держится вся система.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">⚙️</div>
                     <h3>PersonalOS</h3>
-                    <p>База знаний + AI-агенты + память + автоматизации. ИИ работает как система.</p>
+                    <p>База знаний, агенты, память и автоматизации, собранные в одну систему. ИИ работает на вас как единое целое, а не как набор чатов.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">💡</div>
                     <h3>AI-first мышление</h3>
-                    <p>«Может ли AI это сделать?» и «Как сделать это по-новому с AI?» — перед каждой задачей.</p>
+                    <p>Перед каждой задачей — «Может ли это сделать ИИ?» и «Как сделать это по-новому?». Со временем это входит в привычку.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📚</div>
-                    <h3>Промпты и swipe file</h3>
-                    <p>Библиотека промптов и примеров под повторяющиеся задачи — заберёте с собой.</p>
+                    <div class="feature-icon">🎯</div>
+                    <h3>Контекст важнее промпта</h3>
+                    <p>Generic-промпт даёт generic-ответ. Сила — в контексте о вас и ваших задачах, который ИИ помнит и использует постоянно.</p>
                 </div>
             </div>
         </div>
@@ -1611,15 +1606,6 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«Звонок → summary → оффер — за один процесс»</div>
-                    <p class="testimonial-body">Пришёл с запросом оптимизировать workflow: пообщался с клиентом, транскрибировал звонок, он превратился в summary для команды, дальше сформировался оффер. Благодаря выгрузке Telegram, настройке About Me Personal и About Me Work — всё это получилось.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">Ю</div>
-                        <div class="testimonial-author-meta">Юрий<span class="testimonial-author-role">Юрист, партнёр</span></div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
                     <div class="testimonial-quote">«Вернулись базы знаний, которых не было с 2022-го»</div>
                     <p class="testimonial-body">После того, как исчез Notion в 22-м, меня сильно подкосило в плане ведения данных. В этот раз Obsidian зашёл — мантра, что это просто папка с файлами, реально помогла. У меня появилась база знаний, которую я перестал вести с 22-го года.</p>
                     <div class="testimonial-author">
@@ -1645,13 +1631,45 @@
                         <div class="testimonial-author-meta">Dimitri<span class="testimonial-author-role">Участник</span></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">«Курс позволил правильно вдохновляться»</div>
-                    <p class="testimonial-body">Работаю по 10–11 часов в день, половина из них не вылезаю из нейронок. Курс позволил правильно вдохновляться на пробежках вечером, синхронизироваться, многое попробовать добавить в свой процесс.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">С</div>
-                        <div class="testimonial-author-meta">Сергей<span class="testimonial-author-role">Участник</span></div>
+    <!-- INSTRUCTOR -->
+    <section class="instructor">
+        <div class="container">
+            <div class="instructor-grid">
+                <div class="instructor-visual">
+                    <div class="instructor-avatar">
+                        <img src="self-portrait.png" alt="Алексей Иванов">
+                    </div>
+                    <div class="instructor-corners">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="instructor-badge">
+                        <span class="instructor-badge-dot"></span>
+                        ICF PCC · @ppprompt
+                    </div>
+                </div>
+                <div class="instructor-info">
+                    <div class="section-label" data-no="S/04">Ведущий</div>
+                    <h2>Алексей Иванов</h2>
+                    <p class="instructor-title">Инструктор · ICF PCC коуч · Автор @ppprompt</p>
+                    <p class="instructor-bio">Инструктор и автор курсов. Сертифицированный ICF PCC коуч предпринимателей и ИТ-лидеров с опытом в ИИ-стартапах в Кремниевой долине в продуктовых ролях.</p>
+                    <p class="instructor-bio">Ведущий канала @ppprompt — ежедневно про глобальную AI-индустрию, 13+ тысяч подписчиков. Более 600 человек прошли открытые программы Алексея со средней оценкой 4.7/5.</p>
+                    <div class="instructor-stats">
+                        <div>
+                            <div class="instructor-stat-number">600+</div>
+                            <div class="instructor-stat-label">на программах Алексея</div>
+                        </div>
+                        <div>
+                            <div class="instructor-stat-number">4.7/5</div>
+                            <div class="instructor-stat-label">оценка потока</div>
+                        </div>
+                        <div>
+                            <div class="instructor-stat-number">13K+</div>
+                            <div class="instructor-stat-label">подписчиков</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1662,7 +1680,7 @@
     <section class="audience" id="audience">
         <div class="container">
             <div class="section-header">
-                <div class="section-label" data-no="S/04">Для кого</div>
+                <div class="section-label" data-no="S/05">Для кого</div>
                 <h2>Кому подойдёт интенсив</h2>
                 <p>Для тех, кто уже пользуется ИИ, но чувствует, что не раскрывает потенциал.</p>
             </div>
@@ -1709,7 +1727,7 @@
     <section class="curriculum" id="curriculum">
         <div class="container">
             <div class="section-header">
-                <div class="section-label" data-no="S/05">Программа и даты</div>
+                <div class="section-label" data-no="S/06">Программа и даты</div>
                 <h2>4 недели — от хаоса к системе</h2>
                 <p>Встречи в Zoom по вторникам и четвергам, 19:00 МСК / 18:00 CET, по 2 часа. Практика с бадди между сессиями, закрытый чат в Telegram.</p>
             </div>
@@ -1802,7 +1820,7 @@
     <section class="tools">
         <div class="container">
             <div class="section-header">
-                <div class="section-label" data-no="S/06">Стек AI Native</div>
+                <div class="section-label" data-no="S/07">Стек AI Native</div>
                 <h2>Какие инструменты вы освоите</h2>
                 <p>Конкретный стек, на котором мы работаем все 4 недели. Никаких «инструмент месяца» — только то, что реально работает.</p>
             </div>
@@ -1876,7 +1894,7 @@
     <section class="results">
         <div class="container">
             <div class="section-header">
-                <div class="section-label" data-no="S/07">Результат</div>
+                <div class="section-label" data-no="S/08">Результат</div>
                 <h2>Что вы построите за 4 недели</h2>
                 <p>Конкретные артефакты и новые процессы, которые остаются с вами после интенсива.</p>
             </div>
@@ -1945,7 +1963,7 @@
     <section class="program" id="program">
         <div class="container">
             <div class="section-header">
-                <div class="section-label" data-no="S/08">Условия и цены</div>
+                <div class="section-label" data-no="S/09">Условия и цены</div>
                 <h2>Выберите формат участия</h2>
                 <p>Оплата — в евро, долларах, рублях или USDT. По счёту от компании — тоже можно.</p>
             </div>
@@ -1971,7 +1989,7 @@
                         <li>Своя PersonalOS к концу курса</li>
                         <li>Набор проверенных инструментов</li>
                     </ul>
-                    <a href="#enroll" class="btn btn-primary program-cta">Записаться <span class="arrow">→</span></a>
+                    <a href="#pay" class="btn btn-primary program-cta">Записаться <span class="arrow">→</span></a>
                 </div>
 
                 <div class="program-card featured">
@@ -1994,7 +2012,7 @@
                         <li>Разбор вашей PersonalOS и рабочих процессов</li>
                         <li>Рекомендации по настройке под вашу роль</li>
                     </ul>
-                    <a href="#enroll" class="btn btn-primary program-cta">Записаться с менторингом <span class="arrow">→</span></a>
+                    <a href="#pay" class="btn btn-primary program-cta">Записаться с менторингом <span class="arrow">→</span></a>
                 </div>
             </div>
 
@@ -2020,78 +2038,35 @@
                     Оплата <strong>€ / $ / ₽ / USDT</strong> и по счёту
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- ENROLL -->
-    <section class="enroll" id="enroll">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label" data-no="S/09">Как записаться</div>
-                <h2>Выберите удобный способ оплаты</h2>
+            <div class="mentoring-callout" style="border-style: solid; border-color: rgba(34,197,94,0.25);">
+                🏢 <strong>От компании 3 человека и больше — скидка 20%.</strong> Оформим счёт и закрывающие документы. Напишите <a href="https://t.me/RealPonchikTeam" target="_blank" style="color: var(--accent-light);">@RealPonchikTeam</a>.
             </div>
-            <div class="enroll-grid">
-                <a href="https://talkauthentic.io/ainativepay" target="_blank" class="extra">
-                    <div class="extra-icon">💳</div>
-                    <div class="extra-content"><h4>Оплатить в $ или €</h4><p>talkauthentic.io/ainativepay</p></div>
-                </a>
-                <a href="https://derzhites.ru/ainativepay" target="_blank" class="extra">
-                    <div class="extra-icon">💳</div>
-                    <div class="extra-content"><h4>Оплатить в рублях</h4><p>derzhites.ru/ainativepay</p></div>
-                </a>
-                <a href="https://t.me/RealPonchikTeam" target="_blank" class="extra">
-                    <div class="extra-icon">🪙</div>
-                    <div class="extra-content"><h4>Оплатить в USDT</h4><p>напишите в тг @RealPonchikTeam</p></div>
-                </a>
-                <a href="https://t.me/RealPonchikTeam" target="_blank" class="extra">
-                    <div class="extra-icon">🧾</div>
-                    <div class="extra-content"><h4>По счёту от компании</h4><p>напишите в тг @RealPonchikTeam</p></div>
-                </a>
-            </div>
-            <p class="enroll-after">
-                После оплаты мы пришлём подтверждение и небольшой опросник.<br>
-                Есть вопросы? В Telegram <a href="https://t.me/RealPonchikTeam" target="_blank">@RealPonchikTeam</a> ответит ассистент курса Женя.
-            </p>
-        </div>
-    </section>
 
-    <!-- INSTRUCTOR -->
-    <section class="instructor">
-        <div class="container">
-            <div class="instructor-grid">
-                <div class="instructor-visual">
-                    <div class="instructor-avatar">
-                        <img src="self-portrait.png" alt="Алексей Иванов">
-                    </div>
-                    <div class="instructor-corners">
-                        <span></span><span></span><span></span><span></span>
-                    </div>
-                    <div class="instructor-badge">
-                        <span class="instructor-badge-dot"></span>
-                        ICF PCC · @ppprompt
-                    </div>
+            <div id="pay" class="pay-block">
+                <h3 class="pay-title">Как оплатить</h3>
+                <div class="enroll-grid">
+                    <a href="https://talkauthentic.io/ainativepay" target="_blank" class="extra">
+                        <div class="extra-icon">💳</div>
+                        <div class="extra-content"><h4>В $ или €</h4><p>talkauthentic.io/ainativepay</p></div>
+                    </a>
+                    <a href="https://derzhites.ru/ainativepay" target="_blank" class="extra">
+                        <div class="extra-icon">💳</div>
+                        <div class="extra-content"><h4>В рублях</h4><p>derzhites.ru/ainativepay</p></div>
+                    </a>
+                    <a href="https://t.me/RealPonchikTeam" target="_blank" class="extra">
+                        <div class="extra-icon">🪙</div>
+                        <div class="extra-content"><h4>В USDT</h4><p>@RealPonchikTeam</p></div>
+                    </a>
+                    <a href="https://t.me/RealPonchikTeam" target="_blank" class="extra">
+                        <div class="extra-icon">🧾</div>
+                        <div class="extra-content"><h4>По счёту от компании</h4><p>@RealPonchikTeam</p></div>
+                    </a>
                 </div>
-                <div class="instructor-info">
-                    <div class="section-label" data-no="S/10">Ведущий</div>
-                    <h2>Алексей Иванов</h2>
-                    <p class="instructor-title">Инструктор · ICF PCC коуч · Автор @ppprompt</p>
-                    <p class="instructor-bio">Инструктор и автор курсов. Сертифицированный ICF PCC коуч предпринимателей и ИТ-лидеров с опытом в ИИ-стартапах в Кремниевой долине в продуктовых ролях.</p>
-                    <p class="instructor-bio">Ведущий канала @ppprompt — ежедневно про глобальную AI-индустрию, 13+ тысяч подписчиков. Более 600 человек прошли открытые программы Алексея со средней оценкой 4.7/5.</p>
-                    <div class="instructor-stats">
-                        <div>
-                            <div class="instructor-stat-number">600+</div>
-                            <div class="instructor-stat-label">выпускников</div>
-                        </div>
-                        <div>
-                            <div class="instructor-stat-number">4.7/5</div>
-                            <div class="instructor-stat-label">средняя оценка</div>
-                        </div>
-                        <div>
-                            <div class="instructor-stat-number">13K+</div>
-                            <div class="instructor-stat-label">подписчиков</div>
-                        </div>
-                    </div>
-                </div>
+                <p class="enroll-after">
+                    После оплаты мы пришлём подтверждение и небольшой опросник.<br>
+                    Есть вопросы? В Telegram <a href="https://t.me/RealPonchikTeam" target="_blank">@RealPonchikTeam</a> ответит ассистент курса Женя.
+                </p>
             </div>
         </div>
     </section>
@@ -2100,7 +2075,7 @@
     <section class="faq" id="faq">
         <div class="container">
             <div class="section-header">
-                <div class="section-label" data-no="S/11">FAQ</div>
+                <div class="section-label" data-no="S/10">FAQ</div>
                 <h2>Частые вопросы</h2>
             </div>
             <div class="faq-list">
@@ -2184,10 +2159,7 @@
         // FAQ accordion
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
-                const item = button.parentElement;
-                const wasActive = item.classList.contains('active');
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                if (!wasActive) item.classList.add('active');
+                button.parentElement.classList.toggle('active');
             });
         });
 
