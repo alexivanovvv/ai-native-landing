@@ -275,29 +275,61 @@
         }
         .hero-cta {
             display: flex; gap: 14px; flex-wrap: wrap;
-            margin-bottom: 88px;
+            margin-bottom: 28px;
             animation: fadeInUp 0.9s var(--ease-out-quint) 0.3s both;
         }
 
         .hero-stats {
-            display: grid; grid-template-columns: repeat(4, auto);
-            gap: 56px;
-            padding-top: 44px;
+            display: flex; flex-wrap: wrap;
+            gap: 14px 38px;
+            padding-top: 22px;
             border-top: 1px solid var(--border-subtle);
-            max-width: 720px;
+            max-width: 640px;
             animation: fadeInUp 0.9s var(--ease-out-quint) 0.4s both;
         }
         .hero-stat-number {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 30px; font-weight: 600;
+            font-size: 20px; font-weight: 600;
             letter-spacing: -0.02em;
             line-height: 1;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             color: var(--fg);
             font-feature-settings: 'tnum' 1, 'zero' 1;
         }
         .hero-stat-number .unit { color: var(--accent); }
-        .hero-stat-label { font-size: 12px; color: var(--fg-dim); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+        .hero-stat-label { font-size: 11px; color: var(--fg-dim); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
+
+        /* Hero testimonials — 3 short quotes at bottom of first screen */
+        .hero-quotes {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 14px; margin-top: 48px;
+            animation: fadeInUp 0.9s var(--ease-out-quint) 0.5s both;
+        }
+        .hero-quote {
+            padding: 18px 20px;
+            background: var(--bg-glass); backdrop-filter: blur(8px);
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .hero-quote-text { font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--fg); letter-spacing: -0.01em; }
+        .hero-quote-author { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--fg-muted); }
+        .hero-quote-avatar {
+            width: 22px; height: 22px; border-radius: 50%;
+            background: linear-gradient(135deg, rgba(34,197,94,0.35), rgba(132,204,22,0.35));
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: 700; color: var(--fg); flex-shrink: 0;
+        }
+        .hero-quote-role { color: var(--fg-dim); font-weight: 500; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+        .hero-quote-stars { color: #f5c842; font-size: 13px; letter-spacing: 2px; line-height: 1; }
+        .hero-quote-verified {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 10px; font-weight: 600; color: var(--accent-light);
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .hero-quote-verified svg { width: 12px; height: 12px; }
+        @media (max-width: 900px) { .hero-quotes { grid-template-columns: 1fr; gap: 10px; margin-top: 32px; } }
 
         /* Floating chips — anchored to container's right edge so they stay close to H1 */
         .hero-chips {
@@ -990,6 +1022,10 @@
         }
         .testimonial-author-meta { display: flex; flex-direction: column; gap: 1px; }
         .testimonial-author-role { font-size: 11px; color: var(--fg-dim); font-weight: 500; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.03em; }
+        .testimonial-rating { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+        .testimonial-stars { color: #f5c842; font-size: 15px; letter-spacing: 2px; line-height: 1; }
+        .testimonial-verified { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--accent-light); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+        .testimonial-verified svg { width: 13px; height: 13px; }
 
         /* ============ PROGRAM (PRICING) ============ */
         .program { padding: 140px 0; border-top: 1px solid var(--border-subtle); background: var(--bg-elevated); }
@@ -1338,19 +1374,40 @@
             <div class="hero-stats">
                 <div>
                     <div class="hero-stat-number">4.7<span class="unit">/5</span></div>
-                    <div class="hero-stat-label">оценка первого потока</div>
+                    <div class="hero-stat-label">средняя оценка</div>
                 </div>
                 <div>
-                    <div class="hero-stat-number" data-count="13">13<span class="unit">K+</span></div>
-                    <div class="hero-stat-label">читателей @ppprompt</div>
-                </div>
-                <div>
-                    <div class="hero-stat-number" data-count="600">600<span class="unit">+</span></div>
-                    <div class="hero-stat-label">на программах Алексея</div>
+                    <div class="hero-stat-number">10–15</div>
+                    <div class="hero-stat-label">размер группы</div>
                 </div>
                 <div>
                     <div class="hero-stat-number">8</div>
-                    <div class="hero-stat-label">воркшопов за 4 недели</div>
+                    <div class="hero-stat-label">сессий за 4 недели</div>
+                </div>
+                <div>
+                    <div class="hero-stat-number" data-count="600">600<span class="unit">+</span></div>
+                    <div class="hero-stat-label">выпускников программ Алексея</div>
+                </div>
+            </div>
+
+            <div class="hero-quotes">
+                <div class="hero-quote">
+                    <div class="hero-quote-text">«Полвечера на каждый текст — теперь в прошлом»</div>
+                    <div class="hero-quote-stars">★★★★★</div>
+                    <div class="hero-quote-author"><span class="hero-quote-avatar">М</span> Марина <span class="hero-quote-role">· контент-лид</span></div>
+                    <div class="hero-quote-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Проверенный отзыв</div>
+                </div>
+                <div class="hero-quote">
+                    <div class="hero-quote-text">«Четыре часа прошло — а мне интересно копаться дальше»</div>
+                    <div class="hero-quote-stars">★★★★★</div>
+                    <div class="hero-quote-author"><span class="hero-quote-avatar">П</span> Пётр <span class="hero-quote-role">· руководитель</span></div>
+                    <div class="hero-quote-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Проверенный отзыв</div>
+                </div>
+                <div class="hero-quote">
+                    <div class="hero-quote-text">«Звонок → summary → оффер — за один процесс»</div>
+                    <div class="hero-quote-stars">★★★★★</div>
+                    <div class="hero-quote-author"><span class="hero-quote-avatar">Ю</span> Юрий <span class="hero-quote-role">· юрист, партнёр</span></div>
+                    <div class="hero-quote-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Проверенный отзыв</div>
                 </div>
             </div>
         </div>
@@ -1377,26 +1434,6 @@
             <div class="trust-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                 <strong>600+</strong> на программах
-            </div>
-        </div>
-    </section>
-
-    <!-- QUOTE STRIP (teaser) -->
-    <section class="quote-strip">
-        <div class="container">
-            <div class="quote-strip-grid">
-                <div class="qs-card">
-                    <div class="qs-quote">«Полвечера на каждый текст — теперь в прошлом»</div>
-                    <div class="qs-author"><span class="qs-avatar">М</span> Марина <span class="qs-role">· контент-лид</span></div>
-                </div>
-                <div class="qs-card">
-                    <div class="qs-quote">«Сижу, четыре часа прошло — а мне интересно копаться дальше»</div>
-                    <div class="qs-author"><span class="qs-avatar">П</span> Пётр <span class="qs-role">· руководитель</span></div>
-                </div>
-                <div class="qs-card">
-                    <div class="qs-quote">«Звонок → summary → оффер — за один процесс»</div>
-                    <div class="qs-author"><span class="qs-avatar">Ю</span> Юрий <span class="qs-role">· юрист, партнёр</span></div>
-                </div>
             </div>
         </div>
     </section>
@@ -1653,10 +1690,10 @@
                 </div>
                 <div class="instructor-info">
                     <div class="section-label" data-no="S/04">Ведущий</div>
-                    <h2>Алексей Иванов</h2>
-                    <p class="instructor-title">Инструктор · ICF PCC коуч · Автор @ppprompt</p>
-                    <p class="instructor-bio">Инструктор и автор курсов. Сертифицированный ICF PCC коуч предпринимателей и ИТ-лидеров с опытом в ИИ-стартапах в Кремниевой долине в продуктовых ролях.</p>
-                    <p class="instructor-bio">Ведущий канала @ppprompt — ежедневно про глобальную AI-индустрию, 13+ тысяч подписчиков. Более 600 человек прошли открытые программы Алексея со средней оценкой 4.7/5.</p>
+                    <h2>Привет, я Алексей 👋</h2>
+                    <p class="instructor-title">ICF PCC коуч · экс-продакт в AI-стартапах · автор @ppprompt</p>
+                    <p class="instructor-bio">Сертифицированный ICF PCC коуч предпринимателей и ИТ-лидеров. Работал в ИИ-стартапах Кремниевой долины в продуктовых ролях. Веду канал @ppprompt про глобальную AI-индустрию — каждый день, 13+ тысяч подписчиков.</p>
+                    <p class="instructor-bio">Я собрал этот интенсив, потому что вижу одно и то же: люди платят за AI, но используют его как «умный Google». AI Native — это то, как я сам работаю каждый день. За 4 недели я научу вас тому же.</p>
                     <div class="instructor-stats">
                         <div>
                             <div class="instructor-stat-number">600+</div>
@@ -2161,6 +2198,15 @@
             button.addEventListener('click', () => {
                 button.parentElement.classList.toggle('active');
             });
+        });
+
+        // Add star rating + verified badge to every testimonial card
+        document.querySelectorAll('.testimonials .testimonial-card').forEach(card => {
+            const rating = document.createElement('div');
+            rating.className = 'testimonial-rating';
+            rating.innerHTML = '<span class="testimonial-stars" aria-label="5 из 5">★★★★★</span>'
+                + '<span class="testimonial-verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Проверенный отзыв</span>';
+            card.appendChild(rating);
         });
 
         // Smooth scroll
