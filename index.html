@@ -362,7 +362,7 @@
         @media (max-width: 1000px) { .hero .container { grid-template-columns: 1fr; } .hero-os { display: none; } }
 
         /* Hero PersonalOS diagram */
-        .hero-os { position: relative; width: 400px; height: 400px; justify-self: center; animation: fadeInUp 1s var(--ease-out-quint) 0.4s both; }
+        .hero-os { position: relative; width: 400px; height: 400px; min-height: 400px; max-height: 400px; flex: none; justify-self: center; align-self: center; animation: fadeInUp 1s var(--ease-out-quint) 0.4s both; }
         .hero-os-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
         .hero-os-lines line { stroke: rgba(34,197,94,0.35); stroke-width: 1.5; stroke-dasharray: 5 6; animation: osDash 18s linear infinite; }
         @keyframes osDash { to { stroke-dashoffset: -220; } }
@@ -866,10 +866,9 @@
 
         /* ============ CURRICULUM ============ */
         .curriculum { padding: 140px 0; border-top: 1px solid var(--border-subtle); background: var(--bg-elevated); }
-        .curriculum-grid { display: flex; flex-direction: column; gap: 18px; max-width: 820px; margin: 0 auto; }
-        .curriculum-grid .week-card { display: grid; grid-template-columns: 56px 1fr; gap: 28px; align-items: start; }
-        .curriculum-grid .week-card .feature-icon { grid-row: span 4; margin-bottom: 0; }
-        @media (max-width: 560px) { .curriculum-grid .week-card { grid-template-columns: 1fr; gap: 14px; } }
+        .curriculum-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
+        @media (max-width: 1024px) { .curriculum-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .curriculum-grid { grid-template-columns: 1fr; } }
         .week-card {
             background: var(--bg-card);
             background-image: var(--gradient-card);
