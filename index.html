@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Native — Станьте AI Native за 4 недели · интенсив Алексея Иванова</title>
+    <title>AI Native — Станьте AI Native за 3 недели · интенсив Алексея Иванова</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -118,11 +118,11 @@
         /* ============ NAV ============ */
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            background: rgba(5,5,7,0.72); backdrop-filter: blur(24px) saturate(140%);
-            -webkit-backdrop-filter: blur(24px) saturate(140%);
-            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(5,5,7,0.55); backdrop-filter: blur(20px) saturate(120%);
+            -webkit-backdrop-filter: blur(20px) saturate(120%);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        nav .container { display: flex; justify-content: space-between; align-items: center; height: 72px; }
+        nav .container { display: flex; justify-content: space-between; align-items: center; height: 60px; }
         .logo { display: flex; align-items: center; text-decoration: none; color: var(--fg); }
         .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
         .nav-links a {
@@ -272,7 +272,7 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(17px, 1.4vw, 20px);
+            font-size: clamp(19px, 1.6vw, 23px);
             color: var(--fg-muted); max-width: 680px;
             margin-bottom: 48px; line-height: 1.55;
             animation: fadeInUp 0.9s var(--ease-out-quint) 0.2s both;
@@ -310,22 +310,31 @@
             animation: fadeInUp 0.9s var(--ease-out-quint) 0.5s both;
         }
         .hero-quote {
-            padding: 18px 20px;
-            background: var(--bg-glass); backdrop-filter: blur(8px);
+            padding: 20px 22px 18px;
+            background: var(--bg-glass); backdrop-filter: blur(12px);
             border: 1px solid var(--border); border-radius: var(--r-md);
-            display: flex; flex-direction: column; gap: 10px;
+            display: flex; flex-direction: column; gap: 14px;
+            position: relative; overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
         }
-        .hero-quote-text { font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--fg); letter-spacing: -0.01em; }
-        .hero-quote-author { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--fg-muted); }
+        .hero-quote::before {
+            content: '\201C';
+            position: absolute; top: -4px; right: 14px;
+            font-size: 64px; line-height: 1; font-family: Georgia, serif;
+            color: var(--accent); opacity: 0.12; pointer-events: none;
+        }
+        .hero-quote:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+        .hero-quote-text { font-size: 14px; font-weight: 600; line-height: 1.5; color: var(--fg); letter-spacing: -0.01em; }
+        .hero-quote-author { display: flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 600; color: var(--fg-muted); }
         .hero-quote-avatar {
-            width: 22px; height: 22px; border-radius: 50%;
-            background: linear-gradient(135deg, rgba(34,197,94,0.35), rgba(132,204,22,0.35));
-            border: 1px solid var(--border);
+            width: 26px; height: 26px; border-radius: 50%;
+            background: linear-gradient(135deg, rgba(34,197,94,0.4), rgba(132,204,22,0.4));
+            border: 1px solid rgba(34,197,94,0.35);
             display: flex; align-items: center; justify-content: center;
-            font-size: 10px; font-weight: 700; color: var(--fg); flex-shrink: 0;
+            font-size: 11px; font-weight: 700; color: var(--fg); flex-shrink: 0;
         }
         .hero-quote-role { color: var(--fg-dim); font-weight: 500; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
-        .hero-quote-stars { color: #f5c842; font-size: 13px; letter-spacing: 2px; line-height: 1; }
+        .hero-quote-stars { color: #f5c842; font-size: 12px; letter-spacing: 2px; line-height: 1; }
         .hero-quote-verified {
             display: inline-flex; align-items: center; gap: 5px;
             font-size: 10px; font-weight: 600; color: var(--accent-light);
@@ -343,34 +352,41 @@
         /* Hero PersonalOS diagram */
         .hero-os { position: relative; width: 400px; height: 400px; min-height: 400px; max-height: 400px; flex: none; justify-self: center; align-self: center; animation: fadeInUp 1s var(--ease-out-quint) 0.4s both; }
         .hero-os-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
-        .hero-os-lines line { stroke: rgba(34,197,94,0.35); stroke-width: 1.5; stroke-dasharray: 5 6; animation: osDash 18s linear infinite; }
+        .hero-os-lines line { stroke: rgba(34,197,94,0.25); stroke-width: 1; stroke-dasharray: 4 7; animation: osDash 20s linear infinite; }
         @keyframes osDash { to { stroke-dashoffset: -220; } }
+        /* orbital ring */
+        .hero-os::before {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            width: 280px; height: 280px; margin: -140px 0 0 -140px;
+            border-radius: 50%; border: 1px solid rgba(34,197,94,0.12);
+            pointer-events: none;
+        }
         .os-core {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
             display: flex; flex-direction: column; align-items: center; gap: 8px;
-            width: 150px; height: 150px; justify-content: center;
-            background: radial-gradient(circle at 50% 35%, rgba(34,197,94,0.18), var(--bg-card) 70%);
-            border: 1px solid var(--border-accent); border-radius: 50%;
-            box-shadow: 0 0 60px -10px rgba(34,197,94,0.4), var(--shadow-card);
+            width: 140px; height: 140px; justify-content: center;
+            background: radial-gradient(circle at 50% 35%, rgba(34,197,94,0.22), rgba(5,5,7,0.95) 75%);
+            border: 1px solid rgba(34,197,94,0.45); border-radius: 50%;
+            box-shadow: 0 0 0 8px rgba(34,197,94,0.05), 0 0 60px -6px rgba(34,197,94,0.55), var(--shadow-card);
             z-index: 2;
         }
-        .os-core img { filter: drop-shadow(0 6px 16px rgba(34,197,94,0.45)); }
-        .os-core span { font-size: 13px; font-weight: 700; letter-spacing: -0.01em; }
+        .os-core img { filter: drop-shadow(0 4px 12px rgba(34,197,94,0.6)); }
+        .os-core span { font-size: 12px; font-weight: 700; letter-spacing: -0.01em; color: var(--fg-muted); }
         .os-node {
             position: absolute; z-index: 2;
             display: inline-flex; align-items: center; gap: 7px;
-            padding: 10px 15px;
-            background: var(--bg-glass); backdrop-filter: blur(8px);
-            border: 1px solid var(--border); border-radius: 100px;
+            padding: 9px 14px;
+            background: rgba(14,14,18,0.85); backdrop-filter: blur(12px);
+            border: 1px solid rgba(34,197,94,0.2); border-radius: 100px;
             font-size: 13px; font-weight: 600; color: var(--fg); white-space: nowrap;
-            box-shadow: 0 8px 24px -10px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 20px -6px rgba(0,0,0,0.8), 0 0 0 1px rgba(34,197,94,0.06);
             animation: osFloat 6s ease-in-out infinite;
         }
-        .os-node.n-top { top: 0; left: 50%; transform: translateX(-50%); }
-        .os-node.n-bottom { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 1.5s; }
-        .os-node.n-left { left: -6px; top: 50%; transform: translateY(-50%); animation-delay: 0.8s; }
-        .os-node.n-right { right: -6px; top: 50%; transform: translateY(-50%); animation-delay: 2.2s; }
-        @keyframes osFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+        .os-node.n-top { top: 10px; left: 50%; transform: translateX(-50%); }
+        .os-node.n-bottom { bottom: 10px; left: 50%; transform: translateX(-50%); animation-delay: 1.5s; }
+        .os-node.n-left { left: 0; top: 50%; transform: translateY(-50%); animation-delay: 0.8s; }
+        .os-node.n-right { right: 0; top: 50%; transform: translateY(-50%); animation-delay: 2.2s; }
+        @keyframes osFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
 
         /* Floating chips — anchored to container's right edge so they stay close to H1 */
         .hero-chips {
@@ -469,7 +485,7 @@
         .section-header > p { color: var(--fg-muted); font-size: 17px; margin-top: 16px; max-width: 680px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
         /* ============ VIDEO ============ */
-        .video { padding: 40px 0 120px; }
+        .video { padding: 80px 0 80px; }
         .video-window {
             max-width: 920px; margin: 0 auto;
             background: var(--bg-card); border: 1px solid var(--border);
@@ -551,7 +567,7 @@
             mix-blend-mode: overlay;
             pointer-events: none;
         }
-        .pyramid-layer span { position: relative; z-index: 1; }
+        .pyramid-layer span { position: relative; z-index: 1; white-space: nowrap; }
         .pyramid-layer:hover { transform: translateY(-3px); }
         .pyramid-bottom {
             width: 100%;
@@ -568,7 +584,7 @@
             box-shadow: 0 1px 0 rgba(255,255,255,0.45) inset, 0 18px 40px -14px rgba(212, 165, 39, 0.4);
         }
         .pyramid-top {
-            width: 46%;
+            width: 55%;
             background: linear-gradient(180deg, #34d76b, #22c55e);
             border-color: rgba(22, 163, 74, 0.8);
             color: #02160a;
@@ -613,17 +629,34 @@
         .levels-visual .pyramid-row { display: flex; justify-content: center; }
         .levels-explain .section-label { margin-bottom: 14px; }
         .levels-explain h2 { font-size: clamp(26px, 3vw, 38px); margin-bottom: 26px; }
-        .level-rows { display: flex; flex-direction: column; gap: 12px; margin-bottom: 26px; }
+        .level-rows { display: flex; flex-direction: column; gap: 0; margin-bottom: 26px; }
+        .level-row-wrap { display: flex; flex-direction: column; }
+        .level-row-connector { display: flex; align-items: center; justify-content: flex-start; padding: 0 18px; height: 22px; }
+        .level-row-connector-line { width: 1px; height: 100%; background: linear-gradient(to bottom, var(--border-subtle), var(--border-accent)); opacity: 0.5; margin-left: 19px; }
+        .level-row-connector-arrow { font-size: 14px; color: var(--accent); opacity: 0.6; margin-left: 12px; line-height: 1; }
         .level-row {
-            display: flex; gap: 14px; padding: 16px 18px;
+            display: flex; gap: 14px; padding: 14px 18px;
             border: 1px solid var(--border-subtle); border-radius: var(--r-md);
             background: var(--bg-card);
+            transition: border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
+            cursor: default;
         }
-        .level-row .lr-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; box-shadow: 0 0 10px currentColor; }
-        .level-row h4 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
-        .level-row h4 .lr-pct { color: var(--fg-dim); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; margin-left: 8px; }
-        .level-row p { font-size: 14px; color: var(--fg-muted); line-height: 1.5; }
+        .level-row:hover:not(.active) { transform: translateX(4px); box-shadow: -3px 0 0 var(--border-accent), var(--shadow-card); }
+        .lr-num {
+            width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; margin-top: 2px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; font-family: 'JetBrains Mono', monospace;
+            border: 1.5px solid currentColor; opacity: 0.85;
+        }
+        .level-row-body { flex: 1; }
+        .level-row-title { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+        .level-row h4 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+        .lr-pct { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; padding: 1px 7px; border-radius: 20px; background: rgba(255,255,255,0.06); color: var(--fg-muted); }
+        .level-row p { font-size: 14px; color: var(--fg-muted); line-height: 1.5; margin: 0; }
         .level-row.active { border-color: var(--border-accent); background: linear-gradient(135deg, rgba(34,197,94,0.09), var(--bg-card)); }
+        .level-row.active .lr-pct { background: rgba(34,197,94,0.15); color: var(--accent-light); }
+        .level-row.hovered { border-color: var(--border-accent); background: linear-gradient(135deg, rgba(34,197,94,0.09), var(--bg-card)); transform: translateX(4px); box-shadow: -3px 0 0 var(--accent), var(--shadow-card); }
+        .pyramid-layer.hovered { transform: translateY(-5px); box-shadow: 0 20px 50px -10px rgba(34,197,94,0.5); filter: brightness(1.08); }
         .levels-note { font-size: 16px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 22px; }
         .levels-note strong { color: var(--accent-light); }
         @media (max-width: 920px) { .levels-grid { grid-template-columns: 1fr; gap: 40px; } }
@@ -845,8 +878,8 @@
 
         /* ============ CURRICULUM ============ */
         .curriculum { padding: 140px 0; border-top: 1px solid var(--border-subtle); background: var(--bg-elevated); }
-        .curriculum-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
-        @media (max-width: 1024px) { .curriculum-grid { grid-template-columns: repeat(2, 1fr); } }
+        .curriculum-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+        @media (max-width: 1024px) { .curriculum-grid { grid-template-columns: 1fr; } }
         @media (max-width: 600px) { .curriculum-grid { grid-template-columns: 1fr; } }
         .week-card {
             background: var(--bg-card);
@@ -858,6 +891,8 @@
             transition: all 0.4s var(--ease-out-quint);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         .week-card::after {
             content: ''; position: absolute; inset: 0;
@@ -870,9 +905,9 @@
         .week-card .feature-icon { width: 48px; height: 48px; font-size: 20px; }
         .week-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.025em; }
         .week-card .week-sub { color: var(--accent-light); font-size: 13px; margin-bottom: 18px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
-        .week-card ul { list-style: none; padding: 0; }
+        .week-card ul { list-style: none; padding: 0; flex: 1; }
         .week-card li { padding: 7px 0 7px 22px; position: relative; color: var(--fg-muted); font-size: 15px; line-height: 1.6; }
-        .week-card li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+        .week-card li::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 20px; line-height: 1.3; }
         .week-card .week-result { margin-top: 20px; padding-top: 18px; border-top: 1px dashed var(--border); font-size: 13px; color: var(--fg-muted); line-height: 1.6; }
         .week-card .week-result strong { color: var(--fg); display: block; margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-light); }
 
@@ -1024,9 +1059,11 @@
 
         /* ============ TESTIMONIALS ============ */
         .testimonials { padding: 140px 0; border-top: 1px solid var(--border-subtle); }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
         @media (max-width: 1100px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
         .testimonial-card {
+            display: flex;
+            flex-direction: column;
             background: var(--bg-card);
             background-image: var(--gradient-card);
             border: 1px solid var(--border-subtle);
@@ -1061,7 +1098,7 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .testimonial-body { color: var(--fg-muted); font-size: 15px; line-height: 1.68; margin-bottom: 18px; }
+        .testimonial-body { color: var(--fg-muted); font-size: 15px; line-height: 1.68; margin-bottom: 18px; flex: 1; }
         .testimonial-author {
             color: var(--fg);
             font-size: 13px; font-weight: 600;
@@ -1178,8 +1215,10 @@
         .mentoring-callout strong { color: var(--fg); font-family: 'JetBrains Mono', monospace; }
 
         /* ============ PAY BLOCK (in pricing) ============ */
-        .pay-block { margin-top: 44px; padding-top: 40px; border-top: 1px solid var(--border-subtle); }
+        .pay-block { margin-top: 44px; padding-top: 40px; border-top: 1px solid var(--border-subtle); display: none; }
+        .pay-block.open { display: block; }
         .pay-title { text-align: center; font-size: 18px; font-weight: 700; margin-bottom: 28px; letter-spacing: -0.02em; }
+        .pay-toggle-btn { display: block; width: 100%; max-width: 340px; margin: 32px auto 0; padding: 14px 28px; text-align: center; font-size: 15px; cursor: pointer; }
 
         /* ============ ENROLL ============ */
         .enroll { padding: 120px 0; border-top: 1px solid var(--border-subtle); }
@@ -1419,14 +1458,14 @@
             <div class="hero-main">
                 <div class="hero-label">
                     <span class="hero-label-chip"><span class="hero-label-dot"></span> LIVE</span>
-                    Поток 2 · живая группа · идёт набор
+                    Поток 2 · живая группа · старт 27 июля
                 </div>
                 <h1>
                     <span class="h1-line">Станьте <span class="h1-emph">AI Native</span></span>
-                    <span class="h1-line"><span class="hero-gradient-text">за 4 недели и 8 занятий</span></span>
+                    <span class="h1-line"><span class="hero-gradient-text">за 3 недели и 6 занятий</span></span>
                 </h1>
                 <p class="hero-subtitle">
-                    От разрозненных чатов — к работающей PersonalOS, где знания, память и автоматизации настроены под вас и работают как одно целое.
+                    От разрозненных чатов с AI — к работающей PersonalOS, где знания, память и рутины настроены под вас и работают сами, как одно целое.
                 </p>
                 <div class="hero-cta">
                     <a href="#program" class="btn btn-primary">Записаться · от €690 <span class="arrow">→</span></a>
@@ -1436,10 +1475,6 @@
                     <div>
                         <div class="hero-stat-number">4.7<span class="unit">/5</span></div>
                         <div class="hero-stat-label">средняя оценка</div>
-                    </div>
-                    <div>
-                        <div class="hero-stat-number">15–25</div>
-                        <div class="hero-stat-label">размер группы</div>
                     </div>
                     <div>
                         <div class="hero-stat-number" data-count="600">600<span class="unit">+</span></div>
@@ -1464,13 +1499,55 @@
                 <div class="os-node n-bottom">⚡ Автоматизации</div>
                 <div class="os-node n-left">💾 Память</div>
             </div>
+
+            <div class="hero-quotes">
+                <div class="hero-quote">
+                    <div class="hero-quote-text">«Перестал думать об AI как об отдельном окне с промптом — начал строить систему, которую можно масштабировать на организацию»</div>
+                    <div class="hero-quote-author">
+                        <div class="hero-quote-avatar">Ю</div>
+                        <div>
+                            <div>Юрий Горелов</div>
+                            <div class="hero-quote-role">COO, ИТ-стартап</div>
+                        </div>
+                        <div style="margin-left: auto;">
+                            <div class="hero-quote-stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-quote">
+                    <div class="hero-quote-text">«Созвон с клиентом → транскрипт → summary → черновик оффера. То, на что уходил день, я делаю за вечер»</div>
+                    <div class="hero-quote-author">
+                        <div class="hero-quote-avatar">Ю</div>
+                        <div>
+                            <div>Юрий Брисов</div>
+                            <div class="hero-quote-role">Партнёр, юридический консалтинг</div>
+                        </div>
+                        <div style="margin-left: auto;">
+                            <div class="hero-quote-stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-quote">
+                    <div class="hero-quote-text">«Наконец легла мантра "это просто папка с файлами". У меня снова есть живая база знаний, которую забросил с 2022-го»</div>
+                    <div class="hero-quote-author">
+                        <div class="hero-quote-avatar">А</div>
+                        <div>
+                            <div>Андрей Карпов</div>
+                            <div class="hero-quote-role">Продуктовый маркетолог</div>
+                        </div>
+                        <div style="margin-left: auto;">
+                            <div class="hero-quote-stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- TRUST BAR (participants come from) -->
     <section class="trustbar">
         <div class="container">
-            <span class="trustbar-label">Участники приходят из</span>
+            <span class="trustbar-label">Участники приходят из разных сфер:</span>
             <!-- TODO: заменить категории на реальные логотипы компаний, когда будут -->
             <div class="logos-row">
                 <span class="logo-mark">Стартапы</span>
@@ -1500,7 +1577,7 @@
                 </div>
                 <div class="video-embed">
                     <iframe
-                        src="https://www.youtube-nocookie.com/embed/r5c2h6gePWw?rel=0&modestbranding=1"
+                        src="https://www.youtube.com/embed/r5c2h6gePWw?rel=0&modestbranding=1"
                         title="AI Native — видео-приглашение"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin"
@@ -1525,9 +1602,9 @@
                             </svg>
                         </div>
                         <div class="pyramid">
-                            <div class="pyramid-row"><div class="pyramid-layer pyramid-top"><span>AI Native</span></div></div>
-                            <div class="pyramid-row"><div class="pyramid-layer pyramid-mid"><span>AI Literate</span></div></div>
-                            <div class="pyramid-row"><div class="pyramid-layer pyramid-bottom"><span>AI Curious</span></div></div>
+                            <div class="pyramid-row"><div class="pyramid-layer pyramid-top" data-level="native"><span>3 · AI Native</span></div></div>
+                            <div class="pyramid-row"><div class="pyramid-layer pyramid-mid" data-level="literate"><span>2 · AI Literate</span></div></div>
+                            <div class="pyramid-row"><div class="pyramid-layer pyramid-bottom" data-level="curious"><span>1 · AI Curious</span></div></div>
                         </div>
                     </div>
                 </div>
@@ -1536,25 +1613,42 @@
                     <div class="section-label">Три уровня работы с ИИ</div>
                     <h2>Лишь немногие доходят до уровня AI Native</h2>
                     <div class="level-rows">
-                        <div class="level-row">
-                            <span class="lr-dot" style="background:#e9c5a0;color:#e9c5a0;"></span>
-                            <div>
-                                <h4>AI Curious <span class="lr-pct">~65%</span></h4>
-                                <p>Пробуют бесплатные инструменты и зовут ИИ, только когда застряли.</p>
+                        <div class="level-row-wrap">
+                            <div class="level-row" data-level="curious">
+                                <div class="lr-num" style="color:#e9c5a0;">1</div>
+                                <div class="level-row-body">
+                                    <div class="level-row-title">
+                                        <h4>AI Curious</h4>
+                                        <span class="lr-pct">~65%</span>
+                                    </div>
+                                    <p>Пробуют бесплатные инструменты и зовут ИИ, только когда застряли.</p>
+                                </div>
                             </div>
+                            <div class="level-row-connector"><div class="level-row-connector-line"></div><div class="level-row-connector-arrow">↓</div></div>
                         </div>
-                        <div class="level-row">
-                            <span class="lr-dot" style="background:#f5c842;color:#f5c842;"></span>
-                            <div>
-                                <h4>AI Literate <span class="lr-pct">~30%</span></h4>
-                                <p>Платят за AI и пишут промпты, но используют его как «умный Google»: разрозненные чаты, generic-ответы.</p>
+                        <div class="level-row-wrap">
+                            <div class="level-row" data-level="literate">
+                                <div class="lr-num" style="color:#f5c842;">2</div>
+                                <div class="level-row-body">
+                                    <div class="level-row-title">
+                                        <h4>AI Literate</h4>
+                                        <span class="lr-pct">~30%</span>
+                                    </div>
+                                    <p>Платят за AI и пишут промпты, но используют его как «умный Google»: разрозненные чаты, generic-ответы.</p>
+                                </div>
                             </div>
+                            <div class="level-row-connector"><div class="level-row-connector-line"></div><div class="level-row-connector-arrow">↓</div></div>
                         </div>
-                        <div class="level-row active">
-                            <span class="lr-dot" style="background:var(--accent);color:var(--accent);"></span>
-                            <div>
-                                <h4>AI Native <span class="lr-pct">~5% · цель</span></h4>
-                                <p>Перестроили процессы: ИИ помнит контекст, работает в вашем стиле и участвует в каждой задаче.</p>
+                        <div class="level-row-wrap">
+                            <div class="level-row active" data-level="native">
+                                <div class="lr-num" style="color:var(--accent);">3</div>
+                                <div class="level-row-body">
+                                    <div class="level-row-title">
+                                        <h4>AI Native</h4>
+                                        <span class="lr-pct">~5% · цель</span>
+                                    </div>
+                                    <p>Перестроили процессы: ИИ помнит контекст, работает в вашем стиле и участвует в каждой задаче.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1570,7 +1664,7 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Результат</div>
-                <h2>Что вы получите за 4 недели</h2>
+                <h2>Что вы получите за 3 недели</h2>
                 <p>Не набор трюков, а работающая система: ИИ помнит ваш контекст и выдаёт результат в вашем стиле. Вот что останется с вами после интенсива.</p>
             </div>
             <div class="results-grid">
@@ -1645,29 +1739,29 @@
 
             <div class="testimonials-featured">
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«Контент-машина, в которой моя интонация»</div>
-                    <p class="testimonial-body">Думала, AI у меня и так есть — каждый день в ChatGPT что-то пишу. На третьей неделе поняла разницу: контекст всего, что я когда-либо публиковала, лежит в одной папке. Теперь наговариваю мысль в Granola, прогоняю через свой voice — выходит черновик поста, который реально похож на меня, а не на бота. Полвечера на каждый текст — в прошлом.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">М</div>
-                        <div class="testimonial-author-meta">Марина<span class="testimonial-author-role">Контент-лид, B2B SaaS</span></div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">«Состояние сравнимо с детством, когда всё новое»</div>
-                    <p class="testimonial-body">Верил, что освоил тайное знание — как написать промпт, чтобы он везде сработал. Передумал и стал использовать ИИ как ассистента. Создал бота на Sonnet — утром присылает сводку по почтам, вечером — по тому, что я съел. Сижу, четыре часа прошло — а мне интересно дальше копаться.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">П</div>
-                        <div class="testimonial-author-meta">Пётр<span class="testimonial-author-role">Руководитель учебного центра</span></div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">«Двух фаундеров уже затянул в эту базу знаний»</div>
-                    <p class="testimonial-body">Я пришёл с запросом операционной системы. Перелом произошёл, когда впервые увидел Obsidian — подумал, что не справлюсь, но достаточно быстро понял, что это всё игры разума. Сейчас уже двоих фаундеров затянул и общаюсь с ними на языке Markdown-файлов.</p>
+                    <div class="testimonial-quote">«Перестал думать об AI как об отдельном окне с промптом»</div>
+                    <p class="testimonial-body">На интенсив пришёл с ощущением, что AI может многое, но у меня всё было фрагментировано: отдельные чаты, промпты, файлы и инструменты. За время интенсива начал собирать свою рабочую AI-операционную систему: базу знаний, Obsidian, Claude, скиллы, перенос информации из чатов, писем и транскриптов. Сейчас использую это в операционной работе и начал вовлекать в систему фаундера и CEO.</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">Ю</div>
-                        <div class="testimonial-author-meta">Юрий<span class="testimonial-author-role">Операционный директор</span></div>
+                        <div class="testimonial-author-meta">Юрий Горелов<span class="testimonial-author-role">COO, ИТ-стартап</span></div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">«Я начала ко всему относиться как к данным»</div>
+                    <p class="testimonial-body">Для меня главным результатом стало изменение мышления. Я начала относиться ко всему как к данным, которые можно собирать, структурировать и использовать. За четыре недели стала выстраивать систему не только по работе и проектам, но и в других сферах жизни. Зафиксировала свой набор инструментов — Obsidian, Claude Code, Granola, транскрибатор, Notion — и перестала распыляться между десятками сервисов. Теперь понимаю: если AI выдаёт не то, часто проблема не в инструменте, а в том, как я задала контекст.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">Л</div>
+                        <div class="testimonial-author-meta">Лена Закирова<span class="testimonial-author-role">Менеджер проектов, Теплица социальных технологий</span></div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">«Казалось, главное — промпты. Сейчас понимаю: нужна система»</div>
+                    <p class="testimonial-body">Когда пришёл на интенсив, казалось, что главное — научиться правильно писать промпты. Сейчас понимаю: промпта недостаточно, нужна система. Настроил VS Code, Hermes, Claude Code и Codex, сделал бота, который присылает утренние сводки по почте и задачам, а также бота для трекинга питания и активности. Довёл до рабочего состояния скилл по проектному менеджменту — помогает быстро собирать паспорт проекта.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">П</div>
+                        <div class="testimonial-author-meta">Пётр<span class="testimonial-author-role">Руководитель учебного центра IDECO</span></div>
                     </div>
                 </div>
             </div>
@@ -1676,74 +1770,29 @@
 
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«База знаний компании раскладывается сама»</div>
-                    <p class="testimonial-body">Собрал курирующий проект — он сам раскладывает документы по 52 папкам. Корпоративные знания наконец живут в одной системе, а не в головах сотрудников и не в сотне разрозненных чатов.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">И</div>
-                        <div class="testimonial-author-meta">Иван<span class="testimonial-author-role">Аналитик корпоративных знаний</span></div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">«День работы с документом — теперь вечер»</div>
-                    <p class="testimonial-body">Транскрипт созвона превращается в summary, из summary — в драфт документа в моём стиле. То, на что у юриста уходил полный день, я делаю за вечер. И качество не падает — наоборот.</p>
+                    <div class="testimonial-quote">«Созвон → транскрипт → summary → черновик оффера»</div>
+                    <p class="testimonial-body">Пришёл с запросом оптимизировать рабочий workflow с клиентами. Получилось собрать полный процесс: созвон → транскрипт → summary для внутренней команды → черновик оффера. Благодаря настройке Telegram, About Me Personal и About Me Work материалы стали получаться гораздо точнее и ближе к реальному рабочему процессу. Самое важное — понимание, как корпоративно устроить AI-процессы.</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">Ю</div>
-                        <div class="testimonial-author-meta">Юра<span class="testimonial-author-role">Юрист, партнёр (Лондон)</span></div>
+                        <div class="testimonial-author-meta">Юрий Брисов<span class="testimonial-author-role">Партнёр, юридический консалтинг</span></div>
                     </div>
                 </div>
 
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«Я начала ко всему относиться как к данным»</div>
-                    <p class="testimonial-body">Изменилось само мышление — и это самое ценное, что я забираю. Я хаотичный человек, и такой подход меня структурирует. За четыре недели начала наводить порядок во всём — в работе, проектах и даже в личном.</p>
+                    <div class="testimonial-quote">«AI превращает документы в кусочки знаний и раскладывает по папкам»</div>
+                    <p class="testimonial-body">Пришёл с запросом на персональную операционную систему, а углубился в создание корпоративной базы знаний. Было много разрозненных документов про компанию, клиентов, продукт и процессы. Через Cursor и GitHub собрал структуру — AI помогает превращать документы в отдельные «кусочки знаний», раскладывать их по папкам, сохранять источник и использовать для презентаций, онбординга и рабочих материалов.</p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">Л</div>
-                        <div class="testimonial-author-meta">Лена<span class="testimonial-author-role">Проджект-менеджер</span></div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">«AI-двойник эксперта, с которым можно обсуждать»</div>
-                    <p class="testimonial-body">Прошёл курс именитого маркетолога по B2B. Записал аудио, сделал транскрипты, положил в навык — теперь у меня есть собеседник, с которым обсуждаю идеи до внедрения. Это его знания, наложенные на нейросеть.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">А</div>
-                        <div class="testimonial-author-meta">Андрей<span class="testimonial-author-role">Психолог, психосоматика</span></div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">«Войсы → события в календаре и новые скиллы»</div>
-                    <p class="testimonial-body">Прикрутил все свои доступы — бот знает мои API и пользуется ими. Шлю войсы — он добавляет события в календарь, собирает новые скиллы и рутины. Реально работает как персональный ассистент.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">D</div>
-                        <div class="testimonial-author-meta">Dimitri<span class="testimonial-author-role">PhD, management science</span></div>
+                        <div class="testimonial-avatar">И</div>
+                        <div class="testimonial-author-meta">Иван Смирнов<span class="testimonial-author-role">Главный редактор, психологический сервис Просебя</span></div>
                     </div>
                 </div>
 
                 <div class="testimonial-card">
                     <div class="testimonial-quote">«Вернул базу знаний, которую забросил с 2022-го»</div>
-                    <p class="testimonial-body">После того как пропал Notion, я забросил ведение данных. В этот раз Obsidian зашёл — мантра «это просто папка с файлами» реально помогла. У меня снова есть живая база знаний, которую дополняет ИИ.</p>
+                    <p class="testimonial-body">После того как Notion заблокировал аккаунты, я потерял данные за много лет и забросил всё. Obsidian пробовал несколько раз, но не заходил. На интенсиве наконец легла мантра «это просто папка для работы с файлами» — у меня теперь есть база знаний, которую я перестал вести с 2022 года, и это большая победа. Бонусом: запустил Клода на транскриптах курсов по психологии и маркетингу — теперь личные ассистенты на их базе помогают в работе.</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">А</div>
-                        <div class="testimonial-author-meta">Андрей<span class="testimonial-author-role">Продакт-маркетолог, B2B IT</span></div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">«Не хаос вкладок, а процессы — освободил внимание»</div>
-                    <p class="testimonial-body">Работаю по 10 часов в день, половину — в нейронках, но без системы. Интенсив дал именно её: теперь у меня процессы, а не сто открытых чатов. Главное — освободил голову для стратегии.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">С</div>
-                        <div class="testimonial-author-meta">Сергей<span class="testimonial-author-role">Стратегия B2B-AI вендора</span></div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">«Думал, технарю тут нечему учиться. Ошибался»</div>
-                    <p class="testimonial-body">Дело оказалось не в инструментах, а в том, как выстроить процесс вокруг ИИ. Перестроил рабочий день и личные проекты — одна система вместо двадцати вкладок и разрозненных скриптов.</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">И</div>
-                        <div class="testimonial-author-meta">Иван<span class="testimonial-author-role">Разработчик</span></div>
+                        <div class="testimonial-author-meta">Андрей Карпов<span class="testimonial-author-role">Продуктовый маркетолог инновационных продуктов</span></div>
                     </div>
                 </div>
             </div>
@@ -1771,7 +1820,7 @@
                     <h2>Привет, я Алексей 👋</h2>
                     <p class="instructor-title">ICF PCC коуч · экс-продакт в AI-стартапах · автор @ppprompt</p>
                     <p class="instructor-bio">Каждый день веду <strong>@ppprompt</strong> — разбираю мировую AI-индустрию для 13&nbsp;000+ читателей. Поэтому раньше других вижу, что реально работает, а что просто хайп. До этого — продуктовые роли в AI-стартапах Кремниевой долины и сертификация ICF&nbsp;PCC коуча предпринимателей и ИТ-лидеров.</p>
-                    <p class="instructor-bio">Я не пересказываю чужие курсы. <strong>AI Native — это система, по которой я работаю сам</strong>: PersonalOS, агенты, автоматизации. За 4 недели я передаю её вам — как уже передал 600+ участникам со средней оценкой 4.7/5.</p>
+                    <p class="instructor-bio">Я не пересказываю чужие курсы. <strong>AI Native — это система, по которой я работаю сам</strong>: PersonalOS, агенты, автоматизации. За 3 недели я передаю её вам — как уже передал 600+ участникам со средней оценкой 4.7/5.</p>
                     <div class="instructor-trust">
                         <span class="itrust"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Практик, а не теоретик</span>
                         <span class="itrust"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Каждый день в AI-индустрии</span>
@@ -1848,68 +1897,54 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-label" data-no="S/06">Программа и даты</div>
-                <h2>4 недели — от хаоса к системе</h2>
-                <p>Встречи в Zoom по вторникам и четвергам, 19:00 МСК / 18:00 CET, по 2 часа. Практика с бадди между сессиями, закрытый чат в Telegram.</p>
+                <h2>3 недели — от хаоса к системе</h2>
+                <p>27 июля – 16 августа. Встречи в Zoom по вторникам и четвергам, 19:00 МСК / 18:00 CET, по 2 часа: 28.07, 30.07, 4.08, 6.08, 11.08, 13.08. Практика с бадди между сессиями, закрытый чат в Telegram.</p>
             </div>
 
             <div class="curriculum-grid">
                 <div class="week-card">
-                    <div class="feature-icon">01</div>
-                    <h3>Неделя 1 · Организуй</h3>
-                    <div class="week-sub">Собираем всё в одном месте, контекст</div>
+                    <h3>Неделя 1 · База знаний</h3>
+                    <div class="week-sub">Концепция · структура · контекст</div>
                     <ul>
-                        <li>Настраиваем AI под вас: системный промпт, память, папки</li>
-                        <li>Собираем базу знаний в одном месте (Obsidian или Google)</li>
-                        <li>Учимся сохранять важные чаты там, где используем результат</li>
-                        <li>Делаем AI swipe-файлы: лучшие примеры и заготовки</li>
-                        <li>Практика: ваша задача → 80% за минуты → доводим до 100%</li>
+                        <li>Три уровня AI-грамотности и принцип 0→80→100</li>
+                        <li>Архитектура Personal OS: DNA/, KNOWLEDGE/, PROJECTS/, PROMPTS/</li>
+                        <li>About Me файл — центральный контекст, который меняет качество ответов</li>
+                        <li>Swipe-файлы: коллекции лучших примеров под конкретные задачи</li>
+                        <li>Экспорт данных: память из ChatGPT, переписки из Telegram, Notion</li>
                     </ul>
-                    <div class="week-result"><strong>Заберёте</strong>настроенная база знаний, системный промпт и память под роль, swipe file, привычка сохранять важные чаты.</div>
+                    <div class="week-result"><strong>Заберёте</strong>архитектура базы знаний, AGENTS.MD, About Me файл, первые swipe-файлы и понимание data ownership.</div>
                 </div>
 
                 <div class="week-card">
-                    <div class="feature-icon">02</div>
-                    <h3>Неделя 2 · Настрой</h3>
-                    <div class="week-sub">Инструменты и подходы</div>
+                    <h3>Неделя 2 · Стек и автоматизация</h3>
+                    <div class="week-sub">Инструменты · процессы · поток данных</div>
                     <ul>
-                        <li>Правильный инструмент под задачу: ChatGPT/Claude, Perplexity, NotebookLM</li>
-                        <li>Создаём из LLM вашего персонального AI-ассистента под роль и задачи</li>
-                        <li>Проектируем процесс: что делает человек, что AI, как передавать работу</li>
-                        <li>Практика: автоматизируем 2–3 повторяющиеся задачи</li>
+                        <li>Персональный стек ~10 инструментов: Claude, Perplexity, Granola, Zapier</li>
+                        <li>Perplexity Spaces: папки с системными инструкциями под каждый проект</li>
+                        <li>Granola Recipes — сохранённые промпты прямо во время звонков</li>
+                        <li>Автоматизация: транскрипты встреч → Zapier → база знаний</li>
+                        <li>Голосовой ввод (Pippet), CLAUDE.md и навык «делегировать AI или нет»</li>
                     </ul>
-                    <div class="week-result"><strong>Заберёте</strong>персональный AI-ассистент, библиотека из 10–15 промптов, понимание «какой инструмент для какой задачи», 2–3 автоматизированные рутины.</div>
+                    <div class="week-result"><strong>Заберёте</strong>собственный инструментальный стек, настроенный Perplexity Space, автоматический поток транскриптов в базу знаний.</div>
                 </div>
 
                 <div class="week-card">
-                    <div class="feature-icon">03</div>
-                    <h3>Неделя 3 · Свяжи</h3>
-                    <div class="week-sub">Память, шаблоны и оркестрация</div>
+                    <h3>Неделя 3 · Скиллы, агенты и автономия</h3>
+                    <div class="week-sub">Автоматизация · MCP · Hermes · деплой</div>
                     <ul>
-                        <li>Memory packs — AI помнит проекты, клиентов, предпочтения</li>
-                        <li>Google NotebookLM для глубокого анализа и синтеза источников</li>
-                        <li>Базовые скиллы с Claude Code и Claude Cowork</li>
-                        <li>Шаблоны повторяющихся workflow — схемы с микрозадачами</li>
-                        <li>Навык суждения: когда использовать AI, а когда — нет</li>
+                        <li>Скилл = промпт в файле: /команда, хранится на вашем диске, работает в любом инструменте</li>
+                        <li>MCP — подключение AI к Gmail, Google Calendar, Notion + permission-файлы для агента</li>
+                        <li>Скилл vs агент: когда нужна автономная многошаговая работа в фоне</li>
+                        <li>Hermes — автономный AI-агент с Telegram-интерфейсом, работает 24/7</li>
+                        <li>Explore→Plan→Code→Commit и деплой HTML-проектов на Netlify за 5 минут</li>
+                        <li>Демо участников: реальные кейсы применения за 3 недели</li>
                     </ul>
-                    <div class="week-result"><strong>Заберёте</strong>memory packs, 2–3 шаблона workflow, настроенный NotebookLM, первые базовые скиллы в Claude Code.</div>
-                </div>
-
-                <div class="week-card">
-                    <div class="feature-icon">04</div>
-                    <h3>Неделя 4 · Запусти</h3>
-                    <div class="week-sub">Планирование, маркетинг и PersonalOS</div>
-                    <ul>
-                        <li>AI-first планирование: разбивка проекта на микрозадачи, инструмент для каждой</li>
-                        <li>Три вопроса AI Native: «Может ли AI?», «Как эффективнее с AI?», «Как быстрее?»</li>
-                        <li>Создание контента: от заметок к постам, рассылкам и предложениям</li>
-                        <li>Финализация PersonalOS, правила-триггеры, план развития на 3 месяца</li>
-                    </ul>
-                    <div class="week-result"><strong>Заберёте</strong>работающая PersonalOS, контент-машинка от заметок до КП, набор правил AI Native, план развития.</div>
+                    <div class="week-result"><strong>Заберёте</strong>2–3 скилла под свои задачи, MCP-коннекторы к сервисам, работающий автономный агент в Telegram и задеплоенные проекты — собранная Personal OS.</div>
                 </div>
             </div>
 
             <div class="curriculum-result">
-                <strong>В результате за 4 недели:</strong> своя настроенная и работающая PersonalOS, система создания контента для маркетинга на основе ваших данных, базовые скиллы с Claude Code и Claude Cowork, настроенный Google NotebookLM для исследований и анализа.
+                <strong>В результате за 3 недели:</strong> собранная и работающая Personal OS — база знаний, скиллы, агенты, автоматизации. Контент из разговоров, автономный Telegram-агент и понимание как встроить AI в любой процесс.
             </div>
 
         </div>
@@ -1955,15 +1990,15 @@
                 <div class="program-card">
                     <div class="program-badge">Групповой формат</div>
                     <h3 class="program-title">Индивидуальное участие</h3>
-                    <p class="program-duration">4 недели · 8 воркшопов · 2 Q&A</p>
+                    <p class="program-duration">3 недели · 6 воркшопов · 2 Q&A</p>
                     <div class="program-price">
                         <span class="program-currency">€</span>
                         <span class="program-amount">690</span>
                         <span class="program-approx">₽ / USDT</span>
                     </div>
                     <ul class="program-features">
-                        <li>4 недели полного интенсива</li>
-                        <li>8 групповых воркшопов в Zoom</li>
+                        <li>3 недели полного интенсива</li>
+                        <li>6 групповых воркшопов в Zoom</li>
                         <li>2 Q&A занятия</li>
                         <li>Бадди на интенсив</li>
                         <li>Практика между сессиями</li>
@@ -1972,13 +2007,13 @@
                         <li>Своя PersonalOS к концу курса</li>
                         <li>Набор проверенных инструментов</li>
                     </ul>
-                    <a href="#pay" class="btn btn-primary program-cta">Записаться <span class="arrow">→</span></a>
+                    <a href="#pay" class="btn btn-primary program-cta" onclick="document.getElementById('pay').classList.add('open'); document.querySelector('.pay-toggle-btn') && (document.querySelector('.pay-toggle-btn').style.display='none');">Записаться <span class="arrow">→</span></a>
                 </div>
 
                 <div class="program-card featured">
                     <div class="program-badge">Максимальный результат</div>
                     <h3 class="program-title">Участие + 1:1 менторинг</h3>
-                    <p class="program-duration">4 недели · 8 воркшопов + персональная сессия с Алексеем</p>
+                    <p class="program-duration">3 недели · 6 воркшопов + персональная сессия с Алексеем</p>
                     <div class="program-price">
                         <span class="program-currency">€</span>
                         <span class="program-amount">980</span>
@@ -1986,7 +2021,7 @@
                     </div>
                     <ul class="program-features">
                         <li>Всё из базового формата</li>
-                        <li>8 групповых воркшопов в Zoom</li>
+                        <li>6 групповых воркшопов в Zoom</li>
                         <li>2 Q&A занятия</li>
                         <li>Бадди на интенсив</li>
                         <li>Закрытый чат участников</li>
@@ -1995,7 +2030,7 @@
                         <li>Разбор вашей PersonalOS и рабочих процессов</li>
                         <li>Рекомендации по настройке под вашу роль</li>
                     </ul>
-                    <a href="#pay" class="btn btn-primary program-cta">Записаться с менторингом <span class="arrow">→</span></a>
+                    <a href="#pay" class="btn btn-primary program-cta" onclick="document.getElementById('pay').classList.add('open'); document.querySelector('.pay-toggle-btn') && (document.querySelector('.pay-toggle-btn').style.display='none');">Записаться с менторингом <span class="arrow">→</span></a>
                 </div>
             </div>
 
@@ -2023,8 +2058,12 @@
             </div>
 
             <div class="mentoring-callout" style="border-style: solid; border-color: rgba(34,197,94,0.25);">
-                🏢 <strong>От компании 3 человека и больше — скидка 20%.</strong> Оформим счёт и закрывающие документы. Напишите <a href="https://t.me/RealPonchikTeam" target="_blank" style="color: var(--accent-light);">@RealPonchikTeam</a>.
+                🏢 <strong>От компании 3+ человека — скидка 20%.</strong> Напишите <a href="https://t.me/RealPonchikTeam" target="_blank" style="color: var(--accent-light);">@RealPonchikTeam</a>.
             </div>
+
+            <button class="btn btn-secondary pay-toggle-btn" onclick="document.getElementById('pay').classList.toggle('open'); this.style.display='none'">
+                Выбрать способ оплаты <span class="arrow">→</span>
+            </button>
 
             <div id="pay" class="pay-block">
                 <h3 class="pay-title">Как оплатить</h3>
@@ -2094,7 +2133,7 @@
     <section class="cta">
         <div class="container">
             <h2>Готовы перейти на уровень <span class="hero-gradient-text">AI Native</span>?</h2>
-            <p>За 4 недели вы построите работающую систему, где ИИ — постоянный напарник с первой секунды любой задачи. Присоединяйтесь к участникам, которые уже её собрали.</p>
+            <p>За 3 недели вы построите работающую систему, где ИИ — постоянный напарник с первой секунды любой задачи. Присоединяйтесь к участникам, которые уже её собрали.</p>
             <div class="cta-buttons">
                 <a href="#program" class="btn btn-primary">Выбрать тариф <span class="arrow">→</span></a>
                 <a href="https://t.me/RealPonchikTeam" target="_blank" class="btn btn-secondary">Задать вопрос</a>
@@ -2221,12 +2260,28 @@
                 chip.style.transform = `translate(${x * f}px, ${y * f}px)`;
             });
         });
+
+        // Pyramid ↔ level-row hover sync
+        document.querySelectorAll('.pyramid-layer[data-level]').forEach(layer => {
+            const level = layer.dataset.level;
+            const row = document.querySelector(`.level-row[data-level="${level}"]`);
+            if (!row) return;
+            layer.addEventListener('mouseenter', () => { layer.classList.add('hovered'); row.classList.add('hovered'); });
+            layer.addEventListener('mouseleave', () => { layer.classList.remove('hovered'); row.classList.remove('hovered'); });
+        });
+        document.querySelectorAll('.level-row[data-level]').forEach(row => {
+            const level = row.dataset.level;
+            const layer = document.querySelector(`.pyramid-layer[data-level="${level}"]`);
+            if (!layer) return;
+            row.addEventListener('mouseenter', () => { row.classList.add('hovered'); layer.classList.add('hovered'); });
+            row.addEventListener('mouseleave', () => { row.classList.remove('hovered'); layer.classList.remove('hovered'); });
+        });
     </script>
 
     <div class="mobile-cta">
         <div class="mobile-price">
             <span class="mobile-price-main">от €690</span>
-            <span class="mobile-price-sub">4 недели · 8 занятий</span>
+            <span class="mobile-price-sub">3 недели · 6 занятий</span>
         </div>
         <a href="#program" class="btn btn-primary">Записаться <span class="arrow">→</span></a>
     </div>
