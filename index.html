@@ -73,11 +73,11 @@
         [data-theme="light"] {
             color-scheme: light;
 
-            --bg: #f2ece1;
-            --bg-elevated: #ece4d6;
-            --bg-card: #e8e0cf;
-            --bg-card-2: #e1d8c3;
-            --bg-glass: rgba(242, 236, 225, 0.65);
+            --bg: #ede4d7;
+            --bg-elevated: #e7dccb;
+            --bg-card: #ffffff;
+            --bg-card-2: #f7f4ee;
+            --bg-glass: rgba(255, 255, 255, 0.65);
 
             --fg: #191917;
             --fg-muted: #55524a;
@@ -103,8 +103,8 @@
             --shadow-elevated: 0 2px 6px rgba(63,58,42,0.06), 0 30px 70px -24px rgba(63,58,42,0.19), 0 0 0 1px rgba(22,163,74,0.10);
             --shadow-glow: 0 0 60px rgba(34, 197, 94, 0.08);
         }
-        [data-theme="light"] body::before { filter: invert(1); mix-blend-mode: multiply; opacity: 0.16; }
-        [data-theme="light"] nav { background: rgba(242, 236, 225, 0.72); border-bottom: 1px solid rgba(25, 25, 23, 0.07); }
+        [data-theme="light"] body::before { display: none; }
+        [data-theme="light"] nav { background: rgba(237, 228, 215, 0.72); border-bottom: 1px solid rgba(25, 25, 23, 0.07); }
         [data-theme="light"] .btn-secondary:hover { background: rgba(20, 20, 26, 0.03); }
         [data-theme="light"] .hero-grid {
             background-image:
@@ -127,11 +127,11 @@
         [data-theme="light"] .cal-tag.t-ws { color: #15803d; }
         [data-theme="light"] .cal-tag.t-qa { color: #a16207; }
         [data-theme="light"] .cal-tag.t-pr { color: #96613a; }
-        [data-theme="light"] .mobile-cta { background: rgba(242, 236, 225, 0.94) !important; }
+        [data-theme="light"] .mobile-cta { background: rgba(237, 228, 215, 0.94) !important; }
         [data-theme="light"] .hero-os::before { border-color: rgba(22,163,74,0.16); }
         [data-theme="light"] .hero-os-lines line { stroke: rgba(22,163,74,0.22); }
         [data-theme="light"] .os-core {
-            background: radial-gradient(circle at 50% 35%, rgba(22,163,74,0.14), #f2ece1 75%);
+            background: radial-gradient(circle at 50% 35%, rgba(22,163,74,0.14), #ffffff 75%);
             border-color: rgba(22,163,74,0.35);
             box-shadow: 0 0 0 8px rgba(22,163,74,0.05), 0 0 50px -10px rgba(22,163,74,0.30), var(--shadow-card);
         }
