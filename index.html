@@ -798,17 +798,17 @@
         .level-row {
             display: flex; gap: 14px; padding: 14px 18px;
             border: 1px solid var(--border-subtle); border-radius: var(--r-md);
-            background: linear-gradient(135deg, var(--lr-tint, transparent), var(--bg-card) 60%);
+            background: var(--bg-card);
             transition: border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
             cursor: default;
         }
-        .level-row[data-level="curious"] { --lr-color: #e9c5a0; --lr-tint: rgba(233,197,160,0.14); }
-        .level-row[data-level="literate"] { --lr-color: #f5c842; --lr-tint: rgba(245,200,66,0.13); }
-        .level-row[data-level="native"] { --lr-color: #22c55e; --lr-tint: rgba(34,197,94,0.11); }
+        .level-row[data-level="curious"] { --lr-color: #e9c5a0; }
+        .level-row[data-level="literate"] { --lr-color: #f5c842; }
+        .level-row[data-level="native"] { --lr-color: #22c55e; }
         [data-theme="light"] .level-row[data-level="curious"] { --lr-color: #a3703f; }
         [data-theme="light"] .level-row[data-level="literate"] { --lr-color: #a16207; }
         [data-theme="light"] .level-row[data-level="native"] { --lr-color: #16a34a; }
-        .level-row:hover:not(.active) { transform: translateX(4px); box-shadow: -3px 0 0 var(--lr-color, var(--border-accent)), var(--shadow-card); }
+
         .lr-num {
             width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; margin-top: 2px;
             display: flex; align-items: center; justify-content: center;
@@ -820,17 +820,13 @@
         .level-row h4 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
         .lr-pct { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; padding: 1px 7px; border-radius: 20px; background: rgba(255,255,255,0.06); color: var(--fg-muted); }
         .level-row p { font-size: 14px; color: var(--fg-muted); line-height: 1.5; margin: 0; }
-        .level-row.active {
+        .level-row:hover, .level-row.hovered {
             border-color: color-mix(in srgb, var(--lr-color) 45%, transparent);
-            background: linear-gradient(135deg, color-mix(in srgb, var(--lr-color) 16%, transparent), var(--bg-card));
-        }
-        .level-row.active .lr-pct { background: color-mix(in srgb, var(--lr-color) 18%, transparent); color: var(--lr-color); }
-        .level-row.hovered {
-            border-color: color-mix(in srgb, var(--lr-color) 45%, transparent);
-            background: linear-gradient(135deg, color-mix(in srgb, var(--lr-color) 16%, transparent), var(--bg-card));
+            background: linear-gradient(135deg, color-mix(in srgb, var(--lr-color) 18%, transparent), var(--bg-card));
             transform: translateX(4px);
             box-shadow: -3px 0 0 var(--lr-color), var(--shadow-card);
         }
+        .level-row:hover .lr-pct, .level-row.hovered .lr-pct { background: color-mix(in srgb, var(--lr-color) 18%, transparent); color: var(--lr-color); }
         .pyramid-layer.hovered { transform: translateY(-5px); box-shadow: 0 20px 50px -10px rgba(34,197,94,0.5); filter: brightness(1.08); }
         .levels-note { font-size: 16px; color: var(--fg-muted); line-height: 1.55; margin-bottom: 22px; }
         .levels-note strong { color: var(--accent-light); }
