@@ -137,12 +137,7 @@
                 radial-gradient(circle at 50% 88%, rgba(233,197,160,0.22), transparent 50%),
                 #ffffff;
             border-color: rgba(22,163,74,0.35);
-            box-shadow:
-                0 0 0 8px rgba(22,163,74,0.04),
-                0 -20px 55px -12px rgba(34,197,94,0.30),
-                0 0 50px -10px rgba(245,200,66,0.24),
-                0 20px 55px -12px rgba(210,160,110,0.32),
-                var(--shadow-card);
+            box-shadow: var(--shadow-card);
         }
         [data-theme="light"] .os-node {
             background: rgba(253, 252, 248, 0.92);
@@ -158,7 +153,7 @@
                 var(--bg);
         }
         [data-theme="light"] .hero-logo img { filter: drop-shadow(0 10px 30px rgba(22,163,74,0.20)); }
-        [data-theme="light"] .os-core img { filter: drop-shadow(0 4px 12px rgba(22,163,74,0.25)); }
+        [data-theme="light"] .os-core img { filter: drop-shadow(0 3px 8px rgba(63,58,42,0.20)); }
         [data-theme="light"] .hero-chip { box-shadow: 0 8px 24px -8px rgba(20,20,26,0.14); }
         [data-theme="light"] .hero-quote-avatar,
         [data-theme="light"] .qs-avatar,
@@ -517,15 +512,10 @@
                 radial-gradient(circle at 50% 88%, rgba(233,197,160,0.20), transparent 50%),
                 rgba(5,5,7,0.95);
             border: 1px solid rgba(34,197,94,0.45); border-radius: 50%;
-            box-shadow:
-                0 0 0 8px rgba(34,197,94,0.04),
-                0 -22px 60px -12px rgba(34,197,94,0.50),
-                0 0 55px -10px rgba(245,200,66,0.28),
-                0 22px 60px -12px rgba(233,197,160,0.38),
-                var(--shadow-card);
+            box-shadow: var(--shadow-card);
             z-index: 2;
         }
-        .os-core img { filter: drop-shadow(0 4px 12px rgba(34,197,94,0.6)); }
+        .os-core img { filter: drop-shadow(0 3px 8px rgba(0,0,0,0.25)); }
         .os-core span { font-size: 12px; font-weight: 700; letter-spacing: -0.01em; color: var(--fg-muted); }
         .os-node {
             position: absolute; z-index: 2;
@@ -553,10 +543,10 @@
             opacity: 1; transform: scale(1.18);
             color: var(--fg); border-color: var(--border-accent);
         }
-        .os-node.n-tr { top: 15%; right: 5%; animation-delay: 3s; }
-        .os-node.n-bl { bottom: 15%; left: 5%; animation-delay: 3.8s; }
-        .os-node.n-tl { top: 15%; left: 5%; animation-delay: 4.6s; }
-        .os-node.n-br { bottom: 15%; right: 5%; animation-delay: 5.4s; }
+        .os-node.n-tr { top: 26%; right: 4%; animation-delay: 3s; }
+        .os-node.n-bl { bottom: 26%; left: 4%; animation-delay: 3.8s; }
+        .os-node.n-tl { top: 26%; left: 4%; animation-delay: 4.6s; }
+        .os-node.n-br { bottom: 26%; right: 4%; animation-delay: 5.4s; }
         @keyframes osFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
 
         /* Floating chips - anchored to container's right edge so they stay close to H1 */
@@ -1721,10 +1711,10 @@
                     <line x1="200" y1="200" x2="200" y2="364"/>
                     <line x1="200" y1="200" x2="70" y2="200"/>
                     <line x1="200" y1="200" x2="330" y2="200"/>
-                    <line x1="200" y1="200" x2="316" y2="84"/>
-                    <line x1="200" y1="200" x2="84" y2="316"/>
-                    <line x1="200" y1="200" x2="84" y2="84"/>
-                    <line x1="200" y1="200" x2="316" y2="316"/>
+                    <line x1="200" y1="200" x2="312" y2="116"/>
+                    <line x1="200" y1="200" x2="88" y2="284"/>
+                    <line x1="200" y1="200" x2="88" y2="116"/>
+                    <line x1="200" y1="200" x2="312" y2="284"/>
                 </svg>
                 <div class="os-core">
                     <img src="logo.svg" alt="" width="40" height="40">
