@@ -525,12 +525,20 @@
         .os-node.n-right { right: 0; top: 50%; transform: translateY(-50%); animation-delay: 2.2s; }
         .os-node.mini {
             padding: 6px 10px; font-size: 11px; gap: 5px;
-            color: var(--fg-dim); opacity: 0.65;
+            color: var(--fg-dim); opacity: 0.38;
             border-color: var(--border-subtle);
             box-shadow: none;
+            cursor: default;
+            transition: opacity 0.35s var(--ease-out-quint), transform 0.35s var(--ease-out-quint);
+        }
+        .os-node.mini:hover {
+            opacity: 1; transform: scale(1.18);
+            color: var(--fg); border-color: var(--border-accent);
         }
         .os-node.n-tr { top: 15%; right: 5%; animation-delay: 3s; }
         .os-node.n-bl { bottom: 15%; left: 5%; animation-delay: 3.8s; }
+        .os-node.n-tl { top: 15%; left: 5%; animation-delay: 4.6s; }
+        .os-node.n-br { bottom: 15%; right: 5%; animation-delay: 5.4s; }
         @keyframes osFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
 
         /* Floating chips - anchored to container's right edge so they stay close to H1 */
@@ -1697,6 +1705,8 @@
                     <line x1="200" y1="200" x2="330" y2="200"/>
                     <line x1="200" y1="200" x2="316" y2="84"/>
                     <line x1="200" y1="200" x2="84" y2="316"/>
+                    <line x1="200" y1="200" x2="84" y2="84"/>
+                    <line x1="200" y1="200" x2="316" y2="316"/>
                 </svg>
                 <div class="os-core">
                     <img src="logo.svg" alt="" width="40" height="40">
@@ -1708,6 +1718,8 @@
                 <div class="os-node n-left">💾 Память</div>
                 <div class="os-node mini n-tr">⌨️ Скиллы</div>
                 <div class="os-node mini n-bl">🎙 Голос</div>
+                <div class="os-node mini n-tl">🔌 MCP</div>
+                <div class="os-node mini n-br">🚀 Деплой</div>
             </div>
 
             <div class="hero-quotes">
