@@ -131,9 +131,18 @@
         [data-theme="light"] .hero-os::before { border-color: rgba(22,163,74,0.16); }
         [data-theme="light"] .hero-os-lines line { stroke: rgba(22,163,74,0.22); }
         [data-theme="light"] .os-core {
-            background: radial-gradient(circle at 50% 35%, rgba(22,163,74,0.14), #ffffff 75%);
+            background:
+                radial-gradient(circle at 50% 18%, rgba(34,197,94,0.16), transparent 48%),
+                radial-gradient(circle at 50% 55%, rgba(245,200,66,0.13), transparent 55%),
+                radial-gradient(circle at 50% 88%, rgba(233,197,160,0.22), transparent 50%),
+                #ffffff;
             border-color: rgba(22,163,74,0.35);
-            box-shadow: 0 0 0 8px rgba(22,163,74,0.05), 0 0 50px -10px rgba(22,163,74,0.30), var(--shadow-card);
+            box-shadow:
+                0 0 0 8px rgba(22,163,74,0.04),
+                0 -20px 55px -12px rgba(34,197,94,0.30),
+                0 0 50px -10px rgba(245,200,66,0.24),
+                0 20px 55px -12px rgba(210,160,110,0.32),
+                var(--shadow-card);
         }
         [data-theme="light"] .os-node {
             background: rgba(253, 252, 248, 0.92);
@@ -502,9 +511,18 @@
             position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
             display: flex; flex-direction: column; align-items: center; gap: 8px;
             width: 140px; height: 140px; justify-content: center;
-            background: radial-gradient(circle at 50% 35%, rgba(34,197,94,0.22), rgba(5,5,7,0.95) 75%);
+            background:
+                radial-gradient(circle at 50% 18%, rgba(34,197,94,0.28), transparent 48%),
+                radial-gradient(circle at 50% 55%, rgba(245,200,66,0.16), transparent 55%),
+                radial-gradient(circle at 50% 88%, rgba(233,197,160,0.20), transparent 50%),
+                rgba(5,5,7,0.95);
             border: 1px solid rgba(34,197,94,0.45); border-radius: 50%;
-            box-shadow: 0 0 0 8px rgba(34,197,94,0.05), 0 0 60px -6px rgba(34,197,94,0.55), var(--shadow-card);
+            box-shadow:
+                0 0 0 8px rgba(34,197,94,0.04),
+                0 -22px 60px -12px rgba(34,197,94,0.50),
+                0 0 55px -10px rgba(245,200,66,0.28),
+                0 22px 60px -12px rgba(233,197,160,0.38),
+                var(--shadow-card);
             z-index: 2;
         }
         .os-core img { filter: drop-shadow(0 4px 12px rgba(34,197,94,0.6)); }
