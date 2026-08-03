@@ -73,8 +73,8 @@
         [data-theme="light"] {
             color-scheme: light;
 
-            --bg: #ede4d7;
-            --bg-elevated: #e7dccb;
+            --bg: #f6f1ea;
+            --bg-elevated: #efe8dc;
             --bg-card: #ffffff;
             --bg-card-2: #f7f4ee;
             --bg-glass: rgba(255, 255, 255, 0.65);
@@ -104,7 +104,7 @@
             --shadow-glow: 0 0 60px rgba(34, 197, 94, 0.08);
         }
         [data-theme="light"] body::before { display: none; }
-        [data-theme="light"] nav { background: rgba(237, 228, 215, 0.72); border-bottom: 1px solid rgba(25, 25, 23, 0.07); }
+        [data-theme="light"] nav { background: rgba(246, 241, 234, 0.72); border-bottom: 1px solid rgba(25, 25, 23, 0.07); }
         [data-theme="light"] .btn-secondary:hover { background: rgba(20, 20, 26, 0.03); }
         [data-theme="light"] .hero-grid {
             background-image:
@@ -127,7 +127,7 @@
         [data-theme="light"] .cal-tag.t-ws { color: #15803d; }
         [data-theme="light"] .cal-tag.t-qa { color: #a16207; }
         [data-theme="light"] .cal-tag.t-pr { color: #96613a; }
-        [data-theme="light"] .mobile-cta { background: rgba(237, 228, 215, 0.94) !important; }
+        [data-theme="light"] .mobile-cta { background: rgba(246, 241, 234, 0.94) !important; }
         [data-theme="light"] .hero-os::before { border-color: rgba(22,163,74,0.16); }
         [data-theme="light"] .hero-os-lines line { stroke: rgba(22,163,74,0.22); }
         [data-theme="light"] .os-core {
@@ -1087,12 +1087,16 @@
 
         /* ============ CURRICULUM CALENDAR ============ */
         .curriculum-calendar {
-            padding: 40px 0 0;
-            margin-top: 16px;
-            border-top: 1px solid var(--border-subtle);
+            padding: 44px 40px 40px;
+            margin-top: 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--r-lg);
+            box-shadow: var(--shadow-card);
             --cal-yellow: #f5c842;
             --cal-beige: #e9c5a0;
         }
+        @media (max-width: 640px) { .curriculum-calendar { padding: 28px 16px 24px; } }
         .cal-subhead { text-align: center; margin-bottom: 28px; }
         .cal-subhead-label {
             display: inline-flex; align-items: center; gap: 10px;
