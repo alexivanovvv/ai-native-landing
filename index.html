@@ -491,7 +491,13 @@
         /* Hero 2-column layout */
         .hero .container { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 52px; align-items: center; }
         .hero-quotes { grid-column: 1 / -1; }
-        @media (max-width: 1000px) { .hero .container { grid-template-columns: 1fr; } .hero-os { display: none; } }
+        @media (max-width: 1000px) {
+            .hero .container { grid-template-columns: 1fr; }
+            .hero-os {
+                width: 340px; height: 340px; min-height: 340px; max-height: 340px;
+                margin: 12px auto 0;
+            }
+        }
 
         /* Hero PersonalOS diagram */
         .hero-os { position: relative; width: 400px; height: 400px; min-height: 400px; max-height: 400px; flex: none; justify-self: center; align-self: center; animation: fadeInUp 1s var(--ease-out-quint) 0.4s both; }
