@@ -1062,42 +1062,44 @@
         }
         .cal-subhead h3 { font-size: clamp(20px, 2.6vw, 28px); font-weight: 700; letter-spacing: -0.02em; }
         .cal-subhead p { color: var(--fg-muted); font-size: 15px; margin-top: 10px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.55; }
-        .cal-mini-wrap { max-width: 420px; margin: 0 auto; }
+        .cal-mini-wrap { max-width: 760px; margin: 0 auto; }
         .cal-month-title {
             font-size: 24px; font-weight: 700; letter-spacing: -0.02em;
-            color: var(--accent); margin-bottom: 22px;
+            color: var(--accent); margin-bottom: 26px;
         }
         .cal-mini {
             display: grid; grid-template-columns: repeat(7, 1fr);
-            row-gap: 12px; column-gap: 4px; justify-items: center;
+            row-gap: 20px; column-gap: 8px; justify-items: center;
         }
         .cal-dow {
             font-family: 'JetBrains Mono', monospace; font-size: 11px;
             text-transform: uppercase; letter-spacing: 0.05em;
-            color: var(--fg-dim); padding-bottom: 6px;
+            color: var(--fg-dim); padding-bottom: 4px;
         }
+        .cal-day { display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .cal-d {
-            width: 44px; height: 44px; border-radius: 50%;
+            width: 52px; height: 52px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 15px; font-weight: 600; color: var(--fg);
+            font-size: 16px; font-weight: 600; color: var(--fg);
             font-variant-numeric: tabular-nums;
         }
         .cal-d.is-off { color: var(--fg-dim); font-weight: 400; opacity: 0.6; }
         .cal-d.ev-ws { background: var(--accent); color: #04120a; font-weight: 700; }
         .cal-d.ev-qa { background: var(--cal-yellow); color: #201505; font-weight: 700; }
         .cal-d.ev-pr { background: var(--cal-beige); color: #241708; font-weight: 700; }
-        .cal-legend {
-            display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
-            margin-top: 28px;
+        .cal-tag {
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
+            text-transform: uppercase; letter-spacing: 0.04em;
+            white-space: nowrap;
         }
-        .cal-legend-item {
-            display: inline-flex; align-items: center; gap: 8px;
-            font-size: 13px; color: var(--fg-muted);
+        .cal-tag.t-ws { color: var(--accent-light); }
+        .cal-tag.t-qa { color: var(--cal-yellow); }
+        .cal-tag.t-pr { color: var(--cal-beige); }
+        @media (max-width: 640px) {
+            .cal-d { width: 38px; height: 38px; font-size: 13px; }
+            .cal-tag { font-size: 8px; }
+            .cal-mini { column-gap: 4px; row-gap: 14px; }
         }
-        .cal-legend .cal-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-        .cal-legend .cal-dot.is-session { background: var(--accent); }
-        .cal-legend .cal-dot.is-practice { background: var(--cal-beige); }
-        .cal-legend .cal-dot.is-qa { background: var(--cal-yellow); }
 
         .curriculum-result {
             margin-top: 56px; padding: 28px 32px;
@@ -2153,35 +2155,30 @@
                         <div class="cal-dow">Сб</div>
                         <div class="cal-dow">Вс</div>
 
-                        <div class="cal-d is-off">28</div>
-                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">29</div>
-                        <div class="cal-d is-off">30</div>
-                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">1</div>
-                        <div class="cal-d ev-pr" title="Соло-практика">2</div>
-                        <div class="cal-d is-off">3</div>
-                        <div class="cal-d is-off">4</div>
+                        <div class="cal-day"><div class="cal-d is-off">28</div></div>
+                        <div class="cal-day"><div class="cal-d ev-ws">29</div><span class="cal-tag t-ws">Воркшоп</span></div>
+                        <div class="cal-day"><div class="cal-d is-off">30</div></div>
+                        <div class="cal-day"><div class="cal-d ev-ws">1</div><span class="cal-tag t-ws">Воркшоп</span></div>
+                        <div class="cal-day"><div class="cal-d ev-pr">2</div><span class="cal-tag t-pr">Практика</span></div>
+                        <div class="cal-day"><div class="cal-d is-off">3</div></div>
+                        <div class="cal-day"><div class="cal-d is-off">4</div></div>
 
-                        <div class="cal-d ev-ws" title="Гостевой спикер · 19:00 МСК">5</div>
-                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">6</div>
-                        <div class="cal-d ev-qa" title="Q&A · 19:00 МСК">7</div>
-                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">8</div>
-                        <div class="cal-d ev-pr" title="Соло-практика">9</div>
-                        <div class="cal-d is-off">10</div>
-                        <div class="cal-d is-off">11</div>
+                        <div class="cal-day"><div class="cal-d ev-ws">5</div><span class="cal-tag t-ws">Гость</span></div>
+                        <div class="cal-day"><div class="cal-d ev-ws">6</div><span class="cal-tag t-ws">Воркшоп</span></div>
+                        <div class="cal-day"><div class="cal-d ev-qa">7</div><span class="cal-tag t-qa">Q&A</span></div>
+                        <div class="cal-day"><div class="cal-d ev-ws">8</div><span class="cal-tag t-ws">Воркшоп</span></div>
+                        <div class="cal-day"><div class="cal-d ev-pr">9</div><span class="cal-tag t-pr">Практика</span></div>
+                        <div class="cal-day"><div class="cal-d is-off">10</div></div>
+                        <div class="cal-day"><div class="cal-d is-off">11</div></div>
 
-                        <div class="cal-d is-off">12</div>
-                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">13</div>
-                        <div class="cal-d ev-qa" title="Q&A · 19:00 МСК">14</div>
-                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">15</div>
-                        <div class="cal-d ev-pr" title="Соло-практика">16</div>
-                        <div class="cal-d is-off">17</div>
-                        <div class="cal-d is-off">18</div>
+                        <div class="cal-day"><div class="cal-d is-off">12</div></div>
+                        <div class="cal-day"><div class="cal-d ev-ws">13</div><span class="cal-tag t-ws">Воркшоп</span></div>
+                        <div class="cal-day"><div class="cal-d ev-qa">14</div><span class="cal-tag t-qa">Q&A</span></div>
+                        <div class="cal-day"><div class="cal-d ev-ws">15</div><span class="cal-tag t-ws">Воркшоп</span></div>
+                        <div class="cal-day"><div class="cal-d ev-pr">16</div><span class="cal-tag t-pr">Практика</span></div>
+                        <div class="cal-day"><div class="cal-d is-off">17</div></div>
+                        <div class="cal-day"><div class="cal-d is-off">18</div></div>
                     </div>
-                </div>
-                <div class="cal-legend">
-                    <span class="cal-legend-item"><i class="cal-dot is-session"></i> Воркшоп / гость</span>
-                    <span class="cal-legend-item"><i class="cal-dot is-practice"></i> Практика</span>
-                    <span class="cal-legend-item"><i class="cal-dot is-qa"></i> Q&A</span>
                 </div>
             </div>
 
