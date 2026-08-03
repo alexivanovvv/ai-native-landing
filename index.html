@@ -531,22 +531,6 @@
         .os-node.n-bottom { bottom: 10px; left: 50%; transform: translateX(-50%); animation-delay: 1.5s; }
         .os-node.n-left { left: 0; top: 50%; transform: translateY(-50%); animation-delay: 0.8s; }
         .os-node.n-right { right: 0; top: 50%; transform: translateY(-50%); animation-delay: 2.2s; }
-        .os-node.mini {
-            padding: 6px 10px; font-size: 11px; gap: 5px;
-            color: var(--fg-dim); opacity: 0.38;
-            border-color: var(--border-subtle);
-            box-shadow: none;
-            cursor: default;
-            transition: opacity 0.35s var(--ease-out-quint), transform 0.35s var(--ease-out-quint);
-        }
-        .os-node.mini:hover {
-            opacity: 1; transform: scale(1.18);
-            color: var(--fg); border-color: var(--border-accent);
-        }
-        .os-node.n-tr { top: 26%; right: 4%; animation-delay: 3s; }
-        .os-node.n-bl { bottom: 26%; left: 4%; animation-delay: 3.8s; }
-        .os-node.n-tl { top: 26%; left: 4%; animation-delay: 4.6s; }
-        .os-node.n-br { bottom: 26%; right: 4%; animation-delay: 5.4s; }
         @keyframes osFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
 
         /* Floating chips - anchored to container's right edge so they stay close to H1 */
@@ -1732,10 +1716,6 @@
                     <line x1="200" y1="200" x2="200" y2="364"/>
                     <line x1="200" y1="200" x2="70" y2="200"/>
                     <line x1="200" y1="200" x2="330" y2="200"/>
-                    <line x1="200" y1="200" x2="312" y2="116"/>
-                    <line x1="200" y1="200" x2="88" y2="284"/>
-                    <line x1="200" y1="200" x2="88" y2="116"/>
-                    <line x1="200" y1="200" x2="312" y2="284"/>
                 </svg>
                 <div class="os-core">
                     <img src="logo.svg" alt="" width="40" height="40">
@@ -1745,10 +1725,6 @@
                 <div class="os-node n-right">🤖 AI-агенты</div>
                 <div class="os-node n-bottom">⚡ Автоматизации</div>
                 <div class="os-node n-left">⌨️ Скиллы</div>
-                <div class="os-node mini n-tr">🛰 Hermes/OpenClaw</div>
-                <div class="os-node mini n-bl">💾 Долгая память</div>
-                <div class="os-node mini n-tl">🔌 MCP и коннекторы</div>
-                <div class="os-node mini n-br">🔁 Рутины без вас</div>
             </div>
 
             <div class="hero-quotes">
