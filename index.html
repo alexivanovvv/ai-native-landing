@@ -10,7 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
     <script>
         (function () { try {
-            var t = localStorage.getItem('theme');
+            function getCookie(n) { var m = document.cookie.match('(?:^|; )' + n + '=([^;]*)'); return m ? decodeURIComponent(m[1]) : null; }
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (!t) t = getCookie('theme');
             if (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) t = 'light';
             if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
         } catch (e) {} })();
@@ -2424,6 +2427,7 @@
             if (next === 'light') root.setAttribute('data-theme', 'light');
             else root.removeAttribute('data-theme');
             try { localStorage.setItem('theme', next); } catch (e) {}
+            try { document.cookie = 'theme=' + next + '; max-age=31536000; path=/; SameSite=Lax'; } catch (e) {}
         });
 
         // FAQ accordion
