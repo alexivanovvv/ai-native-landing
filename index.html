@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+        (function () { try { if (localStorage.getItem('theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {} })();
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -22,7 +25,7 @@
             /* Foreground */
             --fg: #fafafa;
             --fg-muted: #9494a0;
-            --fg-dim: #56565f;
+            --fg-dim: #86868f;
 
             /* Brand */
             --accent: #22c55e;
@@ -58,7 +61,138 @@
             /* Easing */
             --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
             --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+            color-scheme: dark;
         }
+
+        /* ============ LIGHT THEME ============ */
+        [data-theme="light"] {
+            color-scheme: light;
+
+            --bg: #fafaf7;
+            --bg-elevated: #f4f4ef;
+            --bg-card: #ffffff;
+            --bg-card-2: #f5f5f0;
+            --bg-glass: rgba(255, 255, 255, 0.6);
+
+            --fg: #14141a;
+            --fg-muted: #54545e;
+            --fg-dim: #70707a;
+
+            --accent: #16a34a;
+            --accent-light: #15803d;
+            --accent-deep: #14532d;
+            --accent-glow: rgba(22, 163, 74, 0.20);
+            --accent-soft: rgba(22, 163, 74, 0.07);
+
+            --border: #dadad3;
+            --border-subtle: #e7e7e1;
+            --border-accent: rgba(22, 163, 74, 0.35);
+
+            --gradient-glow: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 197, 94, 0.13), transparent);
+            --gradient-card: linear-gradient(180deg, rgba(20,20,26,0.012) 0%, rgba(20,20,26,0) 100%);
+            --gradient-aurora-1: radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.09), transparent 50%);
+            --gradient-aurora-2: radial-gradient(circle at 80% 40%, rgba(132, 204, 22, 0.06), transparent 50%);
+            --gradient-aurora-3: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.10), transparent 60%);
+
+            --shadow-card: 0 1px 2px rgba(20,20,26,0.05), 0 18px 44px -18px rgba(20,20,26,0.13);
+            --shadow-elevated: 0 2px 6px rgba(20,20,26,0.06), 0 30px 70px -24px rgba(20,20,26,0.20), 0 0 0 1px rgba(22,163,74,0.12);
+            --shadow-glow: 0 0 60px rgba(34, 197, 94, 0.10);
+        }
+        [data-theme="light"] body::before { filter: invert(1); mix-blend-mode: multiply; opacity: 0.16; }
+        [data-theme="light"] nav { background: rgba(250, 250, 247, 0.72); border-bottom: 1px solid rgba(20, 20, 26, 0.07); }
+        [data-theme="light"] .btn-secondary:hover { background: rgba(20, 20, 26, 0.03); }
+        [data-theme="light"] .hero-grid {
+            background-image:
+                linear-gradient(rgba(20,20,26,0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20,20,26,0.045) 1px, transparent 1px);
+        }
+        [data-theme="light"] .cta::after {
+            background-image:
+                linear-gradient(rgba(20,20,26,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20,20,26,0.035) 1px, transparent 1px);
+        }
+        [data-theme="light"] .lr-pct { background: rgba(20, 20, 26, 0.05); }
+        [data-theme="light"] .faq-item:hover { background: rgba(20, 20, 26, 0.02); }
+        [data-theme="light"] .hero-quote-stars,
+        [data-theme="light"] .testimonial-stars { color: #d97706; }
+        [data-theme="light"] .level-card:nth-child(1) { --level-color: #a3703f; }
+        [data-theme="light"] .level-card:nth-child(2) { --level-color: #b45309; }
+        [data-theme="light"] .lr-num[style*="#e9c5a0"] { filter: brightness(0.62) saturate(1.6); }
+        [data-theme="light"] .lr-num[style*="#f5c842"] { filter: brightness(0.62) saturate(1.6); }
+        [data-theme="light"] .curriculum-calendar { --cal-yellow: #b45309; --cal-beige: #96613a; }
+        [data-theme="light"] .cal-d.ev-ws,
+        [data-theme="light"] .cal-d.ev-qa,
+        [data-theme="light"] .cal-d.ev-pr { color: #fff; }
+        [data-theme="light"] .mobile-cta { background: rgba(250, 250, 247, 0.94) !important; }
+        [data-theme="light"] .hero-os::before { border-color: rgba(22,163,74,0.16); }
+        [data-theme="light"] .hero-os-lines line { stroke: rgba(22,163,74,0.22); }
+        [data-theme="light"] .os-core {
+            background: radial-gradient(circle at 50% 35%, rgba(22,163,74,0.14), #ffffff 75%);
+            border-color: rgba(22,163,74,0.35);
+            box-shadow: 0 0 0 8px rgba(22,163,74,0.05), 0 0 50px -10px rgba(22,163,74,0.30), var(--shadow-card);
+        }
+        [data-theme="light"] .os-node {
+            background: rgba(255,255,255,0.9);
+            border-color: rgba(22,163,74,0.22);
+            box-shadow: 0 4px 20px -6px rgba(20,20,26,0.14), 0 0 0 1px rgba(22,163,74,0.07);
+        }
+        [data-theme="light"] ::selection { color: #fff; }
+        [data-theme="light"] .mark-icon { filter: drop-shadow(0 4px 12px rgba(22,163,74,0.18)); }
+        [data-theme="light"] .logo:hover .mark-icon { filter: drop-shadow(0 6px 18px rgba(22,163,74,0.28)); }
+        [data-theme="light"] .hero {
+            background:
+                radial-gradient(120% 90% at 50% -10%, rgba(16,185,129,0.09), transparent 55%),
+                var(--bg);
+        }
+        [data-theme="light"] .hero-logo img { filter: drop-shadow(0 10px 30px rgba(22,163,74,0.20)); }
+        [data-theme="light"] .os-core img { filter: drop-shadow(0 4px 12px rgba(22,163,74,0.25)); }
+        [data-theme="light"] .hero-chip { box-shadow: 0 8px 24px -8px rgba(20,20,26,0.14); }
+        [data-theme="light"] .hero-quote-avatar,
+        [data-theme="light"] .qs-avatar,
+        [data-theme="light"] .testimonial-avatar {
+            background: linear-gradient(135deg, rgba(22,163,74,0.88), rgba(101,163,13,0.88));
+            border-color: rgba(22,163,74,0.4);
+            color: #fff;
+        }
+        [data-theme="light"] .btn-primary {
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.12) inset, 0 8px 24px -4px rgba(22,163,74,0.28), 0 1px 0 0 rgba(255,255,255,0.2) inset;
+        }
+        [data-theme="light"] .btn-primary:hover {
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.2) inset, 0 14px 36px -4px rgba(22,163,74,0.38), 0 1px 0 0 rgba(255,255,255,0.3) inset;
+        }
+        [data-theme="light"] .pyramid-top {
+            box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 14px 30px -12px rgba(22,163,74,0.35);
+            animation: none;
+        }
+        [data-theme="light"] .pyramid-layer.hovered { box-shadow: 0 16px 40px -14px rgba(22,163,74,0.3); }
+        [data-theme="light"] .feature-icon { box-shadow: 0 6px 16px -6px rgba(22,163,74,0.3), 0 1px 0 0 rgba(255,255,255,0.4) inset; }
+        [data-theme="light"] .program-card.featured { box-shadow: var(--shadow-elevated); }
+        [data-theme="light"] .program-card.featured::before { box-shadow: 0 4px 12px -4px rgba(22,163,74,0.3); }
+        [data-theme="light"] .instructor-avatar { box-shadow: var(--shadow-elevated), 0 0 60px -24px rgba(22,163,74,0.18); }
+        [data-theme="light"] .program-earlybird {
+            color: #b45309;
+            background: rgba(245,158,11,0.14);
+            border-color: rgba(180,83,9,0.35);
+        }
+        [data-theme="light"] .cta::before {
+            background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(34,197,94,0.08) 0%, transparent 70%);
+        }
+
+        /* ============ THEME TOGGLE ============ */
+        .nav-right { display: flex; align-items: center; gap: 22px; }
+        .theme-toggle {
+            width: 34px; height: 34px; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: transparent; border: 1px solid var(--border);
+            color: var(--fg-muted); cursor: pointer; flex-shrink: 0;
+            transition: color 0.2s, border-color 0.2s, transform 0.3s var(--ease-out-quint);
+        }
+        .theme-toggle:hover { color: var(--fg); border-color: var(--fg-muted); transform: rotate(20deg); }
+        .theme-toggle svg { width: 16px; height: 16px; }
+        .theme-toggle .icon-moon { display: none; }
+        [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+        [data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
         html { scroll-behavior: smooth; }
 
@@ -739,7 +873,6 @@
         .level-quote {
             color: var(--fg-dim); font-style: italic; margin-top: 10px; font-size: 14px;
             padding-left: 14px; border-left: 2px solid var(--level-color);
-            opacity: 0.85;
         }
         .level-badge {
             display: inline-flex; align-items: center; gap: 6px;
@@ -910,6 +1043,61 @@
         .week-card li::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 20px; line-height: 1.3; }
         .week-card .week-result { margin-top: 20px; padding-top: 18px; border-top: 1px dashed var(--border); font-size: 13px; color: var(--fg-muted); line-height: 1.6; }
         .week-card .week-result strong { color: var(--fg); display: block; margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-light); }
+
+        /* ============ CURRICULUM CALENDAR ============ */
+        .curriculum-calendar {
+            padding: 40px 0 0;
+            margin-top: 16px;
+            border-top: 1px solid var(--border-subtle);
+            --cal-yellow: #f5c842;
+            --cal-beige: #e9c5a0;
+        }
+        .cal-subhead { text-align: center; margin-bottom: 28px; }
+        .cal-subhead-label {
+            display: inline-flex; align-items: center; gap: 10px;
+            margin-bottom: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--accent-light); font-weight: 500;
+        }
+        .cal-subhead h3 { font-size: clamp(20px, 2.6vw, 28px); font-weight: 700; letter-spacing: -0.02em; }
+        .cal-subhead p { color: var(--fg-muted); font-size: 15px; margin-top: 10px; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.55; }
+        .cal-mini-wrap { max-width: 420px; margin: 0 auto; }
+        .cal-month-title {
+            font-size: 24px; font-weight: 700; letter-spacing: -0.02em;
+            color: var(--accent); margin-bottom: 22px;
+        }
+        .cal-mini {
+            display: grid; grid-template-columns: repeat(7, 1fr);
+            row-gap: 12px; column-gap: 4px; justify-items: center;
+        }
+        .cal-dow {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            color: var(--fg-dim); padding-bottom: 6px;
+        }
+        .cal-d {
+            width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; font-weight: 600; color: var(--fg);
+            font-variant-numeric: tabular-nums;
+        }
+        .cal-d.is-off { color: var(--fg-dim); font-weight: 400; opacity: 0.6; }
+        .cal-d.ev-ws { background: var(--accent); color: #04120a; font-weight: 700; }
+        .cal-d.ev-qa { background: var(--cal-yellow); color: #201505; font-weight: 700; }
+        .cal-d.ev-pr { background: var(--cal-beige); color: #241708; font-weight: 700; }
+        .cal-legend {
+            display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+            margin-top: 28px;
+        }
+        .cal-legend-item {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 13px; color: var(--fg-muted);
+        }
+        .cal-legend .cal-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+        .cal-legend .cal-dot.is-session { background: var(--accent); }
+        .cal-legend .cal-dot.is-practice { background: var(--cal-beige); }
+        .cal-legend .cal-dot.is-qa { background: var(--cal-yellow); }
 
         .curriculum-result {
             margin-top: 56px; padding: 28px 32px;
@@ -1434,15 +1622,21 @@
                 <img class="mark-icon" src="logo.svg" alt="" width="32" height="32">
                 <span class="mark-text">AI Native<span class="mark-text-suffix">v1</span></span>
             </a>
-            <ul class="nav-links">
-                <li><a href="#levels">Уровни</a></li>
-                <li><a href="#testimonials">Отзывы</a></li>
-                <li><a href="#audience">Для кого</a></li>
-                <li><a href="#curriculum">Программа</a></li>
-                <li><a href="#program">Цены</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#program" class="btn btn-primary" style="padding: 10px 18px; font-size: 13px;">Записаться <span class="arrow">→</span></a></li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#levels">Уровни</a></li>
+                    <li><a href="#testimonials">Отзывы</a></li>
+                    <li><a href="#audience">Для кого</a></li>
+                    <li><a href="#curriculum">Программа</a></li>
+                    <li><a href="#program">Цены</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#program" class="btn btn-primary" style="padding: 10px 18px; font-size: 13px;">Записаться <span class="arrow">→</span></a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить светлую/тёмную тему">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -1461,7 +1655,7 @@
                 </div>
                 <h1>
                     <span class="h1-line">Станьте <span class="h1-emph">AI Native</span></span>
-                    <span class="h1-line"><span class="hero-gradient-text">за 3 недели и 6 занятий</span></span>
+                    <span class="h1-line"><span class="hero-gradient-text">за 3 недели и 8 занятий</span></span>
                 </h1>
                 <p class="hero-subtitle">
                     От разрозненных чатов с AI — к работающей PersonalOS, где знания, память и рутины настроены под вас и работают сами, как одно целое.
@@ -1942,6 +2136,55 @@
                 </div>
             </div>
 
+            <div class="curriculum-calendar">
+                <div class="cal-subhead">
+                    <div class="cal-subhead-label">Календарь потока</div>
+                    <h3>Как выглядят эти 3 недели</h3>
+                    <p>8 живых занятий: 6 воркшопов по вторникам и четвергам и 2 Q&A по средам. Плюс гостевой спикер и соло-практика по пятницам. Все встречи в 19:00 МСК / 18:00 CET.</p>
+                </div>
+                <div class="cal-mini-wrap">
+                    <div class="cal-month-title">Сентябрь – Октябрь</div>
+                    <div class="cal-mini">
+                        <div class="cal-dow">Пн</div>
+                        <div class="cal-dow">Вт</div>
+                        <div class="cal-dow">Ср</div>
+                        <div class="cal-dow">Чт</div>
+                        <div class="cal-dow">Пт</div>
+                        <div class="cal-dow">Сб</div>
+                        <div class="cal-dow">Вс</div>
+
+                        <div class="cal-d is-off">28</div>
+                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">29</div>
+                        <div class="cal-d is-off">30</div>
+                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">1</div>
+                        <div class="cal-d ev-pr" title="Соло-практика">2</div>
+                        <div class="cal-d is-off">3</div>
+                        <div class="cal-d is-off">4</div>
+
+                        <div class="cal-d ev-ws" title="Гостевой спикер · 19:00 МСК">5</div>
+                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">6</div>
+                        <div class="cal-d ev-qa" title="Q&A · 19:00 МСК">7</div>
+                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">8</div>
+                        <div class="cal-d ev-pr" title="Соло-практика">9</div>
+                        <div class="cal-d is-off">10</div>
+                        <div class="cal-d is-off">11</div>
+
+                        <div class="cal-d is-off">12</div>
+                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">13</div>
+                        <div class="cal-d ev-qa" title="Q&A · 19:00 МСК">14</div>
+                        <div class="cal-d ev-ws" title="Воркшоп · 19:00 МСК">15</div>
+                        <div class="cal-d ev-pr" title="Соло-практика">16</div>
+                        <div class="cal-d is-off">17</div>
+                        <div class="cal-d is-off">18</div>
+                    </div>
+                </div>
+                <div class="cal-legend">
+                    <span class="cal-legend-item"><i class="cal-dot is-session"></i> Воркшоп / гость</span>
+                    <span class="cal-legend-item"><i class="cal-dot is-practice"></i> Практика</span>
+                    <span class="cal-legend-item"><i class="cal-dot is-qa"></i> Q&A</span>
+                </div>
+            </div>
+
             <div class="curriculum-result">
                 <strong>В результате за 3 недели:</strong> собранная и работающая Personal OS — база знаний, скиллы, агенты, автоматизации. Контент из разговоров, автономный Telegram-агент и понимание как встроить AI в любой процесс.
             </div>
@@ -1957,20 +2200,20 @@
                 <h2>Инструменты, которые вы освоите</h2>
             </div>
             <div class="tools-strip">
-                <span class="tool-chip">🤖 Claude</span>
-                <span class="tool-chip">💬 ChatGPT</span>
-                <span class="tool-chip">✨ Gemini</span>
-                <span class="tool-chip">🔍 Perplexity</span>
-                <span class="tool-chip">📓 NotebookLM</span>
+                <span class="tool-chip">⌨️ Claude Code</span>
                 <span class="tool-chip">🧠 Obsidian</span>
-                <span class="tool-chip">📝 Notion</span>
+                <span class="tool-chip">🔍 Perplexity</span>
                 <span class="tool-chip">☁️ Google Drive / Docs</span>
                 <span class="tool-chip">🎙 Granola</span>
-                <span class="tool-chip">🎬 Fathom</span>
-                <span class="tool-chip">⌨️ Claude Code</span>
-                <span class="tool-chip">🧑‍💻 Cursor</span>
                 <span class="tool-chip">⚡ Zapier</span>
-                <span class="tool-chip">🤝 Claude Cowork</span>
+                <span class="tool-chip">🎬 Fathom</span>
+                <span class="tool-chip">🗣️ Pippet</span>
+                <span class="tool-chip">🛰️ Hermes</span>
+                <span class="tool-chip">🔌 MCP</span>
+                <span class="tool-chip">🚀 Netlify</span>
+                <span class="tool-chip">🦙 Ollama</span>
+                <span class="tool-chip">🧩 OpenCode</span>
+                <span class="tool-chip">💬 ChatGPT Codex</span>
             </div>
             <p class="tools-note">💰 <strong>$20–50/мес</strong> — хватает одной LLM-подписки, чтобы начать &nbsp;·&nbsp; 🔒 без кода и серверов</p>
         </div>
@@ -2061,7 +2304,7 @@
                 </div>
             </div>
 
-            <div class="mentoring-callout" style="border-style: solid; border-color: rgba(34,197,94,0.25);">
+            <div class="mentoring-callout" style="border-style: solid; border-color: var(--border-accent);">
                 🏢 <strong>От компании 3+ человека — скидка 20%.</strong> Напишите <a href="https://t.me/RealPonchikTeam" target="_blank" style="color: var(--accent-light);">@RealPonchikTeam</a>.
             </div>
 
@@ -2141,6 +2384,15 @@
     </footer>
 
     <script>
+        // Theme toggle
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const root = document.documentElement;
+            const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            if (next === 'light') root.setAttribute('data-theme', 'light');
+            else root.removeAttribute('data-theme');
+            try { localStorage.setItem('theme', next); } catch (e) {}
+        });
+
         // FAQ accordion
         document.querySelectorAll('.faq-question').forEach(button => {
             button.addEventListener('click', () => {
@@ -2256,7 +2508,7 @@
     <div class="mobile-cta">
         <div class="mobile-price">
             <span class="mobile-price-main">от €590</span>
-            <span class="mobile-price-sub">3 недели · 6 занятий</span>
+            <span class="mobile-price-sub">3 недели · 8 занятий</span>
         </div>
         <a href="#program" class="btn btn-primary">Записаться <span class="arrow">→</span></a>
     </div>
