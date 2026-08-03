@@ -498,12 +498,27 @@
         .hero-os-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
         .hero-os-lines line { stroke: rgba(34,197,94,0.25); stroke-width: 1; stroke-dasharray: 4 7; animation: osDash 20s linear infinite; }
         @keyframes osDash { to { stroke-dashoffset: -220; } }
+        /* data pulses travelling from nodes into the core */
+        .os-pulse { r: 3.5px; fill: var(--accent); opacity: 0; }
+        .os-pulse.p-top { animation: pulseTop 9s ease-in-out infinite; }
+        .os-pulse.p-right { animation: pulseRight 9s ease-in-out infinite 2.2s; }
+        .os-pulse.p-bottom { animation: pulseBottom 9s ease-in-out infinite 4.5s; }
+        .os-pulse.p-left { animation: pulseLeft 9s ease-in-out infinite 6.8s; }
+        @keyframes pulseTop { 0% { transform: translate(200px, 46px); opacity: 0; } 6% { opacity: 0.75; } 30% { transform: translate(200px, 190px); opacity: 0; } 100% { transform: translate(200px, 190px); opacity: 0; } }
+        @keyframes pulseRight { 0% { transform: translate(322px, 200px); opacity: 0; } 6% { opacity: 0.75; } 30% { transform: translate(210px, 200px); opacity: 0; } 100% { transform: translate(210px, 200px); opacity: 0; } }
+        @keyframes pulseBottom { 0% { transform: translate(200px, 354px); opacity: 0; } 6% { opacity: 0.75; } 30% { transform: translate(200px, 210px); opacity: 0; } 100% { transform: translate(200px, 210px); opacity: 0; } }
+        @keyframes pulseLeft { 0% { transform: translate(78px, 200px); opacity: 0; } 6% { opacity: 0.75; } 30% { transform: translate(190px, 200px); opacity: 0; } 100% { transform: translate(190px, 200px); opacity: 0; } }
         /* orbital ring */
         .hero-os::before {
             content: ''; position: absolute; top: 50%; left: 50%;
             width: 280px; height: 280px; margin: -140px 0 0 -140px;
             border-radius: 50%; border: 1px solid rgba(34,197,94,0.12);
             pointer-events: none;
+            animation: ringBreathe 8s ease-in-out infinite;
+        }
+        @keyframes ringBreathe {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.035); opacity: 0.7; }
         }
         .os-core {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
@@ -518,7 +533,11 @@
             box-shadow: var(--shadow-card);
             z-index: 2;
         }
-        .os-core img { filter: drop-shadow(0 3px 8px rgba(0,0,0,0.25)); }
+        .os-core img { filter: drop-shadow(0 3px 8px rgba(0,0,0,0.25)); animation: coreBob 7s ease-in-out infinite; }
+        @keyframes coreBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        @media (prefers-reduced-motion: reduce) {
+            .os-pulse, .hero-os::before, .os-core img, .os-node, .hero-os-lines line { animation: none; }
+        }
         .os-core span { font-size: 12px; font-weight: 700; letter-spacing: -0.01em; color: var(--fg-muted); }
         .os-node {
             position: absolute; z-index: 2;
@@ -1719,6 +1738,10 @@
                     <line x1="200" y1="200" x2="200" y2="364"/>
                     <line x1="200" y1="200" x2="70" y2="200"/>
                     <line x1="200" y1="200" x2="330" y2="200"/>
+                    <circle class="os-pulse p-top" cx="0" cy="0"/>
+                    <circle class="os-pulse p-right" cx="0" cy="0"/>
+                    <circle class="os-pulse p-bottom" cx="0" cy="0"/>
+                    <circle class="os-pulse p-left" cx="0" cy="0"/>
                 </svg>
                 <div class="os-core">
                     <img src="logo.svg" alt="" width="40" height="40">
