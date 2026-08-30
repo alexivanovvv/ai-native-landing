@@ -1,3 +1,7 @@
+---
+share_link: https://share.note.sx/ot9v0531#DTtbLbTLRVvurQU8XRbC9A
+share_updated: 2026-08-13T13:46:28+02:00
+---
 Станьте AI Native — за 4 недели и 8 практических занятий. Старт 27 апреля
 
 Большинство профессионалов застряли на уровне AI Literate — платят за ChatGPT, умеют писать промпты, но используют ИИ как «умный Google».

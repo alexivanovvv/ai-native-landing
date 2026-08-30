@@ -129,13 +129,15 @@
         [data-theme="light"] .lr-num[style*="#f5c842"] { filter: brightness(0.62) saturate(1.6); }
         [data-theme="light"] .cal-tag.t-ws { color: #15803d; }
         [data-theme="light"] .cal-tag.t-qa { color: #a16207; }
-        [data-theme="light"] .cal-tag.t-pr { color: #96613a; }
-        [data-theme="light"] .cal-d.ev-extra {
+        [data-theme="light"] .cal-d.ev-pr, [data-theme="light"] .cal-d.ev-extra {
             border-color: rgba(111, 108, 98, 0.38);
             color: var(--fg-dim);
         }
-        [data-theme="light"] .cal-tag.t-extra { color: #8a8578; }
-        [data-theme="light"] .phase-foundation { --phase-color: #a16207; }
+        [data-theme="light"] .cal-tag.t-pr, [data-theme="light"] .cal-tag.t-extra { color: #8a8578; }
+        [data-theme="light"] .phase-1 { --phase-color: #a16207; }
+        [data-theme="light"] .phase-2 { --phase-color: #9a3412; }
+        [data-theme="light"] .phase-3 { --phase-color: #6d28d9; }
+        [data-theme="light"] .phase-4 { --phase-color: #15803d; }
         [data-theme="light"] .week-card[data-step="1"] { --step-color: #a16207; }
         [data-theme="light"] .week-card[data-step="2"] { --step-color: #9a3412; }
         [data-theme="light"] .week-card[data-step="3"] { --step-color: #6d28d9; }
@@ -1088,7 +1090,7 @@
             pointer-events: none;
             opacity: 0; transition: opacity 0.3s ease;
         }
-        .audience-card:hover { transform: translateY(-4px); border-color: var(--border); box-shadow: var(--shadow-elevated); }
+        .audience-card:hover { transform: translateY(-8px) scale(1.015); border-color: var(--border); box-shadow: var(--shadow-elevated); }
         .audience-card:hover::before { transform: scaleX(1); }
         .audience-card:hover::after { opacity: 1; }
         .audience-number {
@@ -1119,18 +1121,20 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            align-items: start;
         }
         @media (max-width: 980px) { .curriculum-phases { grid-template-columns: 1fr; } }
+        @media (min-width: 981px) { .curriculum-phases .week-card { border-bottom: none; padding-bottom: 0; } }
         .phase {
             background: var(--bg-card);
             background-image: var(--gradient-card);
             border: 1px solid var(--border-subtle);
             border-radius: var(--r-xl);
-            padding: 32px 32px 8px;
+            padding: 32px 32px 28px;
             box-shadow: var(--shadow-card);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
             transition: border-color 0.4s var(--ease-out-quint), box-shadow 0.4s var(--ease-out-quint), transform 0.4s var(--ease-out-quint);
         }
         .phase::before {
@@ -1146,8 +1150,10 @@
         }
         .phase:hover { border-color: color-mix(in srgb, var(--phase-color) 45%, var(--border-subtle)); box-shadow: var(--shadow-elevated); transform: translateY(-3px); }
         .phase:hover::after { opacity: 1; }
-        .phase-foundation { --phase-color: #e4b44c; }
-        .phase-system { --phase-color: var(--accent); }
+        .phase-1 { --phase-color: #e4b44c; }
+        .phase-2 { --phase-color: #d4923a; }
+        .phase-3 { --phase-color: #c9b0e8; }
+        .phase-4 { --phase-color: #4ade80; }
         .phase-head {
             display: flex; align-items: baseline; justify-content: space-between;
             gap: 12px; flex-wrap: wrap;
@@ -1179,8 +1185,10 @@
             border-bottom: 1px solid var(--border-subtle);
             position: relative;
             z-index: 1;
+            flex: 1;
         }
         .week-card:last-child { border-bottom: none; }
+        .week-card .week-body { display: flex; flex-direction: column; height: 100%; }
         .week-num {
             font-family: 'JetBrains Mono', monospace;
             font-size: 26px;
@@ -1206,7 +1214,7 @@
         .week-card ul { list-style: none; padding: 0; }
         .week-card li { padding: 6px 0 6px 22px; position: relative; color: var(--fg-muted); font-size: 15px; line-height: 1.6; }
         .week-card li::before { content: '·'; position: absolute; left: 0; color: var(--step-color); font-weight: 700; font-size: 20px; line-height: 1.3; }
-        .week-card .week-result { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--border); font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+        .week-card .week-result { margin-top: auto; padding-top: 16px; border-top: 1px dashed var(--border); font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
         .week-card .week-result strong { display: block; margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--step-color); font-weight: 600; }
         @media (max-width: 640px) {
             .phase { padding: 24px 20px 4px; }
@@ -1216,7 +1224,7 @@
 
         /* ============ CURRICULUM CALENDAR ============ */
         .curriculum-calendar {
-            display: grid; grid-template-columns: minmax(0, 1fr) 430px;
+            display: grid; grid-template-columns: minmax(0, 1fr) 340px;
             gap: 28px 56px; align-items: center;
             padding: 44px 48px;
             margin: 32px auto 0;
@@ -1238,58 +1246,65 @@
             color: var(--accent-light); font-weight: 500;
         }
         .cal-subhead h3 { font-size: clamp(20px, 2.6vw, 28px); font-weight: 700; letter-spacing: -0.02em; }
-        .cal-subhead p { color: var(--fg-muted); font-size: 15px; margin-top: 12px; max-width: 440px; line-height: 1.6; }
-        .cal-mini-wrap { max-width: 430px; margin: 0; }
+        .cal-subhead ul.cal-legend { list-style: none; padding: 0; margin-top: 14px; max-width: 440px; }
+        .cal-subhead ul.cal-legend li {
+            position: relative; padding: 5px 0 5px 20px;
+            color: var(--fg-muted); font-size: 15px; line-height: 1.55;
+        }
+        .cal-subhead ul.cal-legend li::before {
+            content: '·'; position: absolute; left: 0; top: 3px;
+            color: var(--accent-light); font-weight: 700; font-size: 20px; line-height: 1.3;
+        }
+        .cal-mini-wrap { max-width: 340px; margin: 0; }
         .cal-month-title {
-            font-size: 19px; font-weight: 700; letter-spacing: -0.02em;
-            color: var(--accent); margin-bottom: 18px;
+            font-size: 15px; font-weight: 700; letter-spacing: -0.02em;
+            color: var(--accent); margin-bottom: 12px;
         }
         .cal-mini {
             display: grid; grid-template-columns: repeat(7, 1fr);
-            row-gap: 14px; column-gap: 4px; justify-items: center;
+            row-gap: 14px; column-gap: 3px; justify-items: center;
         }
         .cal-dow {
-            font-family: 'JetBrains Mono', monospace; font-size: 11px;
+            font-family: 'JetBrains Mono', monospace; font-size: 10px;
             text-transform: uppercase; letter-spacing: 0.05em;
-            color: var(--fg-dim); padding-bottom: 4px;
+            color: var(--fg-dim); padding-bottom: 3px;
         }
-        .cal-day { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .cal-day { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; }
         .cal-d {
-            width: 46px; height: 46px; border-radius: 50%;
+            width: 34px; height: 34px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 16px; font-weight: 600; color: var(--fg);
+            font-size: 13px; font-weight: 600; color: var(--fg);
             font-variant-numeric: tabular-nums;
         }
         .cal-d.is-off { color: var(--fg-dim); font-weight: 400; opacity: 0.6; }
         .cal-d.ev-ws { background: #22c55e; color: #04120a; font-weight: 700; }
         .cal-d.ev-qa { background: var(--cal-yellow); color: #201505; font-weight: 700; }
-        .cal-d.ev-pr { background: var(--cal-beige); color: #241708; font-weight: 700; }
-        .cal-d.ev-extra {
+        .cal-d.ev-pr, .cal-d.ev-extra {
             background: transparent;
             border: 1px dashed color-mix(in srgb, var(--fg-dim) 55%, transparent);
             color: var(--fg-dim);
             font-weight: 500;
-            opacity: 0.78;
+            opacity: 0.7;
         }
         .cal-tag {
-            font-family: 'JetBrains Mono', monospace; font-size: 10px;
-            text-transform: uppercase; letter-spacing: 0.04em;
-            white-space: nowrap;
+            font-family: 'JetBrains Mono', monospace; font-size: 9px;
+            text-transform: none; letter-spacing: 0.04em;
+            white-space: normal; text-align: center; line-height: 1.3;
+            word-break: break-word; hyphens: auto;
         }
         .cal-tag.t-ws { color: var(--accent-light); }
         .cal-tag.t-qa { color: var(--cal-yellow); }
-        .cal-tag.t-pr { color: var(--cal-beige); }
-        .cal-tag.t-extra {
+        .cal-tag.t-pr, .cal-tag.t-extra {
             color: var(--fg-dim);
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 400;
-            text-transform: lowercase;
+            text-transform: none;
             letter-spacing: 0.03em;
-            opacity: 0.72;
+            opacity: 0.7;
         }
         @media (max-width: 640px) {
-            .cal-d { width: 38px; height: 38px; font-size: 13px; }
-            .cal-tag { font-size: 8px; }
+            .cal-d { width: 30px; height: 30px; font-size: 12px; }
+            .cal-tag { font-size: 7px; }
             .cal-mini { column-gap: 4px; row-gap: 14px; }
         }
 
@@ -2425,78 +2440,91 @@
             </div>
 
             <div class="curriculum-phases">
-                <div class="phase phase-foundation">
+                <div class="phase phase-1">
                     <div class="phase-head">
-                        <span class="phase-label">Фундамент</span>
-                        <span class="phase-meta">2 недели · 4 сессии</span>
+                        <span class="phase-label">Неделя 1 · Собери</span>
+                        <span class="phase-meta">1 сессия</span>
                     </div>
 
                     <article class="week-card" data-step="1">
                         <div class="week-num">01</div>
                         <div class="week-body">
                             <h3>Собери</h3>
-                            <p class="week-lead">Настраиваем базу знаний, системные промпты и память ИИ, создаем файлы best practice.</p>
+                            <p class="week-lead">AI перестаёт быть чужим. Он узнаёт вас раз и навсегда.</p>
                             <ul>
-                                <li>Три уровня AI-грамотности, принцип 0→80→100 и архитектура Personal OS</li>
-                                <li>База знаний: структура DNA/, KNOWLEDGE/, PROJECTS/, PROMPTS/</li>
-                                <li>About Me и другие инструкции - контекст, который меняет качество ответов</li>
-                                <li>Свайп-файлы, библиотека промптов и AI Native практики</li>
-                                <li>Экспорт памяти из ChatGPT, переписок из Telegram, Notion</li>
-                                <li>AI на вашем компьютере в связке с базой знаний</li>
+                                <li>Системный промпт, память, папки - AI работает именно на вас</li>
+                                <li>Единая база знаний вместо десятка разрозненных чатов</li>
+                                <li>AI breadcrumbs - ответы сохраняются там, где потом нужны</li>
+                                <li>AI swipe file - библиотека ваших лучших примеров</li>
+                                <li>Практика: реальная задача → 80% результата за минуты</li>
                             </ul>
-                            <div class="week-result"><strong>Результат</strong>ИИ знает, кто вы, и работает лучше - уже на вас. Заберете архитектуру базы, AGENTS.md, About Me и первые swipe-файлы.</div>
+                            <div class="week-result"><strong>Результат</strong>AI знает, кто вы. Заберёте базу знаний, системный промпт с памятью и первый swipe file.</div>
                         </div>
                     </article>
+                </div>
+
+                <div class="phase phase-2">
+                    <div class="phase-head">
+                        <span class="phase-label">Неделя 2 · Настрой</span>
+                        <span class="phase-meta">1 сессия</span>
+                    </div>
 
                     <article class="week-card" data-step="2">
                         <div class="week-num">02</div>
                         <div class="week-body">
                             <h3>Настрой</h3>
-                            <p class="week-lead">Выбираем правильные инструменты, разбираем процессы, автоматизируем 2-3 повторяющиеся задачи.</p>
+                            <p class="week-lead">Инструмент под задачу, а не задача под инструмент. Плюс личный AI-ассистент.</p>
                             <ul>
-                                <li>Персональный стек: 10 ключевых инструментов под ваши задачи</li>
-                                <li>Perplexity, Granola, NotebookLM в ежедневной работе</li>
-                                <li>Автоматизации: транскрипты встреч → база знаний</li>
-                                <li>Голосовой ввод (Pippet, Handy) - наговаривать быстрее, чем печатать</li>
-                                <li>Навык «делегировать AI или нет» и первые простые скиллы</li>
+                                <li>Когда вручную, когда ChatGPT/Claude, когда Perplexity или NotebookLM</li>
+                                <li>Персональный AI-ассистент под вашу специализацию</li>
+                                <li>Чёткая граница: где человек, где AI, где стык между ними</li>
+                                <li>Практика: 2-3 рутинные задачи уходят на автомат</li>
                             </ul>
-                            <div class="week-result"><strong>Результат</strong>Вы уже экономите часы в неделю. Заберете свой стек, настроенный Perplexity Space и поток транскриптов в базу.</div>
+                            <div class="week-result"><strong>Результат</strong>Личный ассистент и ясность, какой инструмент когда брать. Заберёте 10-15 рабочих промптов.</div>
                         </div>
                     </article>
                 </div>
 
-                <div class="phase phase-system">
+                <div class="phase phase-3">
                     <div class="phase-head">
-                        <span class="phase-label">Система</span>
-                        <span class="phase-meta">2 недели · 4 сессии</span>
+                        <span class="phase-label">Неделя 3 · Свяжи</span>
+                        <span class="phase-meta">1 сессия</span>
                     </div>
 
                     <article class="week-card" data-step="3">
                         <div class="week-num">03</div>
                         <div class="week-body">
-                            <h3>Соедини</h3>
-                            <p class="week-lead">Инструкции, инструменты, соединение знаний и действий.</p>
+                            <h3>Свяжи</h3>
+                            <p class="week-lead">Разрозненные чаты становятся системой с памятью.</p>
                             <ul>
-                                <li>Скиллы и промпты: как делаются, как работают, как синхронизируются</li>
-                                <li>MCP - AI подключается к Gmail, Calendar, Notion + permission-файлы</li>
-                                <li>Практика: собираем 2-3 скилла под ваши реальные задачи</li>
+                                <li>Memory packs - AI помнит проекты, клиентов, контекст</li>
+                                <li>NotebookLM - синтез из десятков источников за минуты</li>
+                                <li>Шаблоны workflow - готовые схемы вместо старта с нуля каждый раз</li>
+                                <li>Навык суждения: когда AI, а когда - нет</li>
                             </ul>
-                            <div class="week-result"><strong>Результат</strong>Инструменты работают как система, а не как набор разрозненных чатов. Заберете 2-3 скилла и MCP-коннекторы.</div>
+                            <div class="week-result"><strong>Результат</strong>Система вместо хаоса чатов. Заберёте 2-3 шаблона workflow и настроенный NotebookLM.</div>
                         </div>
                     </article>
+                </div>
+
+                <div class="phase phase-4">
+                    <div class="phase-head">
+                        <span class="phase-label">Неделя 4 · Запусти</span>
+                        <span class="phase-meta">1 сессия</span>
+                    </div>
 
                     <article class="week-card" data-step="4">
                         <div class="week-num">04</div>
                         <div class="week-body">
                             <h3>Запусти</h3>
-                            <p class="week-lead">AI-first процессы, агенты, работающая PersonalOS.</p>
+                            <p class="week-lead">Любой проект теперь проходит через AI-first на автомате.</p>
                             <ul>
-                                <li>Скилл vs агент: когда нужна автономная многошаговая работа в фоне</li>
-                                <li>Hermes - агент с Telegram-интерфейсом, работает 24/7</li>
-                                <li>Explore→Plan→Code→Commit: вайб-кодинг и деплой на Netlify</li>
-                                <li>Демо участников: реальные кейсы за 4 недели</li>
+                                <li>AI-first планирование: проект → микрозадачи → инструмент под каждую</li>
+                                <li>Три вопроса перед задачей: может ли AI, как быстрее, как эффективнее</li>
+                                <li>Контент-машинка: заметки превращаются в посты, рассылки, предложения</li>
+                                <li>Финальная сборка PersonalOS и план на 3 месяца</li>
                             </ul>
-                            <div class="week-result"><strong>Результат</strong>Подходите к любым задачам уверенно, как AI Native. Заберете агента в Telegram, задеплоенные проекты и собранную Personal OS.</div>
+                            <div class="week-result"><strong>Результат</strong>Работающая PersonalOS и AI-first рефлекс на автомате. Заберёте контент-машинку и свой набор правил AI Native.</div>
                         </div>
                     </article>
                 </div>
@@ -2506,7 +2534,12 @@
                 <div class="cal-subhead">
                     <div class="cal-subhead-label">Календарь потока</div>
                     <h3>Как выглядят эти 4 недели</h3>
-                    <p>8 живых занятий: 6 воркшопов и 2 сессии Brainstorm / кейс-клиника, по вторникам и четвергам. По средам на 1 и 3 неделе - бадди-созвоны, на 2 и 4 - гостевые сессии. По пятницам - соло-практика. Основные встречи в 19:00 МСК / 18:00 CET.</p>
+                    <ul class="cal-legend">
+                        <li>8 живых занятий по вторникам и четвергам: 6 воркшопов и 2 сессии Brainstorm / кейс-клиника</li>
+                        <li>По средам - бадди-созвоны (1 и 3 неделя) и гостевые сессии (2 и 4 неделя)</li>
+                        <li>По пятницам - соло-практика</li>
+                        <li>Основные встречи в 19:00 МСК / 18:00 CET</li>
+                    </ul>
                 </div>
                 <div class="cal-mini-wrap">
                     <div class="cal-month-title">Сентябрь - Октябрь</div>
@@ -2521,7 +2554,7 @@
 
                         <div class="cal-day"><div class="cal-d is-off">28</div></div>
                         <div class="cal-day"><div class="cal-d ev-ws">29</div><span class="cal-tag t-ws">Воркшоп</span></div>
-                        <div class="cal-day"><div class="cal-d ev-extra">30</div><span class="cal-tag t-extra">+ бадди</span></div>
+                        <div class="cal-day"><div class="cal-d ev-extra">30</div><span class="cal-tag t-extra">+ Бадди</span></div>
                         <div class="cal-day"><div class="cal-d ev-ws">1</div><span class="cal-tag t-ws">Воркшоп</span></div>
                         <div class="cal-day"><div class="cal-d ev-pr">2</div><span class="cal-tag t-pr">Соло-практика</span></div>
                         <div class="cal-day"><div class="cal-d is-off">3</div></div>
@@ -2529,7 +2562,7 @@
 
                         <div class="cal-day"><div class="cal-d is-off">5</div></div>
                         <div class="cal-day"><div class="cal-d ev-ws">6</div><span class="cal-tag t-ws">Воркшоп</span></div>
-                        <div class="cal-day"><div class="cal-d ev-extra">7</div><span class="cal-tag t-extra">+ гость</span></div>
+                        <div class="cal-day"><div class="cal-d ev-extra">7</div><span class="cal-tag t-extra">+ Гость</span></div>
                         <div class="cal-day"><div class="cal-d ev-qa">8</div><span class="cal-tag t-qa">Brainstorm</span></div>
                         <div class="cal-day"><div class="cal-d ev-pr">9</div><span class="cal-tag t-pr">Соло-практика</span></div>
                         <div class="cal-day"><div class="cal-d is-off">10</div></div>
@@ -2537,7 +2570,7 @@
 
                         <div class="cal-day"><div class="cal-d is-off">12</div></div>
                         <div class="cal-day"><div class="cal-d ev-ws">13</div><span class="cal-tag t-ws">Воркшоп</span></div>
-                        <div class="cal-day"><div class="cal-d ev-extra">14</div><span class="cal-tag t-extra">+ бадди</span></div>
+                        <div class="cal-day"><div class="cal-d ev-extra">14</div><span class="cal-tag t-extra">+ Бадди</span></div>
                         <div class="cal-day"><div class="cal-d ev-ws">15</div><span class="cal-tag t-ws">Воркшоп</span></div>
                         <div class="cal-day"><div class="cal-d ev-pr">16</div><span class="cal-tag t-pr">Соло-практика</span></div>
                         <div class="cal-day"><div class="cal-d is-off">17</div></div>
@@ -2545,7 +2578,7 @@
 
                         <div class="cal-day"><div class="cal-d is-off">19</div></div>
                         <div class="cal-day"><div class="cal-d ev-qa">20</div><span class="cal-tag t-qa">Кейс-клиника</span></div>
-                        <div class="cal-day"><div class="cal-d ev-extra">21</div><span class="cal-tag t-extra">+ гость</span></div>
+                        <div class="cal-day"><div class="cal-d ev-extra">21</div><span class="cal-tag t-extra">+ Гость</span></div>
                         <div class="cal-day"><div class="cal-d ev-ws">22</div><span class="cal-tag t-ws">Воркшоп</span></div>
                         <div class="cal-day"><div class="cal-d ev-pr">23</div><span class="cal-tag t-pr">Соло-практика</span></div>
                         <div class="cal-day"><div class="cal-d is-off">24</div></div>
@@ -2831,6 +2864,13 @@
                     en.target.style.opacity = '1';
                     en.target.style.transform = 'translateY(0)';
                     io.unobserve(en.target);
+                    en.target.addEventListener('transitionend', function clearInline(ev) {
+                        if (ev.propertyName === 'transform') {
+                            en.target.style.transform = '';
+                            en.target.style.opacity = '';
+                            en.target.removeEventListener('transitionend', clearInline);
+                        }
+                    });
                 }
             });
         }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });

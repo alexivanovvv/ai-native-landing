@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI NATIVE — манифест перехода</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Golos+Text:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EDE2;
+  --paper2:#EAE3D4;
+  --ink:#161310;
+  --red:#E8442A;
+  --blue:#2743C6;
+  --rule:2px solid var(--ink);
+  --rule-thick:5px solid var(--ink);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Golos Text',sans-serif;
+  font-size:17px;
+  line-height:1.55;
+  overflow-x:hidden;
+  cursor:crosshair;
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection{background:var(--red);color:var(--paper)}
+a{color:inherit}
+.mono{font-family:'IBM Plex Mono',monospace}
+.disp{font-family:'Unbounded',sans-serif}
+
+/* ---------- NAV ---------- */
+nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:stretch;justify-content:space-between;
+  background:var(--paper);border-bottom:var(--rule-thick);
+}
+nav .brand{
+  font-family:'Unbounded';font-weight:900;font-size:1.05rem;letter-spacing:-.02em;
+  padding:14px 20px;border-right:var(--rule);display:flex;align-items:center;gap:10px;text-decoration:none;
+}
+nav .brand .dot{width:12px;height:12px;background:var(--red);display:inline-block}
+nav .links{display:flex;align-items:stretch}
+nav .links a{
+  font-family:'IBM Plex Mono';font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;
+  text-decoration:none;padding:0 18px;display:flex;align-items:center;border-left:var(--rule);
+  transition:background .15s,color .15s;
+}
+nav .links a:hover{background:var(--ink);color:var(--paper)}
+nav .links a.cta{background:var(--red);color:var(--paper);font-weight:600}
+nav .links a.cta:hover{background:var(--ink)}
+@media(max-width:900px){nav .links a:not(.cta){display:none}}
+
+/* ---------- TICKER ---------- */
+.ticker{border-bottom:var(--rule);background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap}
+.ticker .track{display:inline-block;animation:tick 40s linear infinite;padding:8px 0}
+.ticker span{font-family:'IBM Plex Mono';font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;margin:0 28px}
+.ticker b{color:var(--red)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;border-bottom:var(--rule-thick);padding:64px 5vw 80px;overflow:hidden}
+.hero .kicker{font-family:'IBM Plex Mono';font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;display:inline-block;border:var(--rule);padding:6px 14px;background:var(--paper2)}
+.hero h1{
+  font-family:'Unbounded';font-weight:900;text-transform:uppercase;
+  font-size:clamp(2.4rem,7.2vw,6.4rem);line-height:.98;letter-spacing:-.02em;
+  margin-top:28px;max-width:19ch;
+}
+.hero h1 .r{color:var(--red)}
+.hero h1 .stroke{-webkit-text-stroke:2.5px var(--ink);color:transparent}
+.hero .sub{max-width:52ch;margin-top:30px;font-size:1.15rem;font-weight:500}
+.hero .sub b{background:var(--ink);color:var(--paper);padding:1px 7px}
+.hero .cta-row{display:flex;gap:0;margin-top:42px;flex-wrap:wrap}
+.btn{
+  font-family:'Unbounded';font-weight:600;font-size:.95rem;text-transform:uppercase;
+  text-decoration:none;padding:20px 34px;border:var(--rule);display:inline-flex;align-items:center;gap:12px;
+  transition:transform .15s,box-shadow .15s,background .15s,color .15s;position:relative;background:var(--paper);
+}
+.btn.primary{background:var(--red);color:var(--paper);border-color:var(--ink)}
+.btn:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
+.btn .arr{font-family:'IBM Plex Mono'}
+.hero .facts{display:flex;gap:0;margin-top:56px;border:var(--rule);width:fit-content;max-width:100%;flex-wrap:wrap;background:var(--paper2)}
+.hero .facts div{padding:14px 26px;border-right:var(--rule)}
+.hero .facts div:last-child{border-right:none}
+.hero .facts .n{font-family:'Unbounded';font-weight:800;font-size:1.5rem}
+.hero .facts .l{font-family:'IBM Plex Mono';font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;margin-top:2px}
+/* geometry */
+.hero .geo{position:absolute;pointer-events:none}
+.hero .circle{width:340px;height:340px;border-radius:50%;background:var(--red);top:-120px;right:-90px;mix-blend-mode:multiply;opacity:.92}
+.hero .bar{width:640px;height:26px;background:var(--ink);right:-160px;top:290px;transform:rotate(-24deg)}
+.hero .bar2{width:640px;height:10px;background:var(--blue);right:-140px;top:330px;transform:rotate(-24deg)}
+.stamp{
+  position:absolute;right:6vw;bottom:34px;width:150px;height:150px;animation:spin 22s linear infinite;
+}
+.stamp text{font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;fill:var(--ink)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:900px){.stamp{display:none}.hero .circle{width:200px;height:200px}}
+
+/* ---------- SECTIONS COMMON ---------- */
+section{border-bottom:var(--rule-thick);padding:80px 5vw;position:relative}
+.sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:52px;flex-wrap:wrap}
+.sec-num{font-family:'Unbounded';font-weight:900;font-size:clamp(2.4rem,5vw,4rem);color:var(--paper);-webkit-text-stroke:2px var(--ink)}
+.sec-title{font-family:'Unbounded';font-weight:800;font-size:clamp(1.5rem,3.4vw,2.6rem);text-transform:uppercase;letter-spacing:-.01em}
+.sec-title .r{color:var(--red)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* ---------- LEVELS ---------- */
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:var(--rule);}
+.level{padding:34px 28px 42px;border-right:var(--rule);position:relative;background:var(--paper)}
+.level:last-child{border-right:none}
+.level .num{font-family:'Unbounded';font-weight:900;font-size:4.6rem;line-height:1}
+.level h3{font-family:'Unbounded';font-weight:700;font-size:1.15rem;text-transform:uppercase;margin:14px 0 10px}
+.level .pct{font-family:'IBM Plex Mono';font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;border:var(--rule);display:inline-block;padding:4px 10px;margin-bottom:16px}
+.level p{font-size:.95rem}
+.level.l1{margin-top:120px}
+.level.l2{margin-top:60px;background:var(--paper2)}
+.level.l3{background:var(--ink);color:var(--paper)}
+.level.l3 .pct{border-color:var(--red);color:var(--red)}
+.level.l3 .num{color:var(--red)}
+.level .trap{position:absolute;top:-17px;left:24px;background:var(--red);color:var(--paper);font-family:'IBM Plex Mono';font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px}
+.level .goal{position:absolute;top:-17px;left:24px;background:var(--blue);color:var(--paper);font-family:'IBM Plex Mono';font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px}
+@media(max-width:900px){.levels{grid-template-columns:1fr}.level{border-right:none;border-bottom:var(--rule)}.level:last-child{border-bottom:none}.level.l1,.level.l2{margin-top:0}}
+.levels-note{margin-top:34px;font-size:1.25rem;font-weight:600;max-width:56ch}
+.levels-note b{color:var(--red)}
+
+/* ---------- MANIFESTO ---------- */
+.manifesto-list{counter-reset:m;display:grid;grid-template-columns:1fr 1fr;gap:0;border:var(--rule)}
+.m-item{border-bottom:var(--rule);padding:30px 28px;position:relative;transition:background .2s}
+.m-item:nth-child(odd){border-right:var(--rule)}
+.m-item:hover{background:var(--ink);color:var(--paper)}
+.m-item:hover .m-quote{color:var(--red)}
+.m-item:nth-last-child(-n+2){border-bottom:none}
+.m-item .m-n{font-family:'IBM Plex Mono';font-size:.75rem;letter-spacing:.14em;color:var(--red);font-weight:600}
+.m-item h3{font-family:'Unbounded';font-weight:700;font-size:1.05rem;text-transform:uppercase;margin:8px 0 10px}
+.m-item p{font-size:.95rem}
+.m-quote{display:block;margin-top:12px;font-family:'IBM Plex Mono';font-size:.8rem;font-style:normal;color:var(--blue)}
+@media(max-width:900px){.manifesto-list{grid-template-columns:1fr}.m-item:nth-child(odd){border-right:none}.m-item:nth-last-child(2){border-bottom:var(--rule)}}
+.big-quote{
+  margin:70px auto 0;max-width:900px;text-align:center;
+  font-family:'Unbounded';font-weight:800;font-size:clamp(1.3rem,3vw,2.2rem);text-transform:uppercase;line-height:1.25;
+}
+.big-quote .r{color:var(--red)}
+
+/* ---------- PROGRAM ---------- */
+.prog{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.week{border:var(--rule);background:var(--paper);position:relative;transition:transform .2s,box-shadow .2s}
+.week:hover{transform:translate(-5px,-5px);box-shadow:8px 8px 0 var(--ink)}
+.week .w-head{border-bottom:var(--rule);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:var(--paper2)}
+.week:nth-child(2) .w-head{background:var(--red);color:var(--paper)}
+.week:nth-child(3) .w-head{background:var(--ink);color:var(--paper)}
+.week .w-n{font-family:'Unbounded';font-weight:900;font-size:2rem}
+.week .w-t{font-family:'IBM Plex Mono';font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;text-align:right}
+.week h3{font-family:'Unbounded';font-weight:700;font-size:1.1rem;text-transform:uppercase;padding:20px 24px 0}
+.week ul{list-style:none;padding:14px 24px 20px}
+.week li{font-size:.92rem;padding:7px 0;border-bottom:1px dashed rgba(22,19,16,.35);display:flex;gap:10px}
+.week li::before{content:"—";color:var(--red);font-weight:800}
+.week .take{border-top:var(--rule);padding:16px 24px 20px;background:var(--paper2);font-size:.88rem}
+.week .take b{font-family:'IBM Plex Mono';font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;display:block;margin-bottom:6px;color:var(--red)}
+@media(max-width:1000px){.prog{grid-template-columns:1fr}}
+.format-strip{margin-top:40px;border:var(--rule);display:flex;flex-wrap:wrap;background:var(--paper2)}
+.format-strip div{padding:16px 24px;border-right:var(--rule);font-family:'IBM Plex Mono';font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;flex:1;min-width:180px}
+.format-strip div b{display:block;font-family:'Unbounded';font-size:1rem;text-transform:none;letter-spacing:0;margin-bottom:4px}
+.format-strip div:last-child{border-right:none}
+@media(max-width:900px){.format-strip div{border-right:none;border-bottom:var(--rule)}.format-strip div:last-child{border-bottom:none}.format-strip{flex-direction:column}}
+
+/* ---------- RESULTS ---------- */
+.res-grid{display:grid;grid-template-columns:repeat(4,1fr);border:var(--rule)}
+.res{padding:26px 22px;border-right:var(--rule);border-bottom:var(--rule);min-height:150px;position:relative;background:var(--paper)}
+.res:nth-child(4n){border-right:none}
+.res:nth-child(n+5){border-bottom:none}
+.res .i{font-family:'Unbounded';font-weight:900;color:var(--red);font-size:1.2rem}
+.res h4{font-family:'Unbounded';font-weight:600;font-size:.92rem;margin:10px 0 8px;text-transform:uppercase}
+.res p{font-size:.85rem}
+.res:hover{background:var(--paper2)}
+@media(max-width:1000px){.res-grid{grid-template-columns:1fr 1fr}.res:nth-child(2n){border-right:none}.res:nth-child(-n+6){border-bottom:var(--rule)}}
+@media(max-width:560px){.res-grid{grid-template-columns:1fr}.res{border-right:none!important;border-bottom:var(--rule)!important}.res:last-child{border-bottom:none!important}}
+
+/* ---------- TESTIMONIALS ---------- */
+.clips{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+.clip{border:var(--rule);background:#fff;padding:28px 26px;position:relative;box-shadow:7px 7px 0 rgba(22,19,16,.85)}
+.clip:nth-child(1){transform:rotate(-1.3deg)}
+.clip:nth-child(2){transform:rotate(.9deg) translateY(18px)}
+.clip:nth-child(3){transform:rotate(-.6deg)}
+.clip:nth-child(4){transform:rotate(1.1deg)}
+.clip:nth-child(5){transform:rotate(-.9deg) translateY(14px)}
+.clip:nth-child(6){transform:rotate(.7deg)}
+.clip:hover{transform:rotate(0) scale(1.02);z-index:5}
+.clip{transition:transform .25s}
+.clip .q{font-family:'Unbounded';font-weight:600;font-size:1rem;line-height:1.35;margin-bottom:14px}
+.clip .q::before{content:"« ";color:var(--red)}
+.clip .q::after{content:" »";color:var(--red)}
+.clip p{font-size:.88rem;margin-bottom:16px}
+.clip .who{font-family:'IBM Plex Mono';font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;border-top:2px solid var(--ink);padding-top:12px}
+.clip .who b{color:var(--red)}
+@media(max-width:1000px){.clips{grid-template-columns:1fr}.clip{transform:none!important}}
+
+/* ---------- AUTHOR ---------- */
+.author{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:start}
+.author .photo{border:var(--rule);position:relative;background:var(--paper2)}
+.author .photo img{display:block;width:100%;filter:grayscale(1) contrast(1.15)}
+.author .photo::after{content:"АВТОР И ВЕДУЩИЙ";position:absolute;bottom:-16px;left:-16px;background:var(--red);color:var(--paper);font-family:'IBM Plex Mono';font-size:.7rem;letter-spacing:.16em;padding:8px 14px}
+.author h3{font-family:'Unbounded';font-weight:800;font-size:1.9rem;text-transform:uppercase;margin-bottom:18px}
+.author p{max-width:58ch;margin-bottom:14px}
+.author .creds{display:flex;flex-wrap:wrap;gap:0;border:var(--rule);width:fit-content;margin-top:24px;background:var(--paper2)}
+.author .creds span{font-family:'IBM Plex Mono';font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;padding:12px 18px;border-right:var(--rule)}
+.author .creds span:last-child{border-right:none}
+@media(max-width:900px){.author{grid-template-columns:1fr}.author .photo{max-width:340px}}
+
+/* ---------- AUDIENCE ---------- */
+.aud{display:flex;flex-direction:column;border:var(--rule)}
+.aud-row{display:grid;grid-template-columns:70px 260px 1fr;border-bottom:var(--rule);transition:background .15s,color .15s}
+.aud-row:last-child{border-bottom:none}
+.aud-row:hover{background:var(--red);color:var(--paper)}
+.aud-row div{padding:20px 22px}
+.aud-row .n{font-family:'Unbounded';font-weight:900;border-right:var(--rule);display:flex;align-items:center}
+.aud-row .who{font-family:'Unbounded';font-weight:700;font-size:.95rem;text-transform:uppercase;border-right:var(--rule);display:flex;align-items:center}
+.aud-row .pain{font-size:.92rem;display:flex;align-items:center}
+@media(max-width:900px){.aud-row{grid-template-columns:56px 1fr}.aud-row .pain{grid-column:1/3;border-top:1px dashed rgba(22,19,16,.4)}}
+
+/* ---------- PRICING ---------- */
+.prices{display:grid;grid-template-columns:1fr 1fr;gap:44px;max-width:1080px}
+.ticket{border:3px solid var(--ink);background:#fff;position:relative;transition:transform .2s,box-shadow .2s}
+.ticket:hover{transform:translate(-6px,-6px);box-shadow:10px 10px 0 var(--ink)}
+.ticket .t-head{border-bottom:3px dashed var(--ink);padding:24px 30px;display:flex;justify-content:space-between;align-items:center}
+.ticket .t-name{font-family:'IBM Plex Mono';font-size:.75rem;text-transform:uppercase;letter-spacing:.16em}
+.ticket .t-price{font-family:'Unbounded';font-weight:900;font-size:2.6rem}
+.ticket ul{list-style:none;padding:26px 30px}
+.ticket li{padding:8px 0;font-size:.95rem;display:flex;gap:12px;border-bottom:1px dashed rgba(22,19,16,.3)}
+.ticket li::before{content:"■";color:var(--red);font-size:.7rem;line-height:2}
+.ticket .t-cta{display:block;text-align:center;font-family:'Unbounded';font-weight:700;text-transform:uppercase;text-decoration:none;padding:20px;border-top:3px solid var(--ink);transition:background .15s,color .15s}
+.ticket .t-cta:hover{background:var(--ink);color:var(--paper)}
+.ticket.feat{background:var(--ink);color:var(--paper)}
+.ticket.feat .t-price{color:var(--red)}
+.ticket.feat li{border-color:rgba(242,237,226,.3)}
+.ticket.feat .t-cta{background:var(--red);color:var(--paper);border-top-color:var(--paper)}
+.ticket.feat .t-cta:hover{background:var(--paper);color:var(--ink)}
+.ticket .badge{position:absolute;top:-18px;right:24px;background:var(--blue);color:var(--paper);font-family:'IBM Plex Mono';font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px}
+.pay-note{margin-top:36px;font-family:'IBM Plex Mono';font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;max-width:70ch}
+.pay-note b{color:var(--red)}
+@media(max-width:900px){.prices{grid-template-columns:1fr}}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:900px;border:var(--rule)}
+.faq details{border-bottom:var(--rule)}
+.faq details:last-child{border-bottom:none}
+.faq summary{
+  cursor:pointer;list-style:none;padding:22px 26px;display:flex;justify-content:space-between;gap:20px;align-items:center;
+  font-family:'Unbounded';font-weight:600;font-size:.98rem;transition:background .15s,color .15s;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{background:var(--paper2)}
+.faq details[open] summary{background:var(--ink);color:var(--paper)}
+.faq summary .pl{font-family:'IBM Plex Mono';font-weight:600;color:var(--red);flex-shrink:0}
+.faq .a{padding:20px 26px;border-top:2px dashed var(--ink);font-size:.95rem;max-width:70ch}
+
+/* ---------- FINAL ---------- */
+.final{text-align:center;padding:110px 5vw;background:var(--red);color:var(--paper);border-bottom:none}
+.final h2{font-family:'Unbounded';font-weight:900;font-size:clamp(2rem,6vw,4.6rem);text-transform:uppercase;line-height:1.02;letter-spacing:-.02em}
+.final p{font-size:1.15rem;margin:26px auto 40px;max-width:48ch;font-weight:500}
+.final .btn{background:var(--paper);color:var(--ink);border-color:var(--ink)}
+.final .btn:hover{box-shadow:6px 6px 0 rgba(22,19,16,.9)}
+
+footer{padding:34px 5vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:'IBM Plex Mono';font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;border-top:var(--rule-thick)}
+footer a{text-decoration:none;border-bottom:2px solid var(--red)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#top"><span class="dot"></span>AI&nbsp;NATIVE</a>
+  <div class="links">
+    <a href="#levels">Уровни</a>
+    <a href="#manifest">Манифест</a>
+    <a href="#program">Программа</a>
+    <a href="#voices">Голоса</a>
+    <a href="#price">Билеты</a>
+    <a class="cta" href="https://tally.so/r/Gx7rrk" target="_blank" rel="noopener">Записаться →</a>
+  </div>
+</nav>
+
+<div class="ticker" aria-hidden="true">
+  <div class="track" id="tickerTrack">
+    <span>Все знают ChatGPT. <b>Почти никто не стал AI Native.</b></span>
+    <span>80% результата — это <b>контекст</b>, а не промпт</span>
+    <span>Не 200 разрозненных чатов, а <b>PersonalOS</b></span>
+    <span>Промпты без системы = ИИ на <b>10%</b> потенциала</span>
+    <span>Это не апгрейд навыка. <b>Это смена рамки.</b></span>
+    <span>ИИ работает на тебя, <b>а не ты на него</b></span>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="geo circle"></div>
+  <div class="geo bar"></div>
+  <div class="geo bar2"></div>
+  <span class="kicker">Интенсив · Поток 3 · старт 28 сентября · Zoom · живая группа</span>
+  <h1>Умный<br>Google —<br><span class="stroke">за $20</span><br>в&nbsp;месяц? <span class="r">Хватит.</span></h1>
+  <p class="sub">Вы платите за ИИ и умеете писать промпты. Это уровень 2 — и это ловушка. За <b>3 недели и 8 занятий</b> вы пересобираете рабочие процессы так, будто ИИ в команде с первой секунды: база знаний, агенты, автоматизации. Не набор трюков — работающая PersonalOS.</p>
+  <div class="cta-row">
+    <a class="btn primary" href="https://tally.so/r/Gx7rrk" target="_blank" rel="noopener">Записаться · от €590 <span class="arr">→</span></a>
+    <a class="btn" href="#program">Программа <span class="arr">↓</span></a>
+  </div>
+  <div class="facts">
+    <div><div class="n">700+</div><div class="l">выпускников</div></div>
+    <div><div class="n">4.7/5</div><div class="l">оценка курсов</div></div>
+    <div><div class="n">3 нед</div><div class="l">8 занятий</div></div>
+    <div><div class="n">14K+</div><div class="l">читают @ppprompt</div></div>
+  </div>
+  <svg class="stamp" viewBox="0 0 150 150" aria-hidden="true">
+    <defs><path id="circ" d="M75,75 m-58,0 a58,58 0 1,1 116,0 a58,58 0 1,1 -116,0"/></defs>
+    <circle cx="75" cy="75" r="72" fill="none" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="75" cy="75" r="44" fill="none" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="75" cy="75" r="8" fill="var(--red)"/>
+    <text><textPath href="#circ">· AI NATIVE · ПОТОК 3 · СМЕНА РАМКИ · AI NATIVE · ПОТОК 3 ·</textPath></text>
+  </svg>
+</header>
+
+<section id="levels">
+  <div class="sec-head reveal"><span class="sec-num">01</span><h2 class="sec-title">Три уровня. <span class="r">Большинство застряло на втором.</span></h2></div>
+  <div class="levels reveal">
+    <div class="level l1">
+      <div class="num">1</div>
+      <h3>AI Curious</h3>
+      <span class="pct">~65% людей</span>
+      <p>Бесплатные инструменты. Обращаются к ИИ эпизодически — когда застряли. Любопытство без привычки.</p>
+    </div>
+    <div class="level l2">
+      <span class="trap">Ловушка</span>
+      <div class="num">2</div>
+      <h3>AI Literate</h3>
+      <span class="pct">~30% людей</span>
+      <p>Платят за подписки, умеют промпты, знают модели. Но каждый раз объясняют контекст с нуля и переписывают generic-ответы на 70%. ИИ как исполнитель, который лажает.</p>
+    </div>
+    <div class="level l3">
+      <span class="goal">Цель</span>
+      <div class="num">3</div>
+      <h3>AI Native</h3>
+      <span class="pct">~5% людей</span>
+      <p>Процессы пересобраны с предположением, что ИИ — постоянный collaborator. Не «как написать промпт?», а «как переизобрести процесс, если ИИ в команде с первой секунды?»</p>
+    </div>
+  </div>
+  <p class="levels-note reveal">Этот интенсив — <b>мост со второго уровня на третий.</b> Разница как между «умею гуглить» и «построил систему управления знаниями».</p>
+</section>
+
+<section id="manifest" style="background:var(--paper2)">
+  <div class="sec-head reveal"><span class="sec-num">02</span><h2 class="sec-title">Манифест <span class="r">AI Native</span></h2></div>
+  <div class="manifesto-list reveal">
+    <div class="m-item">
+      <span class="m-n">§ 01</span>
+      <h3>Контекст важнее промптов</h3>
+      <p>Хороший контекст — уже 80% результата. База знаний, aboutme-файл, свайп-файлы вашей работы.</p>
+      <span class="m-quote">«Тогда промпт может быть в одно слово»</span>
+    </div>
+    <div class="m-item">
+      <span class="m-n">§ 02</span>
+      <h3>Правило 0 → 80 → 100</h3>
+      <p>ИИ даёт 80% за минуты. Вы доводите последние 20%: голос, нюансы, суждение, ответственность.</p>
+      <span class="m-quote">«Не пишешь с нуля. Не редактируешь готовое. Доводишь.»</span>
+    </div>
+    <div class="m-item">
+      <span class="m-n">§ 03</span>
+      <h3>Система, а не чаты</h3>
+      <p>Не 200 разрозненных диалогов, в которых ничего не найти, а PersonalOS: база знаний + память + агенты.</p>
+      <span class="m-quote">«Как ящик с инструментами без мастерской» — это про подписки без системы</span>
+    </div>
+    <div class="m-item">
+      <span class="m-n">§ 04</span>
+      <h3>Верный инструмент под задачу</h3>
+      <p>Фреймворк выбора вместо FOMO. Пять подписок на 10% мощности — хуже, чем одна на 100%.</p>
+      <span class="m-quote">«ИИ — со-создатель, а не исполнитель, который лажает»</span>
+    </div>
+    <div class="m-item">
+      <span class="m-n">§ 05</span>
+      <h3>Суждение: когда ИИ не нужен</h3>
+      <p>AI Native — это не «всё через ИИ». Это знать, где он усиливает, а где мешает.</p>
+      <span class="m-quote">«ИИ как думающий партнёр, а не исполнитель задач»</span>
+    </div>
+    <div class="m-item">
+      <span class="m-n">§ 06</span>
+      <h3>Повторяется — автоматизируй</h3>
+      <p>Скиллы и агенты для повторяющихся задач: вывести себя за скобки и вернуть время.</p>
+      <span class="m-quote">«ИИ работает на тебя, а не ты на него»</span>
+    </div>
+  </div>
+  <p class="big-quote reveal">AI Native — не про инструменты.<br>Про то, <span class="r">как ты думаешь о своей работе.</span></p>
+</section>
+
+<section id="program">
+  <div class="sec-head reveal"><span class="sec-num">03</span><h2 class="sec-title">Программа: <span class="r">3 недели → PersonalOS</span></h2></div>
+  <div class="prog reveal">
+    <div class="week">
+      <div class="w-head"><span class="w-n">W1</span><span class="w-t">Концепция · структура · контекст</span></div>
+      <h3>База знаний</h3>
+      <ul>
+        <li>Три уровня AI-грамотности и принцип 0→80→100</li>
+        <li>Архитектура PersonalOS: DNA / KNOWLEDGE / PROJECTS / PROMPTS</li>
+        <li>About Me файл и инструкции для ИИ</li>
+        <li>Свайп-файлы и библиотека промптов</li>
+        <li>Экспорт своих данных: память ChatGPT, Telegram, Notion</li>
+      </ul>
+      <div class="take"><b>Заберёте</b>Архитектура базы, AGENTS.MD, About Me, первые swipe-файлы, data ownership.</div>
+    </div>
+    <div class="week">
+      <div class="w-head"><span class="w-n">W2</span><span class="w-t">Инструменты · процессы · поток данных</span></div>
+      <h3>Стек и автоматизация</h3>
+      <ul>
+        <li>Персональный стек из 10 инструментов под вашу роль</li>
+        <li>Perplexity, Granola, NotebookLM в связке с базой</li>
+        <li>Автоматизации: транскрипты встреч → база знаний</li>
+        <li>Голосовой ввод и навык «делегировать ИИ или нет»</li>
+        <li>Первые скиллы</li>
+      </ul>
+      <div class="take"><b>Заберёте</b>Свой стек, Perplexity Space, автопоток транскриптов в базу.</div>
+    </div>
+    <div class="week">
+      <div class="w-head"><span class="w-n">W3</span><span class="w-t">MCP · агенты · деплой</span></div>
+      <h3>Скиллы, агенты, автономия</h3>
+      <ul>
+        <li>Скиллы и промпты: как делаются и синхронизируются</li>
+        <li>MCP-коннекторы: Gmail, Calendar, Notion</li>
+        <li>Автономный агент с Telegram-интерфейсом 24/7</li>
+        <li>Вайб-кодинг и деплой своих инструментов</li>
+        <li>Демо участников</li>
+      </ul>
+      <div class="take"><b>Заберёте</b>2-3 скилла, MCP-коннекторы, TG-агент, задеплоенные проекты — собранная PersonalOS.</div>
+    </div>
+  </div>
+  <div class="format-strip reveal">
+    <div><b>6 воркшопов</b>вт + чт · 19:00 МСК · по 2 часа</div>
+    <div><b>2 Q&amp;A сессии</b>по средам · разбор ваших кейсов</div>
+    <div><b>Бадди + чат</b>закрытый Telegram, поддержка между сессиями</div>
+    <div><b>Записи навсегда</b>+ 90-дневный план после финала</div>
+    <div><b>~5-6 ч/нед</b>сессии ≈4 ч + практика 1-2 ч</div>
+  </div>
+</section>
+
+<section id="results" style="background:var(--paper2)">
+  <div class="sec-head reveal"><span class="sec-num">04</span><h2 class="sec-title">На выходе — <span class="r">не сертификат, а система</span></h2></div>
+  <div class="res-grid reveal">
+    <div class="res"><span class="i">01</span><h4>PersonalOS под вас</h4><p>База знаний + память + агенты + автоматизации, собранные под вашу роль.</p></div>
+    <div class="res"><span class="i">02</span><h4>AI-ассистент с памятью</h4><p>Знает ваш контекст, стиль и проекты. Больше никаких объяснений с нуля.</p></div>
+    <div class="res"><span class="i">03</span><h4>База знаний в Obsidian</h4><p>Ваши данные у вас — не в чужом облаке за paywall.</p></div>
+    <div class="res"><span class="i">04</span><h4>Контент в вашем голосе</h4><p>Свайп-файлы учат ИИ писать как вы, а не как «вежливый робот».</p></div>
+    <div class="res"><span class="i">05</span><h4>2-3 автоматизации</h4><p>Транскрипт → резюме → задачи. Рутина уходит в фон.</p></div>
+    <div class="res"><span class="i">06</span><h4>10-15 промптов под роль</h4><p>Не тысяча сохранённых «когда-нибудь», а проверенная библиотека.</p></div>
+    <div class="res"><span class="i">07</span><h4>Навык суждения</h4><p>Что делегировать ИИ, что делать самому, каким инструментом.</p></div>
+    <div class="res"><span class="i">08</span><h4>90-дневный план</h4><p>Что развивать после интенсива, чтобы система росла, а не пылилась.</p></div>
+  </div>
+</section>
+
+<section id="voices">
+  <div class="sec-head reveal"><span class="sec-num">05</span><h2 class="sec-title">Голоса <span class="r">выпускников</span></h2></div>
+  <div class="clips reveal">
+    <div class="clip">
+      <div class="q">Перестал думать об AI как об отдельном окне с промптом</div>
+      <p>За время интенсива начал собирать свою рабочую AI-операционную систему: базу знаний, Obsidian, Claude, скиллы. Сейчас использую это в операционной работе и вовлекаю в систему фаундера и CEO.</p>
+      <div class="who"><b>Юрий Горелов</b> · COO, ИТ-стартап</div>
+    </div>
+    <div class="clip">
+      <div class="q">Я начала ко всему относиться как к данным</div>
+      <p>Зафиксировала свой набор инструментов и перестала распыляться между десятками сервисов. Теперь понимаю: если AI выдаёт не то — проблема часто не в инструменте, а в том, как я задала контекст.</p>
+      <div class="who"><b>Лена Закирова</b> · менеджер проектов, Теплица</div>
+    </div>
+    <div class="clip">
+      <div class="q">Казалось, главное — промпты. Сейчас понимаю: нужна система</div>
+      <p>Сделал бота, который присылает утренние сводки по почте и задачам, и бота для трекинга питания. Довёл до рабочего состояния скилл по проектному менеджменту.</p>
+      <div class="who"><b>Пётр</b> · руководитель учебного центра IDECO</div>
+    </div>
+    <div class="clip">
+      <div class="q">То, на что уходил день, я делаю за вечер</div>
+      <p>Созвон → транскрипт → summary → черновик оффера. Благодаря About Me Personal и About Me Work материалы стали получаться гораздо точнее.</p>
+      <div class="who"><b>Юрий Брисов</b> · партнёр, юридический консалтинг</div>
+    </div>
+    <div class="clip">
+      <div class="q">AI превращает документы в кусочки знаний и раскладывает по папкам</div>
+      <p>Пришёл с запросом на персональную операционную систему, а углубился в создание корпоративной базы знаний для всей команды.</p>
+      <div class="who"><b>Иван Смирнов</b> · главред, сервис «Просебя»</div>
+    </div>
+    <div class="clip">
+      <div class="q">Вернул базу знаний, которую забросил с 2022-го</div>
+      <p>Наконец легла мантра «это просто папка для работы с файлами». Бонусом: личные ассистенты на базе транскриптов курсов теперь помогают в работе.</p>
+      <div class="who"><b>Андрей Карпов</b> · продуктовый маркетолог</div>
+    </div>
+  </div>
+</section>
+
+<section id="author" style="background:var(--paper2)">
+  <div class="sec-head reveal"><span class="sec-num">06</span><h2 class="sec-title">Кто <span class="r">ведёт</span></h2></div>
+  <div class="author reveal">
+    <div class="photo"><img src="self-portrait.png" alt="Алексей Иванов" onerror="this.parentNode.style.minHeight='300px';this.remove()"></div>
+    <div>
+      <h3>Алексей Иванов</h3>
+      <p>Экс-продакт в AI-стартапах Кремниевой долины. Автор канала <a href="https://t.me/ppprompt" target="_blank" rel="noopener">@ppprompt</a> — ежедневный разбор мировой AI-индустрии для 14 000+ читателей, поэтому раньше других вижу, что реально работает, а что хайп.</p>
+      <p>Я не пересказываю чужие курсы. AI Native — это система, по которой я работаю сам каждый день: PersonalOS, агенты, автоматизации. На интенсиве вы собираете такую же — под себя.</p>
+      <div class="creds">
+        <span>Практик, не теоретик</span>
+        <span>700+ выпускников</span>
+        <span>Каждый день в AI-индустрии</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="audience">
+  <div class="sec-head reveal"><span class="sec-num">07</span><h2 class="sec-title">Для кого <span class="r">этот переход</span></h2></div>
+  <div class="aud reveal">
+    <div class="aud-row"><div class="n">A</div><div class="who">Фаундеры и предприниматели</div><div class="pain">«Если не перестроюсь сейчас — через год будет поздно». Нужна система, а не ещё один курс по промптам.</div></div>
+    <div class="aud-row"><div class="n">B</div><div class="who">Консультанты, коучи, фрилансеры</div><div class="pain">Generic-ответы ИИ не передают ваш стиль. Пора выйти из ловушки «я = bottleneck».</div></div>
+    <div class="aud-row"><div class="n">C</div><div class="who">Руководители и тимлиды</div><div class="pain">Команда использует ИИ хаотично. Сначала самому стать AI Native — потом внедрить в команду.</div></div>
+    <div class="aud-row"><div class="n">D</div><div class="who">Маркетологи и контент-мейкеры</div><div class="pain">Контент-машина, где ИИ знает ваш голос: больше контента без выгорания.</div></div>
+    <div class="aud-row"><div class="n">E</div><div class="who">Knowledge workers</div><div class="pain">Аналитики, продакты, исследователи: база знаний с доступом ИИ и синтез из десятков источников.</div></div>
+  </div>
+</section>
+
+<section id="price" style="background:var(--paper2)">
+  <div class="sec-head reveal"><span class="sec-num">08</span><h2 class="sec-title">Билеты <span class="r">на поток 3</span></h2></div>
+  <div class="prices reveal">
+    <div class="ticket">
+      <div class="t-head"><span class="t-name">Индивидуальное участие</span><span class="t-price">€590</span></div>
+      <ul>
+        <li>3 недели · 6 воркшопов · 2 Q&amp;A</li>
+        <li>Практика на ваших реальных задачах</li>
+        <li>Бадди и закрытый Telegram-чат</li>
+        <li>Гостевая сессия спикера</li>
+        <li>Записи всех сессий — навсегда</li>
+        <li>Собранная PersonalOS на выходе</li>
+      </ul>
+      <a class="t-cta" href="https://tally.so/r/Gx7rrk" target="_blank" rel="noopener">Занять место →</a>
+    </div>
+    <div class="ticket feat">
+      <span class="badge">Максимальный результат</span>
+      <div class="t-head"><span class="t-name">Участие + 1:1 менторинг</span><span class="t-price">€890</span></div>
+      <ul>
+        <li>Всё из индивидуального участия</li>
+        <li>Персональная сессия с Алексеем · 60 мин</li>
+        <li>Разбор вашей PersonalOS и процессов</li>
+        <li>Рекомендации под вашу роль и стек</li>
+        <li>Мест с менторингом — ограниченно</li>
+      </ul>
+      <a class="t-cta" href="https://tally.so/r/Gx7rrk" target="_blank" rel="noopener">Занять место →</a>
+    </div>
+  </div>
+  <p class="pay-note reveal">Оплата: € / $ / ₽ / USDT · счёт от компании — да · команда 3+ человек — <b>скидка 20%</b>, пишите <a href="https://t.me/RealPonchikTeam" target="_blank" rel="noopener">@RealPonchikTeam</a></p>
+</section>
+
+<section id="faq">
+  <div class="sec-head reveal"><span class="sec-num">09</span><h2 class="sec-title">Вопросы <span class="r">и ответы</span></h2></div>
+  <div class="faq reveal">
+    <details>
+      <summary><span>Чем это отличается от курсов по ChatGPT?</span><span class="pl">+</span></summary>
+      <div class="a">Курсы по промптам оставляют вас на уровне 2 (AI Literate). Здесь мы перестраиваем процессы целиком: база знаний, агенты, память, автоматизации. Разница как между «умею гуглить» и «построил систему управления знаниями».</div>
+    </details>
+    <details>
+      <summary><span>Нужен ли опыт программирования?</span><span class="pl">+</span></summary>
+      <div class="a">Нет. Почти всё делается без кода. Тем, кто умеет кодить или вайб-кодить, дадим продвинутые варианты.</div>
+    </details>
+    <details>
+      <summary><span>Какие инструменты и подписки нужны?</span><span class="pl">+</span></summary>
+      <div class="a">Одна LLM-подписка (ChatGPT Plus или Claude Pro, ~$20/мес) + Google-аккаунт. Zoom и Telegram для связи. Остальное настроим вместе на первой сессии.</div>
+    </details>
+    <details>
+      <summary><span>Будут ли записи?</span><span class="pl">+</span></summary>
+      <div class="a">Да, записи всех сессий остаются у вас навсегда. Каждая сессия 120 минут: теория + практика + вопросы.</div>
+    </details>
+    <details>
+      <summary><span>Сколько времени нужно в неделю?</span><span class="pl">+</span></summary>
+      <div class="a">Примерно 5-6 часов: сессии ≈4 часа + самостоятельная практика 1-2 часа на ваших реальных задачах.</div>
+    </details>
+    <details>
+      <summary><span>Я уже использую AI каждый день — мне это нужно?</span><span class="pl">+</span></summary>
+      <div class="a">Если процессы не перестроены целиком — да. Большинство «продвинутых» пользователей всё ещё на уровне AI Literate: промпты без системы = ИИ работает на 10% потенциала.</div>
+    </details>
+  </div>
+</section>
+
+<section class="final">
+  <h2>Смена рамки —<br>не апгрейд навыка</h2>
+  <p>Готовы пересобрать процесс, который «и так работает», если с ИИ он будет работать принципиально иначе?</p>
+  <a class="btn" href="https://tally.so/r/Gx7rrk" target="_blank" rel="noopener">Записаться на поток 3 <span class="arr">→</span></a>
+</section>
+
+<footer>
+  <span>AI NATIVE · интенсив Алексея Иванова</span>
+  <span><a href="https://t.me/ppprompt" target="_blank" rel="noopener">@ppprompt</a> · <a href="https://t.me/RealPonchikTeam" target="_blank" rel="noopener">@RealPonchikTeam</a> · <a href="mailto:hello.alex.ivanov@gmail.com">hello.alex.ivanov@gmail.com</a></span>
+  <span>ИП Иванов Алексей Иванович · ИНН 121517670707</span>
+</footer>
+
+<script>
+// duplicate ticker for seamless loop
+const t=document.getElementById('tickerTrack');t.innerHTML+=t.innerHTML;
+// scroll reveals
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// faq single-open
+document.querySelectorAll('.faq details').forEach(d=>d.addEventListener('toggle',()=>{
+  if(d.open)document.querySelectorAll('.faq details').forEach(o=>{if(o!==d)o.open=false});
+}));
+</script>
+</body>
+</html>
