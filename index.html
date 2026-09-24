@@ -1913,6 +1913,7 @@
         .cta .container { position: relative; z-index: 1; }
         .cta h2 { margin: 0 auto 20px; font-size: clamp(40px, 5.5vw, 64px); }
         .cta p { color: var(--fg-muted); font-size: 19px; max-width: 580px; margin: 0 auto 44px; line-height: 1.6; }
+        .cta p.cta-waitlist { font-size: 15px; margin: 28px auto 0; }
         .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
         /* ============ FOOTER ============ */
@@ -2043,13 +2044,13 @@
                 </div>
                 <h1>
                     <span class="h1-line">Станьте <span class="h1-emph">AI Native</span></span>
-                    <span class="h1-line"><span class="hero-gradient-text">за 4 недели и 8 занятий</span></span>
+                    <span class="h1-line"><span class="hero-gradient-text">за 4 недели</span></span>
                 </h1>
                 <p class="hero-subtitle">
                     От десятков чатов без памяти - к личной PersonalOS: агент помнит ваш контекст, база знаний собирает себя сама, а рутины уходят на автопилот.
                 </p>
                 <div class="hero-cta">
-                    <a href="#plans" class="btn btn-primary">Записаться · от €490 (early bird) <span class="arrow">→</span></a>
+                    <a href="#plans" class="btn btn-primary">Записаться · от €590 <span class="arrow">→</span></a>
                     <a href="#curriculum" class="btn btn-secondary">Программа и даты</a>
                 </div>
                 <div class="hero-stats">
@@ -2059,7 +2060,7 @@
                     </div>
                     <div>
                         <div class="hero-stat-number" data-count="700">700<span class="unit">+</span></div>
-                        <div class="hero-stat-label">выпускников курсов Алексея</div>
+                        <div class="hero-stat-label">участников программ Алексея</div>
                     </div>
                     <div>
                         <div class="hero-stat-number">14K<span class="unit">+</span></div>
@@ -2095,41 +2096,32 @@
 
             <div class="hero-quotes">
                 <div class="hero-quote">
-                    <div class="hero-quote-text">«Перестал думать об AI как об отдельном окне с промптом - начал строить систему, которую можно масштабировать на организацию»</div>
+                    <div class="hero-quote-text">«Сейчас использую это в операционной работе и начал вовлекать в систему фаундера и CEO»</div>
                     <div class="hero-quote-author">
                         <div class="hero-quote-avatar"><img loading="lazy" decoding="async" src="yuriy-gorelov.jpg" alt="Юрий Горелов"></div>
                         <div>
                             <div>Юрий Горелов</div>
                             <div class="hero-quote-role">COO, ИТ-стартап</div>
                         </div>
-                        <div style="margin-left: auto;">
-                            <div class="hero-quote-stars">★★★★★</div>
-                        </div>
                     </div>
                 </div>
                 <div class="hero-quote">
-                    <div class="hero-quote-text">«Созвон с клиентом → транскрипт → summary → черновик оффера. То, на что уходил день, я делаю за вечер»</div>
+                    <div class="hero-quote-text">«Получилось собрать полный процесс: созвон → транскрипт → summary для внутренней команды → черновик оффера»</div>
                     <div class="hero-quote-author">
                         <div class="hero-quote-avatar"><img loading="lazy" decoding="async" src="yuriy-brisov.jpg" alt="Юрий Брисов"></div>
                         <div>
                             <div>Юрий Брисов</div>
                             <div class="hero-quote-role">Партнер, юридический консалтинг</div>
                         </div>
-                        <div style="margin-left: auto;">
-                            <div class="hero-quote-stars">★★★★★</div>
-                        </div>
                     </div>
                 </div>
                 <div class="hero-quote">
-                    <div class="hero-quote-text">«Наконец легла мантра "это просто папка с файлами". У меня снова есть живая база знаний, которую забросил с 2022-го»</div>
+                    <div class="hero-quote-text">«На интенсиве наконец легла мантра "это просто папка для работы с файлами" - у меня теперь есть база знаний, которую я перестал вести с 2022 года»</div>
                     <div class="hero-quote-author">
                         <div class="hero-quote-avatar"><img loading="lazy" decoding="async" src="andrey-karpov.jpg" alt="Андрей Карпов"></div>
                         <div>
                             <div>Андрей Карпов</div>
                             <div class="hero-quote-role">Продуктовый маркетолог</div>
-                        </div>
-                        <div style="margin-left: auto;">
-                            <div class="hero-quote-stars">★★★★★</div>
                         </div>
                     </div>
                 </div>
@@ -2444,11 +2436,11 @@
                     <div class="instructor-stats">
                         <div>
                             <div class="instructor-stat-number">700+</div>
-                            <div class="instructor-stat-label">на программах Алексея</div>
+                            <div class="instructor-stat-label">участников программ Алексея</div>
                         </div>
                         <div>
                             <div class="instructor-stat-number">4.7/5</div>
-                            <div class="instructor-stat-label">оценка потока</div>
+                            <div class="instructor-stat-label">средняя оценка программ</div>
                         </div>
                         <div>
                             <div class="instructor-stat-number">14K+</div>
@@ -2657,14 +2649,14 @@
             <div class="section-header">
                 <div class="section-label" data-no="S/07">Календарь</div>
                 <h2>Как выглядят эти <span class="hero-gradient-text">4 недели</span></h2>
-                <p>Два воркшопа в неделю плюс бадди-созвоны, коворкинги, кейс-разборы и гостевые сессии между ними - вот как это ложится в календарь потока.</p>
+                <p>Шесть воркшопов плюс бадди-созвоны, коворкинги, кейс-разборы и гостевые сессии между ними - вот как это ложится в календарь потока.</p>
             </div>
 
             <div class="curriculum-calendar">
                 <div class="cal-subhead">
                     <ul class="cal-legend">
                         <li style="--dot-color: var(--cal-kickoff, #4ade80);"><span class="cal-legend-dot"></span><span><strong>Kick-off.</strong> Знакомимся с потоком, ставим первые настройки и уже на созвоне запускаем вашу AI-систему.</span></li>
-                        <li style="--dot-color: var(--accent-light);"><span class="cal-legend-dot"></span><span><strong>Воркшопы.</strong> Живые занятия по 120 минут дважды в неделю (вт/чт): теория, практика и разбор ваших задач вместе с Алексеем, 19:00 МСК / 18:00 CET.</span></li>
+                        <li style="--dot-color: var(--accent-light);"><span class="cal-legend-dot"></span><span><strong>Воркшопы.</strong> Живые занятия по 120 минут по вторникам и четвергам: теория, практика и разбор ваших задач вместе с Алексеем, 19:00 МСК / 18:00 CET.</span></li>
                         <li style="--dot-color: var(--cal-buddy, #a78bfa);"><span class="cal-legend-dot"></span><span><strong>Бадди-созвоны.</strong> Один на один с другим участником потока - сверяете прогресс и держите темп, когда мотивация проседает.</span></li>
                         <li style="--dot-color: var(--cal-cowork, #38bdf8);"><span class="cal-legend-dot"></span><span><strong>Коворкинги.</strong> Групповая практика по пятницам: применяете материал сессии на своих задачах при поддержке остальных.</span></li>
                         <li style="--dot-color: var(--cal-yellow, #f5c842);"><span class="cal-legend-dot"></span><span><strong>Кейс-разборы.</strong> Разбираем ваши реальные рабочие ситуации живьем - с конкретными решениями, а не абстрактной теорией.</span></li>
@@ -2763,7 +2755,7 @@
                     </div>
                 </div>
             </div>
-            <p class="tools-note">💰 <strong>~$20/мес</strong> - хватает одной LLM-подписки, чтобы начать &nbsp;·&nbsp; 🔒 без кода и серверов</p>
+            <p class="tools-note">💰 <strong>~$20/мес</strong> - хватает одной LLM-подписки, чтобы начать &nbsp;·&nbsp; 🔒 без программирования: все настраиваем вместе на воркшопах</p>
         </div>
     </section>
 
@@ -2772,29 +2764,27 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-label" data-no="S/09">Условия и цены</div>
-                <h2>Выберите формат участия<span class="hand-note">мест немного</span></h2>
-                <p>Цены и форматы участия в потоке 3. Старт 28 сентября, 4 недели. Оплата в евро, долларах, рублях или USDT - по счету от компании тоже.</p>
+                <h2>Выберите формат участия<span class="hand-note">группа до 40 человек</span></h2>
+                <p>Цены и форматы участия в потоке 3. Старт 28 сентября, 4 недели. Оплата в евро, рублях или USDT - по счету от компании тоже.</p>
             </div>
 
             <div class="waitlist-banner">
-                <p>🔥 <strong>Early bird цены действуют до 21 сентября</strong>, дальше - по полной стоимости. Мест в потоке ограничено.</p>
-                <a href="#payment-methods" class="btn btn-primary">Записаться по early bird <span class="arrow">→</span></a>
+                <p>🚀 <strong>Набор закрывается перед стартом 28 сентября</strong> - после kick-off присоединиться к потоку уже нельзя. Следующий поток - в январе 2027.</p>
+                <a href="#payment-methods" class="btn btn-primary">Записаться <span class="arrow">→</span></a>
             </div>
 
             <div class="program-cards">
                 <div class="program-card">
                     <div class="program-badge">Групповой формат</div>
                     <h3 class="program-title">Индивидуальное участие</h3>
-                    <p class="program-duration">4 недели · 6 воркшопов · 2 сессии Brainstorm/кейс-клиника</p>
-                    <div class="program-earlybird">Early bird до 21 сентября</div>
+                    <p class="program-duration">4 недели · 6 воркшопов · 2 кейс-разбора</p>
                     <div class="program-price">
                         <span class="program-currency">€</span>
-                        <span class="program-amount">490</span>
-                        <span class="program-price-old">€590</span>
+                        <span class="program-amount">590</span>
                         <span class="program-approx">₽ / USDT</span>
                     </div>
                     <ul class="program-features">
-                        <li>4 недели: 8 живых сессий (воркшопы, кейс-разборы), 2 с гостевыми спикерами, 4 коворк-сессии</li>
+                        <li>kick-off, 6 воркшопов, 2 кейс-разбора, 2 гостевые сессии, 3 коворкинга, бадди-созвоны</li>
                         <li>практика в группе и 1:1 с напарником, Q&amp;A по вашим вопросам</li>
                         <li>материалы, демо, гайды, записи и транскрипты встреч, закрытый чат участников</li>
                     </ul>
@@ -2804,16 +2794,14 @@
                 <div class="program-card featured">
                     <div class="program-badge">Максимальный результат</div>
                     <h3 class="program-title">Участие + 1:1 менторинг</h3>
-                    <p class="program-duration">4 недели · 6 воркшопов · 2 сессии Brainstorm + персональная сессия</p>
-                    <div class="program-earlybird">Early bird до 21 сентября</div>
+                    <p class="program-duration">4 недели · 6 воркшопов · 2 кейс-разбора + персональная сессия</p>
                     <div class="program-price">
                         <span class="program-currency">€</span>
-                        <span class="program-amount">790</span>
-                        <span class="program-price-old">€890</span>
+                        <span class="program-amount">890</span>
                         <span class="program-approx">₽ / USDT</span>
                     </div>
                     <ul class="program-features">
-                        <li>4 недели: 8 живых сессий (воркшопы, кейс-разборы), 2 с гостевыми спикерами, 4 коворк-сессии</li>
+                        <li>kick-off, 6 воркшопов, 2 кейс-разбора, 2 гостевые сессии, 3 коворкинга, бадди-созвоны</li>
                         <li>практика в группе и 1:1 с напарником, Q&amp;A по вашим вопросам</li>
                         <li>материалы, демо, гайды, записи и транскрипты встреч, закрытый чат участников</li>
                         <li>1 персональная сессия с Алексеем (60 мин)</li>
@@ -2834,7 +2822,7 @@
                     <div class="payment-methods-row">
                         <a href="https://talkauthentic.io/ainativepay" target="_blank" class="pf-pay">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
-                            В евро / долларах
+                            В евро
                         </a>
                         <a href="https://derzhites.ru/ainativepay" target="_blank" class="pf-pay">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
@@ -2874,7 +2862,7 @@
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Будут ли записи?<span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><div class="faq-answer-content">Да, записи всех сессий остаются у вас навсегда. Основные воркшопы - 120 минут: теория + практика + разбор вопросов. Brainstorm и кейс-клиника - более короткие, по 60 минут.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-content">Да, записи всех сессий остаются у вас навсегда. Основные воркшопы - 120 минут: теория + практика + разбор вопросов. Кейс-разборы - короче, по 60 минут.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Сколько времени нужно в неделю?<span class="faq-icon">+</span></button>
@@ -2898,7 +2886,7 @@
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">Сколько мест и когда закрывается набор?<span class="faq-icon">+</span></button>
-                    <div class="faq-answer"><div class="faq-answer-content">Группа 25-40 человек, чтобы у каждого была обратная связь. Early bird цена держится до 21 сентября, места с 1:1 менторингом ограничены и разбираются первыми.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-content">Группа 25-40 человек, чтобы у каждого была обратная связь. Набор закрывается перед стартом 28 сентября - после kick-off присоединиться уже нельзя. Места с 1:1 менторингом ограничены и разбираются первыми.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">А если пойму, что это не мое, уже заплатив?<span class="faq-icon">+</span></button>
@@ -2917,6 +2905,7 @@
                 <a href="#plans" class="btn btn-primary">Выбрать тариф <span class="arrow">→</span></a>
                 <a href="https://t.me/m/QUHuoRF2NGRi" target="_blank" class="btn btn-secondary">Задать вопрос</a>
             </div>
+            <p class="cta-waitlist">Не готовы в этот раз? Напишите <a href="https://t.me/RealPonchikTeam" target="_blank" class="link-accent">@RealPonchikTeam</a> «хочу в январский поток» - добавим в лист ожидания и позовем первыми.</p>
         </div>
     </section>
 
@@ -2993,14 +2982,6 @@
                 item.classList.toggle('active');
                 button.setAttribute('aria-expanded', item.classList.contains('active') ? 'true' : 'false');
             });
-        });
-
-        // Add star rating to every testimonial card
-        document.querySelectorAll('.testimonials .testimonial-card').forEach(card => {
-            const rating = document.createElement('div');
-            rating.className = 'testimonial-rating';
-            rating.innerHTML = '<span class="testimonial-stars" aria-label="5 из 5">★★★★★</span>';
-            card.appendChild(rating);
         });
 
         // Reviews toggle: кратко / полностью
@@ -3135,8 +3116,8 @@
 
     <div class="mobile-cta">
         <div class="mobile-price">
-            <span class="mobile-price-main">от €490</span>
-            <span class="mobile-price-sub">4 недели · 8 занятий</span>
+            <span class="mobile-price-main">от €590</span>
+            <span class="mobile-price-sub">4 недели · 6 воркшопов</span>
         </div>
         <a href="#plans" class="btn btn-primary">Записаться <span class="arrow">→</span></a>
     </div>
