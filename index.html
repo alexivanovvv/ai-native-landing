@@ -1763,13 +1763,15 @@
             background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(56,189,248,0.05), transparent 55%);
         }
         .speakers .container { position: relative; z-index: 1; }
-        .speakers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-        @media (max-width: 1180px) { .speakers-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; margin: 0 auto; } }
-        @media (max-width: 640px) { .speakers-grid { grid-template-columns: 1fr; max-width: 400px; } }
+        .speakers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+        @media (max-width: 1180px) { .speakers-grid { grid-template-columns: repeat(3, 1fr); max-width: 900px; margin: 0 auto; } }
+        @media (max-width: 760px) { .speakers-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; } }
+        @media (max-width: 480px) { .speakers-grid { grid-template-columns: 1fr; max-width: 400px; } }
         .speakers-grid .speaker-card:nth-child(1) { --speaker-color: var(--cat-green); }
         .speakers-grid .speaker-card:nth-child(2) { --speaker-color: var(--cat-blue); }
         .speakers-grid .speaker-card:nth-child(3) { --speaker-color: var(--cat-violet); }
         .speakers-grid .speaker-card:nth-child(4) { --speaker-color: var(--cat-gold); }
+        .speakers-grid .speaker-card:nth-child(5) { --speaker-color: var(--cat-rose); }
         .speaker-card {
             background: var(--bg-card);
             background-image: var(--gradient-card);
