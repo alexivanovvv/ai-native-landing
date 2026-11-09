@@ -42,6 +42,13 @@
             var q = new URLSearchParams(location.search).get('full');
             if (q === 'true' || savedFull === 'true') document.documentElement.classList.add('show-full-reviews');
         } catch (e) {} })();
+        (function () { try {
+            if (new URLSearchParams(location.search).get('approved') === 'false') document.documentElement.classList.add('show-pending-reviews');
+        } catch (e) {} })();
+        (function () { try {
+            var rv = new URLSearchParams(location.search).get('reviews_version');
+            if (rv === 'b' || rv === 'c') document.documentElement.classList.add('reviews-v-' + rv);
+        } catch (e) {} })();
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1492,6 +1499,8 @@
         .testimonials-grid-9 .testimonial-quote { font-size: 16px; margin-bottom: 9px; }
         .testimonials-grid-9 .testimonial-body { font-size: var(--fs-body); line-height: 1.58; margin-bottom: 12px; transition: color 0.3s ease; }
         .testimonial-body-full { display: none; }
+        /* Отзывы без согласия/апрува: видны только с ?approved=false */
+        html:not(.show-pending-reviews) .review-pending { display: none; }
         html.show-full-reviews .testimonial-body-short { display: none; }
         html.show-full-reviews .testimonial-body-full { display: block; }
         html.show-full-reviews .testimonials-grid-9 .testimonial-body { font-size: var(--fs-body); line-height: 1.6; }
@@ -1568,6 +1577,34 @@
         .testimonial-stars { color: #f5c842; font-size: 15px; letter-spacing: 2px; line-height: 1; }
         .testimonial-verified { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--accent-light); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.04em; }
         .testimonial-verified svg { width: 13px; height: 13px; }
+
+        /* Варианты отображения отзывов: ?reviews_version=b | c (по умолчанию a - сетка выше) */
+        /* B - стена отзывов: колонки разной высоты, автор сверху */
+        html.reviews-v-b .testimonials-grid-9 { display: block; columns: 3; column-gap: 16px; }
+        html.reviews-v-b .testimonials-grid-9 .testimonial-card { break-inside: avoid; margin-bottom: 16px; padding: 24px; }
+        html.reviews-v-b .testimonials-grid-9 .testimonial-author { order: -1; border-top: none; border-bottom: 1px dashed var(--border); padding-top: 0; padding-bottom: 14px; margin-bottom: 16px; font-size: 14px; }
+        html.reviews-v-b .testimonials-grid-9 .testimonial-avatar { width: 60px; height: 60px; font-size: 20px; }
+        html.reviews-v-b .testimonials-grid-9 .testimonial-quote { font-size: 20px; line-height: 1.28; margin-bottom: 12px; }
+        html.reviews-v-b .testimonials-grid-9 .testimonial-body { margin-bottom: 0; }
+        html.reviews-v-b .testimonials-grid-9 .testimonial-card::before { display: none; }
+        @media (max-width: 1100px) { html.reviews-v-b .testimonials-grid-9 { columns: 2; } }
+        @media (max-width: 640px) { html.reviews-v-b .testimonials-grid-9 { columns: 1; } }
+
+        /* C - горизонтальная лента со снапом: крупные карточки, листаются свайпом */
+        html.reviews-v-c .testimonials-grid-9 { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 2px 18px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; align-items: stretch; }
+        html.reviews-v-c.show-full-reviews .testimonials-grid-9 { align-items: stretch; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-card { flex: 0 0 min(460px, 86%); scroll-snap-align: start; padding: 30px; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-card:hover { transform: translateY(-3px); }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-author { order: -1; border-top: none; padding-top: 0; margin-bottom: 20px; font-size: 15px; gap: 14px; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-avatar { width: 72px; height: 72px; font-size: 24px; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-quote { font-size: 23px; line-height: 1.25; margin-bottom: 14px; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-body { margin-bottom: 0; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-card::before { font-size: 120px; top: -6px; right: 18px; }
+        html.reviews-v-c .testimonials-grid-9::after { content: ''; flex: 0 0 1px; }
+        .reviews-nav { display: none; }
+        html.reviews-v-c .reviews-nav { display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
+        .reviews-nav-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-card); color: var(--fg); font-size: 18px; cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease; }
+        .reviews-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
 
         /* ============ PROGRAM (PRICING) ============ */
         .program { padding: var(--space-section-sm) 0; border-top: 1px solid var(--border-subtle); background: var(--bg-elevated); }
@@ -2421,10 +2458,34 @@
                     <p class="testimonial-body testimonial-body-short">Пришел навести порядок в продуктивности и собрать знания из разных сервисов, но увлекся переносом рабочего окружения между двумя Mac через Claude Code - агент сам ведет статус, реестр ПО и план проекта, пишет и прогоняет тесты перед каждым коммитом.</p>
                     <p class="testimonial-body testimonial-body-full">Пришел на интенсив с запросом навести порядок в продуктивности и собрать знания из разных сервисов в одном месте. По пути увлекся другой задачей - переносом рабочего окружения между двумя Mac через Claude Code: настроил так, что агент сам ведет статус по каждой машине, реестр ПО и план проекта, а для каждого скрипта пишет тесты и прогоняет их перед коммитом в Git. Поначалу агент терял контекст и забывал, что уже сделано, но к концу курса это выправилось - теперь я просто спрашиваю, что осталось сделать, и он сам об этом помнит.</p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">М</div>
+                        <div class="testimonial-avatar"><img loading="lazy" decoding="async" src="maksim-lomovskoy.jpg" alt="Максим Ломовской"></div>
                         <div class="testimonial-author-meta">Максим Ломовской<span class="testimonial-author-role">Участник, поток AI Native Summer</span></div>
                     </div>
                 </div>
+
+                <div class="testimonial-card review-pending">
+                    <div class="testimonial-quote">«Было ноль AI в работе. Теперь AI помнит все мои задачи»</div>
+                    <p class="testimonial-body testimonial-body-short">Сделал свои инструменты под работу с платежами и документами: сверку цифр, отчеты, бота для Telegram-групп. Файлы руками больше не носит - смотрит на готовую работу как руководитель.</p>
+                    <p class="testimonial-body testimonial-body-full">До курса пользовался только чатами Claude и ChatGPT, про Hermes, Obsidian и md-файлы не слышал. Сейчас AI помнит мои задачи и контролирует их выполнение, сам находит ошибки в суммах и сверяет отчеты - я бы сам туда в жизни не полез. Письма коллегам со ссылками на документы пишу в 10 раз быстрее. Инструменты сделал сам под свою работу, могу их подправить и переделать - это меня просто восхищает.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar"><img loading="lazy" decoding="async" src="alexander-karp.jpg" alt="Александр Карп"></div>
+                        <div class="testimonial-author-meta">Александр Карп<span class="testimonial-author-role">Финансы и платежи, поток AI Native Fall</span></div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card review-pending">
+                    <div class="testimonial-quote">«Пользуешься AI как ложкой за столом - не задумываясь»</div>
+                    <p class="testimonial-body testimonial-body-short">Собрал личную базу данных отдельно от агента: модель можно сменить, а контекст остается. Привычка к AI держится и после курса.</p>
+                    <p class="testimonial-body testimonial-body-full">Курс дает буст: делаешь, сразу видишь эффект, и хочется ковыряться дальше. Самое полезное - личная база данных отдельно от конкретного агента: агент становится инструментом, а не волшебным ящиком, к которому ты привязан. Побанят Claude - пойду на Codex или DeepSeek. Появляется привычка, и дальше она поддерживается сама: не заставляешь себя, а пользуешься как ложкой за столом. Именно как въезд в AI - рекомендую.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">В</div>
+                        <div class="testimonial-author-meta">Василий Комаров<span class="testimonial-author-role">Финтех, поток AI Native Fall</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="reviews-nav" aria-label="Листать отзывы">
+                <button type="button" class="reviews-nav-btn" data-dir="-1" aria-label="Предыдущие отзывы">←</button>
+                <button type="button" class="reviews-nav-btn" data-dir="1" aria-label="Следующие отзывы">→</button>
             </div>
         </div>
     </section>
@@ -2965,6 +3026,15 @@
             else root.removeAttribute('data-theme');
             try { localStorage.setItem('theme', next); } catch (e) {}
             try { document.cookie = 'theme=' + next + '; max-age=31536000; path=/; SameSite=Lax'; } catch (e) {}
+        });
+
+        // Reviews carousel arrows (variant C)
+        document.querySelectorAll('.reviews-nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const grid = document.querySelector('.testimonials-grid-9');
+                const card = grid.querySelector('.testimonial-card');
+                grid.scrollBy({ left: Number(btn.dataset.dir) * (card.offsetWidth + 18), behavior: 'smooth' });
+            });
         });
 
         // Mobile nav burger
