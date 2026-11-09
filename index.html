@@ -46,8 +46,7 @@
             if (new URLSearchParams(location.search).get('approved') === 'false') document.documentElement.classList.add('show-pending-reviews');
         } catch (e) {} })();
         (function () { try {
-            var rv = new URLSearchParams(location.search).get('reviews_version');
-            if (rv === 'b' || rv === 'c') document.documentElement.classList.add('reviews-v-' + rv);
+            document.documentElement.classList.add('reviews-v-c');
         } catch (e) {} })();
     </script>
     <style>
@@ -751,8 +750,7 @@
         .section-header > p { color: var(--fg-muted); font-size: var(--fs-lead); margin-top: 16px; max-width: 680px; margin-left: auto; margin-right: auto; line-height: 1.6; }
         .reviews-toggle {
             position: relative;
-            display: inline-flex; align-items: center;
-            margin-top: 24px;
+            display: inline-flex; align-items: center; flex-shrink: 0;
             padding: 4px;
             background: var(--bg-elevated);
             border: 1px solid var(--border);
@@ -775,8 +773,8 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
             color: var(--fg-dim);
-            padding: 9px 20px;
-            min-width: 118px;
+            padding: 8px 16px;
+            min-width: 112px;
             text-align: center;
             border-radius: 999px;
             transition: color 0.35s ease;
@@ -1578,33 +1576,38 @@
         .testimonial-verified { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--accent-light); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.04em; }
         .testimonial-verified svg { width: 13px; height: 13px; }
 
-        /* Варианты отображения отзывов: ?reviews_version=b | c (по умолчанию a - сетка выше) */
-        /* B - стена отзывов: колонки разной высоты, автор сверху */
-        html.reviews-v-b .testimonials-grid-9 { display: block; columns: 3; column-gap: 16px; }
-        html.reviews-v-b .testimonials-grid-9 .testimonial-card { break-inside: avoid; margin-bottom: 16px; padding: 24px; }
-        html.reviews-v-b .testimonials-grid-9 .testimonial-author { order: -1; border-top: none; border-bottom: 1px dashed var(--border); padding-top: 0; padding-bottom: 14px; margin-bottom: 16px; font-size: 14px; }
-        html.reviews-v-b .testimonials-grid-9 .testimonial-avatar { width: 60px; height: 60px; font-size: 20px; }
-        html.reviews-v-b .testimonials-grid-9 .testimonial-quote { font-size: 20px; line-height: 1.28; margin-bottom: 12px; }
-        html.reviews-v-b .testimonials-grid-9 .testimonial-body { margin-bottom: 0; }
-        html.reviews-v-b .testimonials-grid-9 .testimonial-card::before { display: none; }
-        @media (max-width: 1100px) { html.reviews-v-b .testimonials-grid-9 { columns: 2; } }
-        @media (max-width: 640px) { html.reviews-v-b .testimonials-grid-9 { columns: 1; } }
-
         /* C - горизонтальная лента со снапом: крупные карточки, листаются свайпом */
-        html.reviews-v-c .testimonials-grid-9 { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 2px 18px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; align-items: stretch; }
-        html.reviews-v-c.show-full-reviews .testimonials-grid-9 { align-items: stretch; }
-        html.reviews-v-c .testimonials-grid-9 .testimonial-card { flex: 0 0 min(460px, 86%); scroll-snap-align: start; padding: 30px; }
+        html.reviews-v-c .testimonials-grid-9 { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 2px 18px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; align-items: flex-start; }
+        html.reviews-v-c.show-full-reviews .testimonials-grid-9 { align-items: flex-start; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-card { flex: 0 0 min(420px, 86%); scroll-snap-align: start; padding: 28px; }
         html.reviews-v-c .testimonials-grid-9 .testimonial-card:hover { transform: translateY(-3px); }
-        html.reviews-v-c .testimonials-grid-9 .testimonial-author { order: -1; border-top: none; padding-top: 0; margin-bottom: 20px; font-size: 15px; gap: 14px; }
-        html.reviews-v-c .testimonials-grid-9 .testimonial-avatar { width: 72px; height: 72px; font-size: 24px; }
-        html.reviews-v-c .testimonials-grid-9 .testimonial-quote { font-size: 23px; line-height: 1.25; margin-bottom: 14px; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-author { order: -1; border-top: none; padding-top: 0; margin-bottom: 18px; font-size: 15px; gap: 14px; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-avatar { width: 64px; height: 64px; font-size: 22px; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-quote { font-size: 21px; line-height: 1.25; margin-bottom: 12px; }
         html.reviews-v-c .testimonials-grid-9 .testimonial-body { margin-bottom: 0; }
-        html.reviews-v-c .testimonials-grid-9 .testimonial-card::before { font-size: 120px; top: -6px; right: 18px; }
+        html.reviews-v-c .testimonials-grid-9 .testimonial-card::before { font-size: 108px; top: -6px; right: 18px; }
         html.reviews-v-c .testimonials-grid-9::after { content: ''; flex: 0 0 1px; }
         .reviews-nav { display: none; }
-        html.reviews-v-c .reviews-nav { display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
-        .reviews-nav-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-card); color: var(--fg); font-size: 18px; cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease; }
-        .reviews-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+        html.reviews-v-c .reviews-nav { display: flex; align-items: center; gap: 28px; margin-bottom: 24px; }
+        .reviews-track { flex: 1; min-width: 0; display: flex; align-items: center; gap: 16px; }
+        .reviews-count { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--fg-dim); white-space: nowrap; font-variant-numeric: tabular-nums; }
+        .reviews-progress { flex: 1; height: 3px; background: var(--border-subtle); border-radius: 3px; overflow: hidden; }
+        .reviews-progress-bar { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent-deep), var(--accent-light)); border-radius: 3px; box-shadow: 0 0 10px var(--accent-glow); transition: width 0.35s var(--ease-out-quint); }
+        .reviews-arrows { display: flex; gap: 8px; flex-shrink: 0; }
+        html.reviews-v-c .testimonials .section-header { margin-bottom: 48px; }
+        html.reviews-v-c .testimonials-grid-9 { cursor: grab; }
+        html.reviews-v-c .testimonials-grid-9.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+        html.reviews-v-c .testimonials-grid-9.dragging .testimonial-card { pointer-events: none; }
+        @media (max-width: 760px) { html.reviews-v-c .reviews-nav { flex-wrap: wrap; gap: 14px 16px; } .reviews-toggle { order: 0; } .reviews-arrows { order: 1; margin-left: auto; } .reviews-track { order: 2; flex-basis: 100%; } }
+        @media (max-width: 400px) { .reviews-toggle-option { min-width: 104px; padding: 8px 10px; } }
+        .reviews-nav-btn { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-elevated); color: var(--fg); cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s ease; }
+        .reviews-nav-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-light); background: color-mix(in srgb, var(--accent) 10%, var(--bg-elevated)); }
+        .reviews-nav-btn:active:not(:disabled) { transform: scale(0.94); }
+        .reviews-nav-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .reviews-nav-btn:disabled { opacity: 0.3; cursor: default; }
+        html.reviews-v-c .testimonials-grid-9 { --fade-l: 0px; --fade-r: 64px; -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent); mask-image: linear-gradient(to right, transparent, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent); }
+        html.reviews-v-c .testimonials-grid-9.at-end { --fade-r: 0px; }
+        @media (max-width: 640px) { html.reviews-v-c .testimonials-grid-9 { --fade-r: 20px; } html.reviews-v-c .testimonials-grid-9.at-end { --fade-r: 0px; } }
 
         /* ============ PROGRAM (PRICING) ============ */
         .program { padding: var(--space-section-sm) 0; border-top: 1px solid var(--border-subtle); background: var(--bg-elevated); }
@@ -2376,13 +2379,23 @@
             <div class="section-header">
                 <div class="section-label" data-no="S/03">Отзывы участников</div>
                 <h2>Что говорят выпускники</h2>
+            </div>
+
+            <div class="reviews-nav" aria-label="Листать отзывы">
                 <div class="reviews-toggle" role="group" aria-label="Формат отзывов">
                     <span class="reviews-toggle-thumb" aria-hidden="true"></span>
                     <button type="button" class="reviews-toggle-option" data-mode="short">Кратко</button>
                     <button type="button" class="reviews-toggle-option" data-mode="full">Полностью</button>
                 </div>
+                <div class="reviews-track">
+                    <span class="reviews-progress" aria-hidden="true"><span class="reviews-progress-bar"></span></span>
+                    <span class="reviews-count" aria-live="polite"></span>
+                </div>
+                <div class="reviews-arrows">
+                    <button type="button" class="reviews-nav-btn" data-dir="-1" aria-label="Предыдущие отзывы"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+                    <button type="button" class="reviews-nav-btn" data-dir="1" aria-label="Следующие отзывы"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+                </div>
             </div>
-
             <div class="testimonials-grid testimonials-grid-9">
                 <div class="testimonial-card">
                     <div class="testimonial-quote">«Перестал думать об AI как об отдельном окне с промптом»</div>
@@ -2466,8 +2479,8 @@
 
                 <div class="testimonial-card review-pending">
                     <div class="testimonial-quote">«Было ноль AI в работе. Теперь AI помнит все мои задачи»</div>
-                    <p class="testimonial-body testimonial-body-short">Сделал свои инструменты под работу с платежами и документами: сверку цифр, отчеты, бота для Telegram-групп. Файлы руками больше не носит - смотрит на готовую работу как руководитель.</p>
-                    <p class="testimonial-body testimonial-body-full">До курса пользовался только чатами Claude и ChatGPT, про Hermes, Obsidian и md-файлы не слышал. Сейчас AI помнит мои задачи и контролирует их выполнение, сам находит ошибки в суммах и сверяет отчеты - я бы сам туда в жизни не полез. Письма коллегам со ссылками на документы пишу в 10 раз быстрее. Инструменты сделал сам под свою работу, могу их подправить и переделать - это меня просто восхищает.</p>
+                    <p class="testimonial-body testimonial-body-short">До курса AI в моей работе не было вообще. Теперь он сам сверяет суммы в отчетах и находит ошибки там, куда я бы в жизни не полез. А письма коллегам пишу в 10 раз быстрее.</p>
+                    <p class="testimonial-body testimonial-body-full">Я не айтишник, и до курса AI в моей работе не было вообще - только чаты Claude и ChatGPT. Про Hermes и Obsidian даже не слышал. Сейчас AI помнит все мои задачи и следит, чтобы я ничего не забыл. Сам сверяет суммы, лезет в отчет за прошлый месяц и пишет, что цифры не сходятся - я бы туда в жизни не полез. Файлы в Claude руками больше не ношу: процессы сами смотрят в папки, а я смотрю на готовую работу как руководитель. И все эти инструменты я сделал сам, под себя, и могу переделать в любой момент. Это меня просто восхищает.</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar"><img loading="lazy" decoding="async" src="alexander-karp.jpg" alt="Александр Карп"></div>
                         <div class="testimonial-author-meta">Александр Карп<span class="testimonial-author-role">Финансы и платежи, поток AI Native Fall</span></div>
@@ -2476,17 +2489,13 @@
 
                 <div class="testimonial-card review-pending">
                     <div class="testimonial-quote">«Пользуешься AI как ложкой за столом - не задумываясь»</div>
-                    <p class="testimonial-body testimonial-body-short">Собрал личную базу данных отдельно от агента: модель можно сменить, а контекст остается. Привычка к AI держится и после курса.</p>
-                    <p class="testimonial-body testimonial-body-full">Курс дает буст: делаешь, сразу видишь эффект, и хочется ковыряться дальше. Самое полезное - личная база данных отдельно от конкретного агента: агент становится инструментом, а не волшебным ящиком, к которому ты привязан. Побанят Claude - пойду на Codex или DeepSeek. Появляется привычка, и дальше она поддерживается сама: не заставляешь себя, а пользуешься как ложкой за столом. Именно как въезд в AI - рекомендую.</p>
+                    <p class="testimonial-body testimonial-body-short">Курс дает буст: делаешь, сразу видишь эффект, и хочется копать дальше. Главное, что я унес, - своя база данных, не привязанная к одному агенту. Забанят Claude - перейду на Codex, и все останется при мне.</p>
+                    <p class="testimonial-body testimonial-body-full">Курс дает буст: делаешь, сразу видишь эффект, и хочется ковыряться дальше. Самое ценное для меня - своя база данных отдельно от агента. Тогда агент просто инструмент, а не волшебный ящик, к которому ты привязан: забанят Claude - пойду на Codex или DeepSeek. Недавно меня внезапно спросили по старой задаче, кто что должен был сделать. Пока спрашивали, мой AI-секретарь поднял историю, и я четко ответил, как все было. Со временем перестаешь заставлять себя и придумывать задачи - пользуешься AI как ложкой за столом, не задумываясь. Как въезд в AI - рекомендую.</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">В</div>
                         <div class="testimonial-author-meta">Василий Комаров<span class="testimonial-author-role">Финтех, поток AI Native Fall</span></div>
                     </div>
                 </div>
-            </div>
-            <div class="reviews-nav" aria-label="Листать отзывы">
-                <button type="button" class="reviews-nav-btn" data-dir="-1" aria-label="Предыдущие отзывы">←</button>
-                <button type="button" class="reviews-nav-btn" data-dir="1" aria-label="Следующие отзывы">→</button>
             </div>
         </div>
     </section>
@@ -3062,6 +3071,50 @@
             else root.removeAttribute('data-theme');
             try { localStorage.setItem('theme', next); } catch (e) {}
             try { document.cookie = 'theme=' + next + '; max-age=31536000; path=/; SameSite=Lax'; } catch (e) {}
+        });
+
+        // Reviews carousel: edge fades + arrow state
+        const reviewsGrid = document.querySelector('.testimonials-grid-9');
+        const reviewsBtns = document.querySelectorAll('.reviews-nav-btn');
+        const reviewsCount = document.querySelector('.reviews-count');
+        const reviewsBar = document.querySelector('.reviews-progress-bar');
+        const visibleReviewCards = () => [...reviewsGrid.querySelectorAll('.testimonial-card')].filter(c => c.offsetParent);
+        const updateReviewsEdges = () => {
+            const atStart = reviewsGrid.scrollLeft < 4;
+            const atEnd = reviewsGrid.scrollLeft + reviewsGrid.clientWidth > reviewsGrid.scrollWidth - 4;
+            const cards = visibleReviewCards();
+            const right = reviewsGrid.getBoundingClientRect().right + 4;
+            const seen = atEnd ? cards.length : cards.filter(c => c.getBoundingClientRect().right <= right).length;
+            reviewsCount.textContent = String(Math.max(seen, 1)).padStart(2, '0') + ' / ' + String(cards.length).padStart(2, '0');
+            reviewsBar.style.width = (Math.max(seen, 1) / cards.length * 100) + '%';
+            reviewsGrid.classList.toggle('scrolled', !atStart);
+            reviewsGrid.classList.toggle('at-end', atEnd);
+            reviewsBtns.forEach(b => { b.disabled = b.dataset.dir === '-1' ? atStart : atEnd; });
+        };
+        reviewsGrid.addEventListener('scroll', updateReviewsEdges, { passive: true });
+        window.addEventListener('resize', updateReviewsEdges);
+        updateReviewsEdges();
+
+        // Reviews: drag to scroll with mouse
+        let dragX = null, dragLeft = 0, dragMoved = false;
+        reviewsGrid.addEventListener('pointerdown', e => {
+            if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('button, a')) return;
+            dragX = e.clientX; dragLeft = reviewsGrid.scrollLeft; dragMoved = false;
+        });
+        window.addEventListener('pointermove', e => {
+            if (dragX === null) return;
+            const dx = e.clientX - dragX;
+            if (!dragMoved && Math.abs(dx) > 5) { dragMoved = true; reviewsGrid.classList.add('dragging'); }
+            if (dragMoved) reviewsGrid.scrollLeft = dragLeft - dx;
+        });
+        window.addEventListener('pointerup', () => {
+            if (dragX === null) return;
+            dragX = null;
+            if (dragMoved) {
+                reviewsGrid.classList.remove('dragging');
+                const step = (visibleReviewCards()[0]?.offsetWidth || 400) + 18;
+                reviewsGrid.scrollTo({ left: Math.round(reviewsGrid.scrollLeft / step) * step, behavior: 'smooth' });
+            }
         });
 
         // Reviews carousel arrows (variant C)
