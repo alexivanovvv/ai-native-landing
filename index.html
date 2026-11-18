@@ -1540,10 +1540,17 @@
         .testimonial-card:hover::after { opacity: 1; }
         .testimonial-card:hover .testimonial-body { color: var(--fg); }
         .testimonial-card:hover .testimonial-avatar { transform: scale(1.1); border-color: var(--accent); }
-        .review-highlights { margin: 0 0 28px; }
-        .review-highlights-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 12px; }
-        .review-highlights-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
-        .review-highlights-list li { padding: 8px 14px; border: 1px solid var(--border-accent); border-radius: 999px; background: var(--bg-card); font-size: 14px; line-height: 1.35; }
+        .review-highlights-card::before { content: none; }
+        /* Первая карточка: компактная; в «Полностью» - больше пунктов */
+        html.reviews-v-c .testimonials-grid-9 .review-highlights-card { padding: 22px; }
+        html:not(.show-full-reviews) .review-highlights-list li.highlight-extra { display: none; }
+        .review-faces { display: flex; margin-bottom: 12px; }
+        .review-faces img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bg-card); margin-left: -10px; }
+        .review-faces img:first-child { margin-left: 0; }
+        .review-faces-more { width: 34px; height: 34px; border-radius: 50%; margin-left: -10px; border: 2px solid var(--bg-card); background: var(--accent-soft); color: var(--accent); font: 600 10px 'JetBrains Mono', monospace; display: flex; align-items: center; justify-content: center; }
+        .review-highlights-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 10px; }
+        .review-highlights-list { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 6px; list-style: none; padding: 0; margin: 0; }
+        .review-highlights-list li { padding: 5px 11px; border: 1px solid var(--border-accent); border-radius: 999px; background: var(--bg-card); font-size: 13px; line-height: 1.35; }
         .testimonial-quote {
             font-size: 17px; font-weight: 700;
             letter-spacing: -0.02em; line-height: 1.3;
@@ -2385,20 +2392,6 @@
                 <h2>Что говорят выпускники</h2>
             </div>
 
-            <div class="review-highlights">
-                <div class="review-highlights-label">Что чаще всего отмечают участники</div>
-                <ul class="review-highlights-list">
-                    <li>Четкая организация интенсива</li>
-                    <li>Живые воркшопы держат в ритме</li>
-                    <li>Сильные гостевые спикеры из AI-индустрии</li>
-                    <li>Система вместо отдельных промптов</li>
-                    <li>Своя база знаний, не привязанная к одному агенту</li>
-                    <li>Польза с первой недели</li>
-                    <li>Работа на своих реальных задачах</li>
-                    <li>AI становится привычкой</li>
-                </ul>
-            </div>
-
             <div class="reviews-nav" aria-label="Листать отзывы">
                 <div class="reviews-toggle" role="group" aria-label="Формат отзывов">
                     <span class="reviews-toggle-thumb" aria-hidden="true"></span>
@@ -2415,8 +2408,37 @@
                 </div>
             </div>
             <div class="testimonials-grid testimonials-grid-9">
+                <div class="testimonial-card review-highlights-card">
+                    <div class="review-faces" aria-hidden="true">
+                        <img loading="lazy" decoding="async" src="yuriy-gorelov.jpg" alt="">
+                        <img loading="lazy" decoding="async" src="lena-zakirova.jpg" alt="">
+                        <img loading="lazy" decoding="async" src="ivan-smirnov.jpg" alt="">
+                        <img loading="lazy" decoding="async" src="tatiana-abramova.jpg" alt="">
+                        <img loading="lazy" decoding="async" src="andrey-karpov.jpg" alt="">
+                        <img loading="lazy" decoding="async" src="maksim-lomovskoy.jpg" alt="">
+                        <img loading="lazy" decoding="async" src="petr-grefenshteyn.jpg" alt="">
+                        <img loading="lazy" decoding="async" src="yuriy-brisov.jpg" alt="">
+                <span class="review-faces-more">70+</span>
+                    </div>
+                    <div class="review-highlights-label">Что чаще всего отмечают участники</div>
+                    <ul class="review-highlights-list">
+                        <li>Польза с первой недели</li>
+                        <li>Исчезает FOMO</li>
+                        <li>Своя система: контекст + агенты</li>
+                        <li>Ритм и фокус</li>
+                        <li>Независимая база знаний</li>
+                        <li>Сильные спикеры</li>
+                        <li>Ясность по инструментам</li>
+                        <li class="highlight-extra">Демо и разборы</li>
+                        <li>Работа на своих задачах</li>
+                        <li>Общение в группе</li>
+                        <li>Живые воркшопы держат в ритме</li>
+                        <li class="highlight-extra">Полезно новичкам и продвинутым</li>
+                    </ul>
+                </div>
+
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«Перестал думать об AI как об отдельном окне с промптом»</div>
+                    <div class="testimonial-quote">Перестал думать об AI как об отдельном окне с промптом</div>
                     <p class="testimonial-body testimonial-body-short">Собрал рабочую AI-операционную систему: базу знаний, скиллы, перенос информации из чатов и транскриптов. Начал вовлекать в неё фаундера и CEO.</p>
                     <p class="testimonial-body testimonial-body-full">На интенсив пришел с ощущением, что AI может многое, но у меня все было фрагментировано: отдельные чаты, промпты, файлы и инструменты. За время интенсива начал собирать свою рабочую AI-операционную систему: базу знаний, Obsidian, Claude, скиллы, перенос информации из чатов, писем и транскриптов. Сейчас использую это в операционной работе и начал вовлекать в систему фаундера и CEO.</p>
                     <div class="testimonial-author">
@@ -2426,7 +2448,7 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«Я начала ко всему относиться как к данным»</div>
+                    <div class="testimonial-quote">Я начала ко всему относиться как к данным</div>
                     <p class="testimonial-body testimonial-body-short">Зафиксировала набор инструментов - Obsidian, Claude Code, Granola - и перестала распыляться. Поняла: если AI выдает не то, дело в контексте, а не в инструменте.</p>
                     <p class="testimonial-body testimonial-body-full">Для меня главным результатом стало изменение мышления. Я начала относиться ко всему как к данным, которые можно собирать, структурировать и использовать. За четыре недели стала выстраивать систему не только по работе и проектам, но и в других сферах жизни. Зафиксировала свой набор инструментов - Obsidian, Claude Code, Granola, транскрибатор, Notion - и перестала распыляться между десятками сервисов. Теперь понимаю: если AI выдает не то, часто проблема не в инструменте, а в том, как я задала контекст.</p>
                     <div class="testimonial-author">
@@ -2436,7 +2458,7 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«Казалось, главное - промпты. Сейчас понимаю: нужна система»</div>
+                    <div class="testimonial-quote">Казалось, главное - промпты. Сейчас понимаю: нужна система</div>
                     <p class="testimonial-body testimonial-body-short">Настроил VS Code, Hermes, Claude Code и Codex, собрал бота с утренними сводками и трекингом. Довёл до рабочего состояния скилл по проектному менеджменту.</p>
                     <p class="testimonial-body testimonial-body-full">Когда пришел на интенсив, казалось, что главное - научиться правильно писать промпты. Сейчас понимаю: промпта недостаточно, нужна система. Настроил VS Code, Hermes, Claude Code и Codex, сделал бота, который присылает утренние сводки по почте и задачам, а также бота для трекинга питания и активности. Довел до рабочего состояния скилл по проектному менеджменту - помогает быстро собирать паспорт проекта.</p>
                     <div class="testimonial-author">
@@ -2446,7 +2468,7 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«Созвон → транскрипт → summary → черновик оффера»</div>
+                    <div class="testimonial-quote">Созвон → транскрипт → summary → черновик оффера</div>
                     <p class="testimonial-body testimonial-body-short">Собрал полный workflow с клиентами. Материалы стали точнее и ближе к реальному процессу благодаря настройке Telegram и About Me.</p>
                     <p class="testimonial-body testimonial-body-full">Пришел с запросом оптимизировать рабочий workflow с клиентами. Получилось собрать полный процесс: созвон → транскрипт → summary для внутренней команды → черновик оффера. Благодаря настройке Telegram, About Me Personal и About Me Work материалы стали получаться гораздо точнее и ближе к реальному рабочему процессу. Самое важное - понимание, как корпоративно устроить AI-процессы.</p>
                     <div class="testimonial-author">
@@ -2456,7 +2478,7 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«AI превращает документы в кусочки знаний и раскладывает по папкам»</div>
+                    <div class="testimonial-quote">AI превращает документы в кусочки знаний и раскладывает по папкам</div>
                     <p class="testimonial-body testimonial-body-short">Углубился в корпоративную базу знаний вместо личной. Через Cursor и GitHub собрал структуру для презентаций, онбординга и рабочих материалов.</p>
                     <p class="testimonial-body testimonial-body-full">Пришел с запросом на персональную операционную систему, а углубился в создание корпоративной базы знаний. Было много разрозненных документов про компанию, клиентов, продукт и процессы. Через Cursor и GitHub собрал структуру - AI помогает превращать документы в отдельные «кусочки знаний», раскладывать их по папкам, сохранять источник и использовать для презентаций, онбординга и рабочих материалов.</p>
                     <div class="testimonial-author">
@@ -2466,7 +2488,7 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«Вернул базу знаний, которую забросил с 2022-го»</div>
+                    <div class="testimonial-quote">Вернул базу знаний, которую забросил с 2022-го</div>
                     <p class="testimonial-body testimonial-body-short">После блокировки Notion потерял годы данных. На интенсиве наконец зашёл Obsidian - плюс запустил Клода на транскриптах курсов как личных ассистентов.</p>
                     <p class="testimonial-body testimonial-body-full">После того как Notion заблокировал аккаунты, я потерял данные за много лет и забросил все. Obsidian пробовал несколько раз, но не заходил. На интенсиве наконец легла мантра «это просто папка для работы с файлами» - у меня теперь есть база знаний, которую я перестал вести с 2022 года, и это большая победа. Бонусом: запустил Клода на транскриптах курсов по психологии и маркетингу - теперь личные ассистенты на их базе помогают в работе.</p>
                     <div class="testimonial-author">
@@ -2476,7 +2498,7 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«Собрала Career Opportunity Workflow»</div>
+                    <div class="testimonial-quote">Собрала Career Opportunity Workflow</div>
                     <p class="testimonial-body testimonial-body-short">Перешла с разрозненных чатов ChatGPT на базу знаний в Obsidian - точность ответов выросла в разы. Скиллы сами ищут вакансии, дорабатывают резюме и обновляют статус заявок.</p>
                     <p class="testimonial-body testimonial-body-full">Я два с лишним года работала с ChatGPT, но только в вебе - отдельными чатами без единой системы. На интенсиве я перешла на Obsidian и собрала настоящую базу знаний, и точность ответов выросла в разы. Главным результатом стал Career Opportunity Workflow - набор скиллов, которые ищут подходящие вакансии, оценивают их через JobFit, дорабатывают резюме под каждую позицию (с версией правок и без) и сами обновляют статус заявок в трекере, сверяясь с почтой. Вся черновая работа теперь уходит от меня - остается только важное.</p>
                     <div class="testimonial-author">
@@ -2486,7 +2508,7 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">«Теперь я просто спрашиваю, что осталось сделать - и агент сам об этом помнит»</div>
+                    <div class="testimonial-quote">Теперь я просто спрашиваю, что осталось сделать - и агент сам об этом помнит</div>
                     <p class="testimonial-body testimonial-body-short">Пришел навести порядок в продуктивности и собрать знания из разных сервисов, но увлекся переносом рабочего окружения между двумя Mac через Claude Code - агент сам ведет статус, реестр ПО и план проекта, пишет и прогоняет тесты перед каждым коммитом.</p>
                     <p class="testimonial-body testimonial-body-full">Пришел на интенсив с запросом навести порядок в продуктивности и собрать знания из разных сервисов в одном месте. По пути увлекся другой задачей - переносом рабочего окружения между двумя Mac через Claude Code: настроил так, что агент сам ведет статус по каждой машине, реестр ПО и план проекта, а для каждого скрипта пишет тесты и прогоняет их перед коммитом в Git. Поначалу агент терял контекст и забывал, что уже сделано, но к концу курса это выправилось - теперь я просто спрашиваю, что осталось сделать, и он сам об этом помнит.</p>
                     <div class="testimonial-author">
@@ -2495,25 +2517,66 @@
                     </div>
                 </div>
 
-                <div class="testimonial-card review-pending">
-                    <div class="testimonial-quote">«Было ноль AI в работе. Теперь AI помнит все мои задачи»</div>
-                    <p class="testimonial-body testimonial-body-short">До курса AI в моей работе не было вообще. Теперь он сам сверяет суммы в отчетах и находит ошибки там, куда я бы в жизни не полез. А письма коллегам пишу в 10 раз быстрее.</p>
-                    <p class="testimonial-body testimonial-body-full">Я не айтишник, и до курса AI в моей работе не было вообще - только чаты Claude и ChatGPT. Про Hermes и Obsidian даже не слышал. Сейчас AI помнит все мои задачи и следит, чтобы я ничего не забыл. Сам сверяет суммы, лезет в отчет за прошлый месяц и пишет, что цифры не сходятся - я бы туда в жизни не полез. Файлы в Claude руками больше не ношу: процессы сами смотрят в папки, а я смотрю на готовую работу как руководитель. И все эти инструменты я сделал сам, под себя, и могу переделать в любой момент. Это меня просто восхищает.</p>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">Я смотрю как руководитель на уже сделанную работу</div>
+                    <p class="testimonial-body testimonial-body-short">Я понятия не имел о существовании Hermes и Obsidian. Я просто построил процессы, которые сами смотрят в папки, проверяют, нет ли там новых файлов, и собирают для меня отчеты по тем правилам, которым я его научил. И только после этого я уже смотрю как руководитель на сделанную работу. Я все время боюсь, что что-то забуду, он мне помогает не забывать.</p>
+                    <p class="testimonial-body testimonial-body-full">AI Native меня познакомил с ИИ и с инструментами, которые с этим связаны, потому что я понятия не имел о существовании Hermes и Obsidian. Я просто построил процессы, которые сами смотрят в папки и собирают для меня отчеты по тем правилам, которым я его научил. И только после этого я уже смотрю как руководитель на сделанную работу. Я все время боюсь, что что-то забуду, он мне помогает не забывать. Причем каждый раз, когда мне надо сделать задачу, которую я до этого не делал, я могу свой инструмент подправить, поменять форму. Это мне помогает писать очень правильные письма коллегам и ссылаться на конкретные документы, конкретные данные. Потенциальный участник курса сможет совершенно иначе взглянуть на свою работу.</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar"><img loading="lazy" decoding="async" src="alexander-karp.jpg" alt="Александр Карп"></div>
                         <div class="testimonial-author-meta">Александр Карп<span class="testimonial-author-role">Финансы и платежи, поток AI Native Fall</span></div>
                     </div>
                 </div>
 
-                <div class="testimonial-card review-pending">
-                    <div class="testimonial-quote">«Пользуешься AI как ложкой за столом - не задумываясь»</div>
-                    <p class="testimonial-body testimonial-body-short">Курс дает буст: делаешь, сразу видишь эффект, и хочется копать дальше. Главное, что я унес, - своя база данных, не привязанная к одному агенту. Забанят Claude - перейду на Codex, и все останется при мне.</p>
-                    <p class="testimonial-body testimonial-body-full">Курс дает буст: делаешь, сразу видишь эффект, и хочется ковыряться дальше. Самое ценное для меня - своя база данных отдельно от агента. Тогда агент просто инструмент, а не волшебный ящик, к которому ты привязан: забанят Claude - пойду на Codex или DeepSeek. Недавно меня внезапно спросили по старой задаче, кто что должен был сделать. Пока спрашивали, мой AI-секретарь поднял историю, и я четко ответил, как все было. Со временем перестаешь заставлять себя и придумывать задачи - пользуешься AI как ложкой за столом, не задумываясь. Как въезд в AI - рекомендую.</p>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">Агент как инструмент, а не волшебный ящик</div>
+                    <p class="testimonial-body testimonial-body-short">Привычка выработалась. Ты перестаешь себя заставлять и придумывать задачи, а просто пользуешься этим не задумываясь. А максимально полезно на самом деле - это сбор личной базы данных и отделение данных от конкретного агента: ты можешь пользоваться агентом как инструментом, а не как волшебным ящиком, к которому ты привязан.</p>
+                    <p class="testimonial-body testimonial-body-full">Я давно думал над тем, что надо въезжать в тему ИИ, но было непонятно, с чего стоит начать. А на AI Native с первой же сессии появилась четкая задача - построить личную базу знаний. Самое главное, как в любых тренировках, выработать привычку. Привычка выработалась: ты перестаешь себя заставлять и просто пользуешься этим не задумываясь. Максимально полезно - это отделение личной базы данных от конкретного агента. Агент становится инструментом, а не волшебным ящиком: если вдруг забанят аккаунт в Claude, я спокойно пойду на Codex, а база останется. Например, на интенсиве я сделал себе агента-секретаря, который собирает резюме по транскриптам встреч. Сегодня меня внезапно спросили, что я должен был сделать по одной задаче. Пока спрашивали, я попросил агента посмотреть, что было на встрече, и он сразу собрал, о чем договорились и кто что должен делать дальше.</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">В</div>
                         <div class="testimonial-author-meta">Василий Комаров<span class="testimonial-author-role">Финтех, поток AI Native Fall</span></div>
                     </div>
                 </div>
+
+                <div class="testimonial-card review-pending">
+                    <div class="testimonial-quote">Курс помог наконец перейти от идей к действиям</div>
+                    <p class="testimonial-body testimonial-body-short">Я давно собирался сделать свою базу знаний, но все откладывал. Интенсив стал для меня тем самым «тренером». После курса стал меньше читать новости про ИИ и больше внедрять.</p>
+                    <p class="testimonial-body testimonial-body-full">Я давно собирался сделать свою базу знаний, но все откладывал. Интенсив стал для меня тем самым «тренером»: я выделил на это месяц, заплатил и не пропустил ни одного занятия. После курса стал меньше читать новости про ИИ и больше внедрять. Начал собирать единую базу знаний, переносить туда документы и продумывать, как сохранять разговоры, чтобы договоренности не терялись. Для меня главное - курс помог наконец перейти от идей к действиям.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">А</div>
+                        <div class="testimonial-author-meta">Артур Борцов<span class="testimonial-author-role">Маркетинг в банке, поток AI Native Fall</span></div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">На AI Native сложился пазл</div>
+                    <p class="testimonial-body testimonial-body-short">Я пришел на курс с базовым опытом работы с ИИ, но мне не хватало целостной системы. На AI Native сложился пазл: я лучше понял, как собирать контекст, выстраивать свой second brain и на какие принципы опираться в работе.</p>
+                    <p class="testimonial-body testimonial-body-full">Я пришел на курс с базовым опытом работы с ИИ, но мне не хватало целостной системы. На AI Native сложился пазл: я лучше понял, как собирать контекст, выстраивать свой second brain и на какие принципы опираться в работе. Самое прикольное, для меня просто спасение, - во время интенсива я сделал своего агента в Telegram, который каждый день проверяет меню в детском саду на предмет аллергий, сам находит или запрашивает его, если садик забыл выложить. Как итог, моя система стала лучше соответствовать тому, чего я от нее ожидал.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">Д</div>
+                        <div class="testimonial-author-meta">Дмитрий Климов<span class="testimonial-author-role">Директор проектного бюро, поток AI Native Fall</span></div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card review-pending">
+                    <div class="testimonial-quote">AI для меня теперь не инструмент, а привычка думать</div>
+                    <p class="testimonial-body testimonial-body-short">Раньше с вопросом шел к коллегам, теперь - к Claude: он очень хорошо предлагает варианты. Над некоторыми планами я проводил по 30-40 итераций, и это прям очень помогало.</p>
+                    <p class="testimonial-body testimonial-body-full">До курса я планировал проспать до наступления сингулярности. Но на вебинаре сел, закатал рукава, сделал пару штук - и у меня щелкнуло. Главное, что я вынес, - привычку думать вместе с Claude: не идти к коллегам и не фрустрировать, а задать вопрос. Над некоторыми планами я проводил по 30-40 итераций, и это прям очень помогало. А больше всего дала практика - живые разборы проектов друг друга.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">Е</div>
+                        <div class="testimonial-author-meta">Евгений Квасов<span class="testimonial-author-role">BI Team Lead, финтех, поток AI Native Fall</span></div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card review-pending">
+                    <div class="testimonial-quote">Так зашло, что я пошла на курс второй раз</div>
+                    <p class="testimonial-body testimonial-body-short">Мне так зашло, что я пошла на курс второй раз. Мой запрос на AI и то, что давал Алексей, совпали, как шарик в лузу.</p>
+                    <p class="testimonial-body testimonial-body-full">Мне так зашло, что я пошла на курс второй раз. Когда я в первый раз пришла, у меня было ощущение, что я попала ровно туда, где мне надо было быть: мой запрос на AI и то, что давал Алексей, совпали, как шарик в лузу. Я инвестировала в интенсив большие куски времени, и это дало мне возможность выйти на тот уровень, на который я хотела.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar"><img loading="lazy" decoding="async" src="tatiana-abramova.jpg" alt="Татьяна Абрамова"></div>
+                        <div class="testimonial-author-meta">Татьяна Абрамова<span class="testimonial-author-role">IT Project Manager, 2 потока AI Native</span></div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
