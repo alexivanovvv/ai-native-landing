@@ -1541,9 +1541,9 @@
         .testimonial-card:hover .testimonial-body { color: var(--fg); }
         .testimonial-card:hover .testimonial-avatar { transform: scale(1.1); border-color: var(--accent); }
         .review-highlights-card::before { content: none; }
-        /* Первая карточка: компактная; в «Полностью» - больше пунктов */
+        /* Первая карточка: компактная, одинаковая в «Кратко» и «Полностью» */
         html.reviews-v-c .testimonials-grid-9 .review-highlights-card { padding: 22px; }
-        html:not(.show-full-reviews) .review-highlights-list li.highlight-extra { display: none; }
+        html:not(.reviews-v-c).show-full-reviews .testimonials-grid-9 .testimonial-card.review-highlights-card { padding: 20px; }
         .review-faces { display: flex; margin-bottom: 12px; }
         .review-faces img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bg-card); margin-left: -10px; }
         .review-faces img:first-child { margin-left: 0; }
@@ -2429,11 +2429,10 @@
                         <li>Независимая база знаний</li>
                         <li>Сильные спикеры</li>
                         <li>Ясность по инструментам</li>
-                        <li class="highlight-extra">Демо и разборы</li>
+                        <li>Демо и разборы</li>
                         <li>Работа на своих задачах</li>
                         <li>Общение в группе</li>
                         <li>Живые воркшопы держат в ритме</li>
-                        <li class="highlight-extra">Полезно новичкам и продвинутым</li>
                     </ul>
                 </div>
 
